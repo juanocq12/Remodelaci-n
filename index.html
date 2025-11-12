@@ -1,252 +1,991 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AcabadosVIS - Remodelaciones y Diseño de Interiores</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- META BÁSICA -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AcabadosVIS – Termina tu apartamento sin enredos | Cotiza en línea</title>
+  <meta name="description" content="Termina tu apartamento VIS con AcabadosVIS. Cotiza en línea, personaliza acabados, sigue tu obra en tiempo real y paga con nuestros aliados. Sin sobrecostos, garantía y fechas claras." />
+  <meta name="keywords" content="acabados, VIS, remodelaciones, cotizador, obra blanca, apartamentos, Bogotá, Medellín" />
+  <meta name="author" content="AcabadosVIS" />
+
+  <!-- OPEN GRAPH / SEO SOCIAL -->
+  <meta property="og:title" content="AcabadosVIS – Termina tu apartamento sin enredos" />
+  <meta property="og:description" content="Cotiza acabados al instante, seguimiento en tiempo real y financiación con alianzas. #ListoParaVivir" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://acabadosvis.com/wp-content/uploads/2023/06/portada-cocina.jpg" />
+  <meta property="og:url" content="https://acabadosvis.com" />
+
+  <!-- FAVICON -->
+  <link rel="icon" href="https://acabadosvis.com/wp-content/uploads/2023/06/Logo-AcabadosVIS.png" type="image/png" />
+
+  <!-- FUENTES E ICONOS -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/a2e0d1f6b1.js" crossorigin="anonymous"></script>
+
+  <!-- ESTILOS -->
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Poppins', sans-serif; background-color: #fafafa; color: #333; scroll-behavior: smooth; }
+    :root{
+      --primary:#ff6b3d;
+      --secondary:#ff974d;
+      --bg:#fafafa;
+      --text:#2b2b2b;
+      --muted:#6b6b6b;
+      --accent:#25D366;
+      --surface:#ffffff;
+      --shadow:0 8px 24px rgba(0,0,0,.08);
+      --radius:18px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6;
+    }
+    img{max-width:100%; display:block}
+    a{color:inherit}
 
     /* HEADER */
-    header {
-      position: fixed;
-      top: 0; width: 100%;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      z-index: 1000;
+    header{
+      position:fixed; top:0; left:0; right:0; z-index:1000;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:saturate(1.1) blur(12px);
+      box-shadow:0 2px 8px rgba(0,0,0,.06);
     }
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; }
-    .logo img { height: 45px; }
-    .menu a {
-      text-decoration: none;
-      color: #333;
-      margin: 0 15px;
-      font-weight: 600;
-      transition: color .3s;
+    nav{
+      max-width:1200px; margin:0 auto; padding:14px 24px;
+      display:flex; align-items:center; justify-content:space-between;
     }
-    .menu a:hover { color: #ff6b3d; }
-    .btn-cotizar {
-      background: linear-gradient(90deg, #ff6b3d, #ff974d);
-      color: #fff;
-      border: none;
-      padding: 10px 25px;
-      border-radius: 25px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform .3s;
+    .logo{display:flex; align-items:center; gap:10px}
+    .logo img{height:40px}
+    .menu{display:flex; align-items:center; gap:18px}
+    .menu a{
+      text-decoration:none; font-weight:600; color:#333; padding:8px 10px; border-radius:10px;
+      transition:.25s; white-space:nowrap;
     }
-    .btn-cotizar:hover { transform: scale(1.05); }
+    .menu a:hover{color:var(--primary); background:#fff}
+    .actions{display:flex; align-items:center; gap:12px}
+    .btn{
+      border:none; cursor:pointer; font-weight:700; border-radius:999px; padding:10px 18px; transition:.25s;
+    }
+    .btn-primary{
+      color:#fff; background:linear-gradient(90deg,var(--primary),var(--secondary));
+      box-shadow:0 8px 20px rgba(255,107,61,.2);
+    }
+    .btn-primary:hover{transform:translateY(-1px)}
+    .btn-outline{
+      color:var(--primary); background:#fff; border:2px solid var(--primary);
+    }
+    .hamburger{display:none; font-size:22px; cursor:pointer}
 
     /* HERO */
-    .hero {
-      height: 100vh;
-      background: url('https://acabadosvis.com/wp-content/uploads/2023/06/portada-cocina.jpg') center/cover no-repeat;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      text-align: center;
-      color: #fff;
-      position: relative;
+    .hero{
+      min-height:100vh; position:relative; display:grid; place-items:center; text-align:center; color:#fff;
+      background:url('https://acabadosvis.com/wp-content/uploads/2023/06/portada-cocina.jpg') center/cover no-repeat;
     }
-    .hero::after {
-      content: "";
-      position: absolute; top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
+    .hero::after{
+      content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.35));
     }
-    .hero-content { position: relative; z-index: 1; max-width: 800px; }
-    .hero h1 { font-size: 3rem; font-weight: 700; }
-    .hero p { margin: 20px 0; font-size: 1.2rem; }
-    .btn-whatsapp {
-      background: #25D366; color: white;
-      padding: 10px 20px; border-radius: 30px;
-      text-decoration: none; display: inline-flex; align-items: center;
+    .hero-inner{
+      position:relative; z-index:1; max-width:900px; padding:0 20px; animation:fadeIn .9s ease;
     }
-    .btn-whatsapp i { margin-right: 10px; }
+    .hero h1{font-size:clamp(2rem,4vw,3.2rem); font-weight:700}
+    .hero p{margin:16px 0 28px; font-size:clamp(1rem,2.2vw,1.25rem); color:#f3f3f3}
+    .cta-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+    .kpis{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;
+      margin-top:28px;
+    }
+    .kpi{
+      background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:var(--radius);
+      padding:18px; backdrop-filter:blur(4px);
+    }
+    .kpi b{font-size:1.7rem}
+
+    /* SECCIONES */
+    section{padding:80px 20px}
+    .container{max-width:1200px; margin:0 auto}
+
+    .section-title{font-size:2rem; color:var(--primary); text-align:center; margin-bottom:16px}
+    .section-sub{color:var(--muted); text-align:center; max-width:800px; margin:0 auto 34px}
 
     /* BENEFICIOS */
-    .beneficios {
-      text-align: center;
-      padding: 80px 20px;
-      background: white;
+    .beneficios-grid{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px;
     }
-    .beneficios h2 { font-size: 2rem; margin-bottom: 20px; color: #ff6b3d; }
-    .beneficios p { max-width: 700px; margin: 0 auto 40px; color: #555; }
-    .iconos {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px; max-width: 900px; margin: auto;
+    .beneficio{
+      background:var(--surface); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow); transition:.25s;
     }
-    .iconos div {
-      background: #fff;
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      transition: transform .3s;
+    .beneficio:hover{transform:translateY(-3px)}
+    .beneficio i{color:var(--primary); font-size:26px; margin-bottom:8px}
+    .beneficio h4{font-weight:700; margin-bottom:6px}
+
+    /* COTIZADOR WIZARD */
+    .wizard{
+      display:grid; grid-template-columns:1.2fr .8fr; gap:24px;
     }
-    .iconos div:hover { transform: translateY(-5px); }
-    .iconos i { color: #ff6b3d; font-size: 2rem; margin-bottom: 10px; }
+    .card{
+      background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); padding:20px;
+    }
+    .steps{display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap}
+    .step-pill{
+      padding:8px 12px; border-radius:999px; background:#f0f0f0; color:#555; font-weight:600; font-size:.9rem;
+    }
+    .step-pill.active{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#fff}
+    .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+    .field{display:flex; flex-direction:column; gap:8px}
+    label{font-weight:600}
+    input, select, textarea{
+      padding:12px 14px; border:1.5px solid #e7e7e7; border-radius:12px; font:inherit; outline:none; transition:.2s;
+    }
+    input:focus, select:focus, textarea:focus{border-color:var(--primary); box-shadow:0 0 0 4px rgba(255,107,61,.12)}
+    .option-group{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-top:8px}
+    .option{border:1.5px solid #eee; padding:14px; border-radius:12px; cursor:pointer; transition:.2s; display:flex; gap:8px; align-items:center}
+    .option input{accent-color:var(--primary)}
+    .option:hover{border-color:var(--primary)}
+
+    .actions-row{display:flex; gap:12px; margin-top:16px; flex-wrap:wrap}
+    .btn-soft{background:#f5f5f5; border:none; padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer}
+    .btn-next{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#fff; border:none; padding:10px 16px; border-radius:10px; font-weight:700; cursor:pointer}
+    .price{
+      font-weight:700; font-size:1.6rem; color:#111;
+    }
+    .muted{color:var(--muted); font-size:.95rem}
+
+    /* RESUMEN COTIZACIÓN */
+    .summary{
+      background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); padding:20px;
+    }
+    .summary h4{margin-bottom:8px}
+    .summary-list{list-style:none; display:grid; gap:8px}
+    .summary-list li{display:flex; justify-content:space-between}
+    .summary .total{border-top:1px dashed #ddd; padding-top:12px; margin-top:8px}
+
+    /* DASHBOARD OBRA */
+    .dashboard{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+    .progress-wrap{background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); padding:20px}
+    .progress-bar{
+      height:14px; background:#eee; border-radius:999px; overflow:hidden; margin-top:8px;
+    }
+    .progress-inner{
+      height:100%; width:0%; background:linear-gradient(90deg,var(--primary),var(--secondary)); transition:width .6s ease;
+    }
+    .timeline{list-style:none; display:grid; gap:10px; margin-top:12px}
+    .timeline li{display:flex; align-items:center; gap:10px}
+    .badge{padding:6px 10px; border-radius:999px; font-size:.85rem; font-weight:700; background:#f3f3f3}
+    .badge.ok{background:#e9fff2; color:#157f3b}
+    .badge.in{background:#fff8e6; color:#8a5a00}
+    .badge.next{background:#eaf3ff; color:#0d4a92}
 
     /* TESTIMONIOS */
-    .testimonios {
-      background: #f8f8f8;
-      text-align: center;
-      padding: 80px 20px;
+    .testimonios-grid{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px;
     }
-    .testimonios h2 { color: #ff6b3d; margin-bottom: 30px; }
-    .videos {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
+    .testimonio{
+      background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;
     }
-    .videos video, .videos img {
-      width: 280px;
-      border-radius: 25px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
+    .testimonio figcaption{padding:14px 16px}
+    .stars{color:#ffb703}
 
     /* COMPARATIVO */
-    .comparativo {
-      display: flex; flex-wrap: wrap;
-      align-items: center; justify-content: center;
-      padding: 80px 20px;
-      background: white;
-    }
-    .comparativo img { width: 400px; border-radius: 20px; margin-right: 50px; }
-    .comparativo table {
-      border-collapse: collapse; width: 400px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      border-radius: 10px; overflow: hidden;
-    }
-    .comparativo th, .comparativo td {
-      border: 1px solid #eee; padding: 15px;
-      text-align: left;
-    }
-    .comparativo th { background: #ff6b3d; color: white; }
-    .comparativo td:first-child { font-weight: 600; }
+    .comparativo{display:grid; grid-template-columns:1fr 1fr; gap:24px}
+    table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px; box-shadow:var(--shadow)}
+    th, td{padding:14px; border:1px solid #eee; text-align:left}
+    th{background:var(--primary); color:#fff}
 
     /* ALIADOS */
-    .aliados {
-      text-align: center; padding: 80px 20px;
-      background: #f8f8f8;
+    .aliados-logos{
+      display:flex; flex-wrap:wrap; gap:28px; justify-content:center; align-items:center;
     }
-    .aliados h2 { color: #ff6b3d; margin-bottom: 30px; }
-    .logos {
-      display: flex; flex-wrap: wrap;
-      justify-content: center;
-      gap: 40px;
-    }
-    .logos img { height: 40px; opacity: 0.8; transition: opacity .3s; }
-    .logos img:hover { opacity: 1; }
+    .aliados-logos img{height:42px; filter:saturate(0.9); opacity:.85; transition:.25s}
+    .aliados-logos img:hover{opacity:1; filter:saturate(1)}
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      background: #222;
-      color: white;
-      padding: 30px;
-      font-size: 0.9rem;
+    /* CTA VIDEOCALL */
+    .videocall{
+      background:linear-gradient(135deg,#fff 0%,#fff 40%,#ffe9e2 100%);
+      border-radius:var(--radius); box-shadow:var(--shadow); padding:24px;
+      display:flex; align-items:center; gap:20px; flex-wrap:wrap;
     }
 
-    /* BOTÓN WHATSAPP FLOTANTE */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #25D366;
-      color: white;
-      border-radius: 50%;
-      padding: 15px;
-      font-size: 1.8rem;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-      transition: transform .3s;
-      z-index: 100;
+    /* MÉTRICAS */
+    .metrics{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;
     }
-    .whatsapp-float:hover { transform: scale(1.1); }
+    .metric{background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); padding:18px; text-align:center}
+    .metric b{font-size:1.8rem; color:#111}
+
+    /* FOOTER Y FLOTANTES */
+    footer{background:#111; color:#ddd; padding:28px 20px; margin-top:40px}
+    .footer-inner{max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1.2fr .8fr; gap:24px}
+    .footer-links{list-style:none; display:grid; gap:8px}
+    .whatsapp-float{
+      position:fixed; right:20px; bottom:20px; background:var(--accent); color:#fff;
+      width:56px; height:56px; display:grid; place-items:center; border-radius:50%;
+      box-shadow:0 10px 24px rgba(0,0,0,.18); z-index:999; transition:.25s
+    }
+    .whatsapp-float:hover{transform:translateY(-2px)}
+
+    /* MODAL */
+    .modal{
+      position:fixed; inset:0; background:rgba(0,0,0,.55); display:none; align-items:center; justify-content:center; z-index:2000;
+      padding:20px;
+    }
+    .modal.open{display:flex}
+    .modal-card{background:#fff; border-radius:16px; box-shadow:var(--shadow); max-width:520px; width:100%; padding:22px}
+    .modal-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px}
+    .close{border:none; background:#f5f5f5; border-radius:8px; padding:8px 10px; cursor:pointer}
+
+    /* RESPONSIVE */
+    @media (max-width:992px){
+      .wizard{grid-template-columns:1fr}
+      .dashboard{grid-template-columns:1fr}
+      .comparativo{grid-template-columns:1fr}
+    }
+    @media (max-width:820px){
+      .menu{display:none}
+      .hamburger{display:block}
+    }
   </style>
+
+  <!-- ACCESIBILIDAD BÁSICA -->
+  <meta name="theme-color" content="#ff6b3d" />
 </head>
-
 <body>
-
   <!-- HEADER -->
-  <header>
-    <nav>
-      <div class="logo"><img src="https://acabadosvis.com/wp-content/uploads/2023/06/Logo-AcabadosVIS.png" alt="Logo"></div>
-      <div class="menu">
-        <a href="#inicio">Inicio</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#blog">Blog</a>
-        <a href="#contacto">Servicio al cliente</a>
+  <header role="banner">
+    <nav aria-label="Navegación principal">
+      <a class="logo" href="#inicio" aria-label="Inicio AcabadosVIS">
+        <img src="https://acabadosvis.com/wp-content/uploads/2023/06/Logo-AcabadosVIS.png" alt="AcabadosVIS logo">
+        <strong>AcabadosVIS</strong>
+      </a>
+      <div class="menu" role="navigation">
+        <a href="#beneficios">Beneficios</a>
+        <a href="#cotizador">Cotiza en línea</a>
+        <a href="#dashboard">Seguimiento</a>
+        <a href="#testimonios">Clientes</a>
+        <a href="#comparativo">¿Por qué elegirnos?</a>
+        <a href="#aliados">Aliados</a>
+        <a href="#contacto">Contacto</a>
       </div>
-      <button class="btn-cotizar">Cotiza en Línea</button>
+      <div class="actions">
+        <button class="btn btn-outline" id="openLogin"><i class="fas fa-user"></i> Acceder</button>
+        <button class="btn btn-primary" onclick="document.getElementById('cotizador').scrollIntoView({behavior:'smooth'})">
+          Cotiza en línea
+        </button>
+        <div class="hamburger" id="openMenu" aria-label="Abrir menú"><i class="fas fa-bars"></i></div>
+      </div>
     </nav>
   </header>
 
   <!-- HERO -->
-  <section id="inicio" class="hero">
-    <div class="hero-content">
-      <h1>AcabadosVIS</h1>
-      <p>Termina tu apartamento como siempre lo soñaste,<br>nosotros lo hacemos por ti.</p>
-      <a href="https://wa.me/573001234567" class="btn-whatsapp"><i class="fab fa-whatsapp"></i>Hablar con Asesor</a>
+  <section class="hero" id="inicio" role="region" aria-label="Portada">
+    <div class="hero-inner">
+      <h1>Tu hogar, tu huella, tus acabados</h1>
+      <p>Te acompañamos de principio a fin para que los acabados de tu apartamento VIS sean los que siempre has deseado. Sin enredos y sin salir de casa.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#cotizador"><i class="fas fa-calculator"></i> Cotiza ahora</a>
+        <a class="btn btn-outline" href="#videocall"><i class="fas fa-video"></i> Agendar videollamada</a>
+        <a class="btn btn-outline" target="_blank" rel="noopener" href="https://wa.me/573001234567"><i class="fab fa-whatsapp"></i> Hablar con asesor</a>
+      </div>
+
+      <div class="kpis" aria-label="Métricas destacadas">
+        <div class="kpi"><b>+450</b><div>Proyectos entregados</div></div>
+        <div class="kpi"><b>+600</b><div>Familias satisfechas</div></div>
+        <div class="kpi"><b>+200</b><div>Empleos generados</div></div>
+      </div>
     </div>
   </section>
 
-  <!-- BENEFICIOS -->
-  <section id="nosotros" class="beneficios">
-    <h2>Diseñamos la primera Calculadora de Acabados del mercado</h2>
-    <p>Sabemos lo desafiante que puede ser adecuar tu nuevo hogar, por eso, en AcabadosVIS hemos diseñado la solución más completa.</p>
-    <div class="iconos">
-      <div><i class="fas fa-hand-holding-usd"></i><h4>Sin sobrecostos</h4></div>
-      <div><i class="fas fa-palette"></i><h4>Personalización completa</h4></div>
-      <div><i class="fas fa-laptop-house"></i><h4>Seguimiento en Línea</h4></div>
-      <div><i class="fas fa-handshake"></i><h4>Financiación con Alianzas</h4></div>
+  <main id="main-content">
+    <!-- BENEFICIOS -->
+    <section id="beneficios" class="container">
+      <h2 class="section-title">Diseñamos la primera calculadora de acabados del mercado</h2>
+      <p class="section-sub">Sabemos lo desafiante que puede ser adecuar tu nuevo hogar. Por eso, creamos una solución completa con transparencia, personalización, seguimiento en línea y financiación con alianzas.</p>
+      <div class="beneficios-grid" role="list">
+        <article class="beneficio" role="listitem">
+          <i class="fas fa-hand-holding-usd" aria-hidden="true"></i>
+          <h4>Sin sobrecostos</h4>
+          <p class="muted">Lo que contratas es lo que pagas. Sin sorpresas ni cobros extra.</p>
+        </article>
+        <article class="beneficio" role="listitem">
+          <i class="fas fa-palette" aria-hidden="true"></i>
+          <h4>Personalización total</h4>
+          <p class="muted">Acabados a tu medida: muros, pisos, cocina, baño y más.</p>
+        </article>
+        <article class="beneficio" role="listitem">
+          <i class="fas fa-laptop-house" aria-hidden="true"></i>
+          <h4>Seguimiento en línea</h4>
+          <p class="muted">Revisa avances, fechas y evidencias desde nuestra app.</p>
+        </article>
+        <article class="beneficio" role="listitem">
+          <i class="fas fa-handshake" aria-hidden="true"></i>
+          <h4>Financiación con alianzas</h4>
+          <p class="muted">Trabajamos con bancos y aliados para facilitar tu pago.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- COTIZADOR WIZARD -->
+    <section id="cotizador" class="container" aria-label="Cotizador en línea">
+      <h2 class="section-title">Cotiza en línea tus acabados</h2>
+      <p class="section-sub">Cotiza al instante tus acabados. Solo necesitas los m², qué te entregan y la distribución.</p>
+
+      <div class="wizard">
+        <!-- FORMULARIO -->
+        <div class="card" aria-live="polite">
+          <div class="steps">
+            <span class="step-pill active" id="sp1">1. Datos del proyecto</span>
+            <span class="step-pill" id="sp2">2. Obra blanca</span>
+            <span class="step-pill" id="sp3">3. Piso y cocina</span>
+            <span class="step-pill" id="sp4">4. Pintura y baño</span>
+            <span class="step-pill" id="sp5">5. Resumen</span>
+          </div>
+
+          <!-- STEP 1 -->
+          <div id="step1">
+            <div class="form-row">
+              <div class="field">
+                <label for="ciudad">Ciudad</label>
+                <select id="ciudad">
+                  <option value="bogota">Bogotá</option>
+                  <option value="medellin">Medellín</option>
+                  <option value="otra">Otra</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="metros">Metros cuadrados (m²)</label>
+                <input id="metros" type="number" min="20" max="200" placeholder="Ej: 60" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="entrega">¿Qué te entrega la constructora?</label>
+                <select id="entrega">
+                  <option value="obra_gris">Obra gris</option>
+                  <option value="obra_blanca_base">Obra blanca base</option>
+                  <option value="semi_terminado">Semi terminado</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="distribucion">Distribución</label>
+                <select id="distribucion">
+                  <option value="2h_1b">2 habitaciones, 1 baño</option>
+                  <option value="3h_2b">3 habitaciones, 2 baños</option>
+                  <option value="loft">Loft/estudio</option>
+                </select>
+              </div>
+            </div>
+            <div class="actions-row">
+              <button class="btn-soft" onclick="resetWizard()">Reiniciar</button>
+              <button class="btn-next" onclick="nextStep()">Siguiente</button>
+            </div>
+          </div>
+
+          <!-- STEP 2 -->
+          <div id="step2" style="display:none">
+            <p class="muted">Selecciona los componentes de obra blanca:</p>
+            <div class="option-group">
+              <label class="option"><input type="checkbox" id="ob_placa" /> <i class="fas fa-brick"></i> Pañete + estuco muros</label>
+              <label class="option"><input type="checkbox" id="ob_cielos" /> <i class="fas fa-border-style"></i> Cielo raso</label>
+              <label class="option"><input type="checkbox" id="ob_electrica" /> <i class="fas fa-bolt"></i> Adecuación eléctrica</label>
+              <label class="option"><input type="checkbox" id="ob_hidraulica" /> <i class="fas fa-faucet"></i> Adecuación hidráulica</label>
+            </div>
+            <div class="actions-row">
+              <button class="btn-soft" onclick="prevStep()">Atrás</button>
+              <button class="btn-next" onclick="nextStep()">Siguiente</button>
+            </div>
+          </div>
+
+          <!-- STEP 3 -->
+          <div id="step3" style="display:none">
+            <div class="form-row">
+              <div class="field">
+                <label for="piso">Tipo de piso</label>
+                <select id="piso">
+                  <option value="ceramica_econ">Cerámica (económico)</option>
+                  <option value="porcelanato_mid">Porcelanato (medio)</option>
+                  <option value="madera_premium">Madera laminada (premium)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="cocina">Cocina</label>
+                <select id="cocina">
+                  <option value="sin_cocina">Sin instalación</option>
+                  <option value="kit_basico">Kit básico</option>
+                  <option value="kit_vital">Kit Vital</option>
+                  <option value="cocina_premium">Cocina premium</option>
+                </select>
+              </div>
+            </div>
+            <div class="actions-row">
+              <button class="btn-soft" onclick="prevStep()">Atrás</button>
+              <button class="btn-next" onclick="nextStep()">Siguiente</button>
+            </div>
+          </div>
+
+          <!-- STEP 4 -->
+          <div id="step4" style="display:none">
+            <div class="form-row">
+              <div class="field">
+                <label for="pintura">Pintura muros</label>
+                <select id="pintura">
+                  <option value="no">No agregar</option>
+                  <option value="latex">Látex lavable</option>
+                  <option value="acetinado">Acabado satinado</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="bano">Baño</label>
+                <select id="bano">
+                  <option value="no">No agregar</option>
+                  <option value="basico">Enchape básico</option>
+                  <option value="premium">Enchape premium + accesorios</option>
+                </select>
+              </div>
+            </div>
+            <div class="actions-row">
+              <button class="btn-soft" onclick="prevStep()">Atrás</button>
+              <button class="btn-next" onclick="nextStep()">Siguiente</button>
+            </div>
+          </div>
+
+          <!-- STEP 5 -->
+          <div id="step5" style="display:none">
+            <h4>Resumen de tu cotización</h4>
+            <ul class="summary-list" id="summaryList"></ul>
+            <div class="total">
+              <div class="price" id="precioTotal">$0</div>
+              <div class="muted" id="detallePrecio">Incluye materiales, mano de obra y manejo de residuos. Entrega estimada en 2 meses.</div>
+            </div>
+            <div class="actions-row">
+              <button class="btn-soft" onclick="prevStep()">Atrás</button>
+              <button class="btn-next" onclick="sendQuote()">Solicitar asesor</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESUMEN LIVE -->
+        <aside class="summary" aria-label="Resumen en tiempo real">
+          <h4>Tu proyecto</h4>
+          <ul class="summary-list">
+            <li><span>Ciudad</span><span id="sumCiudad">—</span></li>
+            <li><span>Metros (m²)</span><span id="sumMetros">—</span></li>
+            <li><span>Entrega</span><span id="sumEntrega">—</span></li>
+            <li><span>Distribución</span><span id="sumDistribucion">—</span></li>
+            <li><span>Obra blanca</span><span id="sumObra">—</span></li>
+            <li><span>Piso</span><span id="sumPiso">—</span></li>
+            <li><span>Cocina</span><span id="sumCocina">—</span></li>
+            <li><span>Pintura</span><span id="sumPintura">—</span></li>
+            <li><span>Baño</span><span id="sumBano">—</span></li>
+          </ul>
+          <div class="total">
+            <div class="price" id="sumTotal">$0</div>
+            <p class="muted">Estimación preliminar. El valor puede variar según especificaciones y visita técnica.</p>
+            <button class="btn btn-primary" onclick="document.getElementById('step5').scrollIntoView({behavior:'smooth'})">Continuar</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- DASHBOARD SEGUIMIENTO -->
+    <section id="dashboard" class="container" aria-label="Seguimiento de obra en tiempo real">
+      <h2 class="section-title">Sigue tu obra en tiempo real</h2>
+      <p class="section-sub">Nuestro ecosistema antifraude te permite revisar avances y evidencias de cada etapa. Tu tranquilidad, nuestra prioridad.</p>
+
+      <div class="dashboard">
+        <div class="progress-wrap">
+          <h3>Avance general</h3>
+          <div class="badge ok">Contrato firmado</div>
+          <div class="progress-bar" aria-label="Barra de progreso">
+            <div id="progressInner" class="progress-inner" style="width:35%"></div>
+          </div>
+          <p class="muted">Entrega estimada: 2 meses. Última actualización: hoy.</p>
+          <div class="actions-row">
+            <button class="btn-soft" onclick="increaseProgress(10)">Actualizar +10%</button>
+            <button class="btn-soft" onclick="increaseProgress(-10)">Revertir -10%</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Hitos</h3>
+          <ul class="timeline">
+            <li><span class="badge ok">OK</span> Visita técnica</li>
+            <li><span class="badge in">En curso</span> Adecuaciones eléctricas</li>
+            <li><span class="badge next">Siguiente</span> Enchape de baño</li>
+            <li><span class="badge next">Siguiente</span> Instalación de piso</li>
+          </ul>
+          <div class="actions-row">
+            <button class="btn-soft" onclick="addHito()">Agregar evidencia</button>
+            <button class="btn-soft" onclick="alert('Módulo de fotos próximamente')">Ver fotos</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section id="testimonios" class="container" aria-label="Clientes felices">
+      <h2 class="section-title">Clientes felices</h2>
+      <p class="section-sub">Descubre la magia de nuestros proyectos.</p>
+      <div class="testimonios-grid">
+        <figure class="testimonio">
+          <img src="https://acabadosvis.com/wp-content/uploads/2023/06/testimonio1.jpg" alt="Cliente en cocina remodelada">
+          <figcaption>
+            <div class="stars">★★★★★</div>
+            <p class="muted">“Cotización en tiempo récord y diseño impecable.”</p>
+          </figcaption>
+        </figure>
+        <figure class="testimonio">
+          <img src="https://acabadosvis.com/wp-content/uploads/2023/06/testimonio2.jpg" alt="Cliente en sala remodelada">
+          <figcaption>
+            <div class="stars">★★★★★</div>
+            <p class="muted">“Buenos precios y entrega sin enredos.”</p>
+          </figcaption>
+        </figure>
+        <figure class="testimonio">
+          <img src="https://acabadosvis.com/wp-content/uploads/2023/06/testimonio3.jpg" alt="Cliente en habitación remodelada">
+          <figcaption>
+            <div class="stars">★★★★★</div>
+            <p class="muted">“Se acomodaron a mi presupuesto y tiempos.”</p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- COMPARATIVO -->
+    <section id="comparativo" class="container" aria-label="Por qué elegirnos">
+      <h2 class="section-title">¿Por qué elegirnos?</h2>
+      <div class="comparativo">
+        <img src="https://acabadosvis.com/wp-content/uploads/2023/06/pareja-feliz.jpg" alt="Pareja feliz en su nuevo hogar">
+        <div>
+          <table aria-label="Comparativo de servicios">
+            <thead>
+              <tr><th>AcabadosVIS</th><th>Otros contratistas</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Entrega en menos de 2 meses</td><td>Fechas indefinidas</td></tr>
+              <tr><td>12 meses de garantía</td><td>Sin garantía</td></tr>
+              <tr><td>Pagas solo lo contratado</td><td>Sobrecostos y pagos extra</td></tr>
+              <tr><td>Plan de manejo de residuos</td><td>Sin control ambiental</td></tr>
+            </tbody>
+          </table>
+          <div class="actions-row" style="margin-top:12px">
+            <a href="#cotizador" class="btn btn-primary"><i class="fas fa-calculator"></i> Cotizar ahora</a>
+            <button class="btn-soft" onclick="document.getElementById('videocall').scrollIntoView({behavior:'smooth'})"><i class="fas fa-video"></i> Agendar videollamada</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALIADOS -->
+    <section id="aliados" class="container" aria-label="Aliados estratégicos">
+      <h2 class="section-title">Nuestros aliados</h2>
+      <p class="section-sub">Integramos tecnología y servicios con aliados para que tu proceso sea más ágil y seguro.</p>
+      <div class="aliados-logos" role="list">
+        <img role="listitem" src="https://acabadosvis.com/wp-content/uploads/2023/06/sodimac.png" alt="Sodimac Homecenter">
+        <img role="listitem" src="https://acabadosvis.com/wp-content/uploads/2023/06/corona.png" alt="Corona">
+        <img role="listitem" src="https://acabadosvis.com/wp-content/uploads/2023/06/scala.png" alt="Scala">
+        <img role="listitem" src="https://acabadosvis.com/wp-content/uploads/2023/06/compensar.png" alt="Compensar">
+        <img role="listitem" src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Banco_de_Bogot%C3%A1_logo.png" alt="Banco de Bogotá">
+      </div>
+    </section>
+
+    <!-- VIDEO CALL / ASESORÍA -->
+    <section id="videocall" class="container" aria-label="Agenda videollamada">
+      <div class="videocall">
+        <div style="flex:1 1 300px">
+          <h3>Si lo prefieres, hagámoslo juntos</h3>
+          <p class="muted">Agenda una videollamada con nuestra asesora experta y utiliza nuestra calculadora de acabados para conocer el costo exacto de tu proyecto.</p>
+          <div class="actions-row">
+            <a class="btn btn-primary" href="#cotizador"><i class="fas fa-calculator"></i> Usar calculadora</a>
+            <a class="btn btn-outline" href="mailto:servicio@acabadosvis.com?subject=Agendar%20videollamada"><i class="fas fa-calendar-check"></i> Agendar reunión</a>
+          </div>
+        </div>
+        <div style="flex:1 1 280px; min-width:260px">
+          <img src="https://images.unsplash.com/photo-1580894894513-54198146332f?q=80&w=1200&auto=format&fit=crop" alt="Asesoría por videollamada">
+        </div>
+      </div>
+    </section>
+
+    <!-- KIT VITAL -->
+    <section id="kit" class="container" aria-label="Kit Vital">
+      <h2 class="section-title">Kit Vital</h2>
+      <p class="section-sub">Diseñado para complementar los acabados entregados por la constructora y dejar tu hogar #ListoParaVivir.</p>
+      <div class="beneficios-grid">
+        <article class="beneficio">
+          <img src="https://images.unsplash.com/photo-1505692794403-34d4982a6d6f?q=80&w=1200&auto=format&fit=crop" alt="Cocina moderna madera">
+          <h4>Cocina funcional</h4>
+          <p class="muted">Módulos en madera, herrajes de calidad y cubiertas resistentes.</p>
+        </article>
+        <article class="beneficio">
+          <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop" alt="Closets y organización">
+          <h4>Almacenamiento inteligente</h4>
+          <p class="muted">Closets y muebles a medida para aprovechar cada centímetro.</p>
+        </article>
+        <article class="beneficio">
+          <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3b2f1b?q=80&w=1200&auto=format&fit=crop" alt="Dormitorio listo">
+          <h4>Dormitorio listo</h4>
+          <p class="muted">Acabados que combinan estética y durabilidad.</p>
+        </article>
+        <article class="beneficio">
+          <img src="https://images.unsplash.com/photo-1567016591517-728b0a39a93e?q=80&w=1200&auto=format&fit=crop" alt="Baño premium">
+          <h4>Baño premium</h4>
+          <p class="muted">Enchapes, grifería y accesorios con garantía.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- CONTACTO / FOOTER -->
+  <footer id="contacto" role="contentinfo">
+    <div class="footer-inner">
+      <div>
+        <h4>AcabadosVIS</h4>
+        <p class="muted">Integramos tecnología para que el proceso de terminación de tu apartamento sea más ágil y seguro.</p>
+        <ul class="footer-links">
+          <li><a href="#beneficios">Beneficios</a></li>
+          <li><a href="#cotizador">Cotiza en línea</a></li>
+          <li><a href="#dashboard">Seguimiento</a></li>
+          <li><a href="#comparativo">¿Por qué elegirnos?</a></li>
+          <li><a href="#aliados">Aliados</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contáctanos</h4>
+        <p class="muted">Bogotá | Medellín</p>
+        <p class="muted">Email: servicio@acabadosvis.com</p>
+        <p class="muted">WhatsApp: +57 300 123 4567</p>
+        <div class="actions-row" style="margin-top:10px">
+          <a class="btn btn-primary" href="https://wa.me/573001234567" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> Escribir por WhatsApp</a>
+          <a class="btn btn-outline" href="mailto:servicio@acabadosvis.com?subject=Solicitud%20de%20cotizaci%C3%B3n"><i class="fas fa-envelope"></i> Enviar correo</a>
+        </div>
+      </div>
     </div>
-  </section>
-
-  <!-- TESTIMONIOS -->
-  <section class="testimonios">
-    <h2>Clientes Felices</h2>
-    <div class="videos">
-      <img src="https://acabadosvis.com/wp-content/uploads/2023/06/testimonio1.jpg" alt="">
-      <img src="https://acabadosvis.com/wp-content/uploads/2023/06/testimonio2.jpg" alt="">
-      <img src="https://acabadosvis.com/wp-content/uploads/2023/06/testimonio3.jpg" alt="">
-    </div>
-  </section>
-
-  <!-- COMPARATIVO -->
-  <section class="comparativo">
-    <img src="https://acabadosvis.com/wp-content/uploads/2023/06/pareja-feliz.jpg" alt="Clientes felices">
-    <table>
-      <tr><th>AcabadosVIS</th><th>Otros contratistas</th></tr>
-      <tr><td>Entrega en menos de 2 meses</td><td>Fechas indefinidas</td></tr>
-      <tr><td>12 meses de garantía</td><td>Sin garantía</td></tr>
-      <tr><td>Pagas solo lo contratado</td><td>Pagos extra y sobrecostos</td></tr>
-      <tr><td>Plan de manejo de residuos</td><td>Sin control ambiental</td></tr>
-    </table>
-  </section>
-
-  <!-- ALIADOS -->
-  <section class="aliados">
-    <h2>Nuestros Aliados</h2>
-    <div class="logos">
-      <img src="https://acabadosvis.com/wp-content/uploads/2023/06/sodimac.png" alt="">
-      <img src="https://acabadosvis.com/wp-content/uploads/2023/06/corona.png" alt="">
-      <img src="https://acabadosvis.com/wp-content/uploads/2023/06/scala.png" alt="">
-      <img src="https://acabadosvis.com/wp-content/uploads/2023/06/compensar.png" alt="">
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    © 2025 AcabadosVIS | Todos los derechos reservados.
+    <p style="margin-top:16px; text-align:center; font-size:.9rem; color:#aaa">© 2025 AcabadosVIS | Todos los derechos reservados.</p>
   </footer>
 
-  <!-- BOTÓN FLOTANTE -->
-  <a href="https://wa.me/573001234567" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+  <!-- FLOAT WHATSAPP -->
+  <a class="whatsapp-float" href="https://wa.me/573001234567" aria-label="Abrir WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
 
+  <!-- MODAL LOGIN -->
+  <div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="loginTitle">Acceso clientes</h3>
+        <button class="close" id="closeLogin" aria-label="Cerrar modal"><i class="fas fa-times"></i></button>
+      </div>
+      <p class="muted">Ingresa para ver tu proyecto, pagos y avances.</p>
+      <div class="field" style="margin-top:8px">
+        <label for="emailLogin">Email</label>
+        <input id="emailLogin" type="email" placeholder="tu@correo.com" />
+      </div>
+      <div class="field" style="margin-top:8px">
+        <label for="passLogin">Contraseña</label>
+        <input id="passLogin" type="password" placeholder="••••••••" />
+      </div>
+      <div class="actions-row" style="margin-top:14px">
+        <button class="btn-soft" onclick="alert('Recuperación próximamente')">Olvidé mi contraseña</button>
+        <button class="btn btn-primary" onclick="fakeLogin()">Ingresar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENÚ MÓVIL SIMPLE -->
+  <div class="modal" id="menuModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Menú</h3>
+        <button class="close" id="closeMenu"><i class="fas fa-times"></i></button>
+      </div>
+      <div style="display:grid; gap:10px">
+        <a href="#beneficios" onclick="closeMenu()">Beneficios</a>
+        <a href="#cotizador" onclick="closeMenu()">Cotiza en línea</a>
+        <a href="#dashboard" onclick="closeMenu()">Seguimiento</a>
+        <a href="#testimonios" onclick="closeMenu()">Clientes</a>
+        <a href="#comparativo" onclick="closeMenu()">¿Por qué elegirnos?</a>
+        <a href="#aliados" onclick="closeMenu()">Aliados</a>
+        <a href="#contacto" onclick="closeMenu()">Contacto</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    // UTILIDAD: formatear moneda COP
+    const fmtCOP = v => v.toLocaleString('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0});
+
+    // ESTADO COTIZADOR
+    const state = {
+      ciudad:'bogota', metros:0, entrega:'obra_gris', distribucion:'2h_1b',
+      obra:{placa:false, cielos:false, electrica:false, hidraulica:false},
+      piso:'ceramica_econ', cocina:'sin_cocina', pintura:'no', bano:'no',
+      total:0, step:1
+    };
+
+    // REFERENCIAS
+    const refs = {
+      // Inputs
+      ciudad:document.getElementById('ciudad'),
+      metros:document.getElementById('metros'),
+      entrega:document.getElementById('entrega'),
+      distribucion:document.getElementById('distribucion'),
+      ob_placa:document.getElementById('ob_placa'),
+      ob_cielos:document.getElementById('ob_cielos'),
+      ob_electrica:document.getElementById('ob_electrica'),
+      ob_hidraulica:document.getElementById('ob_hidraulica'),
+      piso:document.getElementById('piso'),
+      cocina:document.getElementById('cocina'),
+      pintura:document.getElementById('pintura'),
+      bano:document.getElementById('bano'),
+      // Summary live
+      sumCiudad:document.getElementById('sumCiudad'),
+      sumMetros:document.getElementById('sumMetros'),
+      sumEntrega:document.getElementById('sumEntrega'),
+      sumDistribucion:document.getElementById('sumDistribucion'),
+      sumObra:document.getElementById('sumObra'),
+      sumPiso:document.getElementById('sumPiso'),
+      sumCocina:document.getElementById('sumCocina'),
+      sumPintura:document.getElementById('sumPintura'),
+      sumBano:document.getElementById('sumBano'),
+      sumTotal:document.getElementById('sumTotal'),
+      // Steps
+      step1:document.getElementById('step1'),
+      step2:document.getElementById('step2'),
+      step3:document.getElementById('step3'),
+      step4:document.getElementById('step4'),
+      step5:document.getElementById('step5'),
+      sp1:document.getElementById('sp1'),
+      sp2:document.getElementById('sp2'),
+      sp3:document.getElementById('sp3'),
+      sp4:document.getElementById('sp4'),
+      sp5:document.getElementById('sp5'),
+      summaryList:document.getElementById('summaryList'),
+      precioTotal:document.getElementById('precioTotal'),
+      detallePrecio:document.getElementById('detallePrecio'),
+      progressInner:document.getElementById('progressInner'),
+    };
+
+    // LISTAS LEIBLES
+    const labels = {
+      ciudad:{bogota:'Bogotá', medellin:'Medellín', otra:'Otra'},
+      entrega:{obra_gris:'Obra gris', obra_blanca_base:'Obra blanca base', semi_terminado:'Semi terminado'},
+      distribucion:{'2h_1b':'2H / 1B','3h_2b':'3H / 2B',loft:'Loft'},
+      piso:{ceramica_econ:'Cerámica (económica)', porcelanato_mid:'Porcelanato (medio)', madera_premium:'Madera laminada (premium)'},
+      cocina:{sin_cocina:'Sin instalación', kit_basico:'Kit básico', kit_vital:'Kit Vital', cocina_premium:'Cocina premium'},
+      pintura:{no:'No agregar', latex:'Látex lavable', acetinado:'Acabado satinado'},
+      bano:{no:'No agregar', basico:'Enchape básico', premium:'Enchape premium + accesorios'}
+    };
+
+    // PRECIOS DE REFERENCIA (puedes ajustarlos)
+    const precios = {
+      base_por_m2:{
+        obra_gris: 120000,
+        obra_blanca_base: 95000,
+        semi_terminado: 70000
+      },
+      obra:{
+        placa: 25000,    // pañete+estuco por m2
+        cielos: 18000,
+        electrica: 15000,
+        hidraulica: 14000
+      },
+      piso:{
+        ceramica_econ: 52000,
+        porcelanato_mid: 78000,
+        madera_premium: 98000
+      },
+      cocina:{
+        sin_cocina: 0,
+        kit_basico: 2800000,
+        kit_vital: 4200000,
+        cocina_premium: 6800000
+      },
+      pintura:{
+        no: 0,
+        latex: 16000,
+        acetinado: 22000
+      },
+      bano:{
+        no: 0,
+        basico: 1600000,
+        premium: 3200000
+      }
+    };
+
+    // EVENTOS INPUTS
+    function bindEvents(){
+      refs.ciudad.onchange = e => {state.ciudad=e.target.value; updateSummary(); calc();}
+      refs.metros.oninput = e => {state.metros=Number(e.target.value||0); updateSummary(); calc();}
+      refs.entrega.onchange = e => {state.entrega=e.target.value; updateSummary(); calc();}
+      refs.distribucion.onchange = e => {state.distribucion=e.target.value; updateSummary(); calc();}
+
+      refs.ob_placa.onchange = e => {state.obra.placa=e.target.checked; updateSummary(); calc();}
+      refs.ob_cielos.onchange = e => {state.obra.cielos=e.target.checked; updateSummary(); calc();}
+      refs.ob_electrica.onchange = e => {state.obra.electrica=e.target.checked; updateSummary(); calc();}
+      refs.ob_hidraulica.onchange = e => {state.obra.hidraulica=e.target.checked; updateSummary(); calc();}
+
+      refs.piso.onchange = e => {state.piso=e.target.value; updateSummary(); calc();}
+      refs.cocina.onchange = e => {state.cocina=e.target.value; updateSummary(); calc();}
+      refs.pintura.onchange = e => {state.pintura=e.target.value; updateSummary(); calc();}
+      refs.bano.onchange = e => {state.bano=e.target.value; updateSummary(); calc();}
+    }
+
+    // CALCULO
+    function calc(){
+      const m2 = Math.max(0, state.metros);
+      const base = (precios.base_por_m2[state.entrega]||0) * m2;
+
+      const obraExtras =
+        (state.obra.placa ? precios.obra.placa*m2 : 0) +
+        (state.obra.cielos ? precios.obra.cielos*m2 : 0) +
+        (state.obra.electrica ? precios.obra.electrica*m2 : 0) +
+        (state.obra.hidraulica ? precios.obra.hidraulica*m2 : 0);
+
+      const piso = (precios.piso[state.piso]||0) * m2;
+      const cocina = precios.cocina[state.cocina]||0;
+      const pintura = (precios.pintura[state.pintura]||0) * m2;
+      const bano = precios.bano[state.bano]||0;
+
+      // Ajuste por ciudad (logística)
+      const cityFactor = state.ciudad==='bogota' ? 1.00 : state.ciudad==='medellin' ? 1.03 : 1.05;
+
+      const subtotal = (base + obraExtras + piso + cocina + pintura + bano) * cityFactor;
+      // Manejo de residuos / administración (3%)
+      const admin = subtotal * 0.03;
+      const total = subtotal + admin;
+
+      state.total = Math.round(total);
+      refs.sumTotal.textContent = fmtCOP(state.total);
+      refs.precioTotal.textContent = fmtCOP(state.total);
+    }
+
+    // RESUMEN LIVE
+    function updateSummary(){
+      refs.sumCiudad.textContent = labels.ciudad[state.ciudad];
+      refs.sumMetros.textContent = state.metros ? state.metros + ' m²' : '—';
+      refs.sumEntrega.textContent = labels.entrega[state.entrega];
+      refs.sumDistribucion.textContent = labels.distribucion[state.distribucion];
+
+      const obras = [];
+      if(state.obra.placa) obras.push('Pañete+estuco');
+      if(state.obra.cielos) obras.push('Cielo raso');
+      if(state.obra.electrica) obras.push('Adecuación eléctrica');
+      if(state.obra.hidraulica) obras.push('Adecuación hidráulica');
+      refs.sumObra.textContent = obras.length ? obras.join(', ') : '—';
+
+      refs.sumPiso.textContent = labels.piso[state.piso];
+      refs.sumCocina.textContent = labels.cocina[state.cocina];
+      refs.sumPintura.textContent = labels.pintura[state.pintura];
+      refs.sumBano.textContent = labels.bano[state.bano];
+    }
+
+    // WIZARD STEPS
+    function renderSteps(){
+      [refs.sp1,refs.sp2,refs.sp3,refs.sp4,refs.sp5].forEach((el,i)=>{
+        if(i+1===state.step) el.classList.add('active'); else el.classList.remove('active');
+      });
+      refs.step1.style.display = state.step===1 ? 'block':'none';
+      refs.step2.style.display = state.step===2 ? 'block':'none';
+      refs.step3.style.display = state.step===3 ? 'block':'none';
+      refs.step4.style.display = state.step===4 ? 'block':'none';
+      refs.step5.style.display = state.step===5 ? 'block':'none';
+
+      if(state.step===5){
+        const list = [];
+        list.push(['Ciudad', labels.ciudad[state.ciudad]]);
+        list.push(['Metros', state.metros+' m²']);
+        list.push(['Entrega', labels.entrega[state.entrega]]);
+        list.push(['Distribución', labels.distribucion[state.distribucion]]);
+        const obras = [];
+        if(state.obra.placa) obras.push('Pañete+estuco');
+        if(state.obra.cielos) obras.push('Cielo raso');
+        if(state.obra.electrica) obras.push('Adecuación eléctrica');
+        if(state.obra.hidraulica) obras.push('Adecuación hidráulica');
+        list.push(['Obra blanca', obras.length?obras.join(', '):'—']);
+        list.push(['Piso', labels.piso[state.piso]]);
+        list.push(['Cocina', labels.cocina[state.cocina]]);
+        list.push(['Pintura', labels.pintura[state.pintura]]);
+        list.push(['Baño', labels.bano[state.bano]]);
+        refs.summaryList.innerHTML = list.map(([k,v])=>`<li><span>${k}</span><span>${v}</span></li>`).join('');
+      }
+    }
+    function nextStep(){
+      if(state.step===1 && (!state.metros || state.metros<20)){
+        alert('Por favor ingresa los m² (mínimo 20).');
+        refs.metros.focus(); return;
+      }
+      state.step = Math.min(5, state.step+1);
+      renderSteps();
+      window.scrollTo({top: document.getElementById('cotizador').offsetTop - 80, behavior:'smooth'});
+    }
+    function prevStep(){ state.step = Math.max(1, state.step-1); renderSteps(); }
+    function resetWizard(){
+      state.ciudad='bogota'; state.metros=0; state.entrega='obra_gris'; state.distribucion='2h_1b';
+      state.obra={placa:false, cielos:false, electrica:false, hidraulica:false};
+      state.piso='ceramica_econ'; state.cocina='sin_cocina'; state.pintura='no'; state.bano='no'; state.total=0; state.step=1;
+
+      refs.ciudad.value=state.ciudad; refs.metros.value=''; refs.entrega.value=state.entrega; refs.distribucion.value=state.distribucion;
+      refs.ob_placa.checked=false; refs.ob_cielos.checked=false; refs.ob_electrica.checked=false; refs.ob_hidraulica.checked=false;
+      refs.piso.value=state.piso; refs.cocina.value=state.cocina; refs.pintura.value=state.pintura; refs.bano.value=state.bano;
+      updateSummary(); calc(); renderSteps();
+    }
+
+    // ENVIAR COTIZACIÓN (DEMO)
+    function sendQuote(){
+      const payload = {
+        nombre:'', email:'', telefono:'',
+        proyecto:{
+          ciudad:state.ciudad, metros:state.metros, entrega:state.entrega, distribucion:state.distribucion,
+          obra:state.obra, piso:state.piso, cocina:state.cocina, pintura:state.pintura, bano:state.bano,
+          total:state.total
+        }
+      };
+      // Aquí podrías hacer fetch POST a tu backend
+      console.log('Cotización:', payload);
+      alert('¡Tu solicitud ha sido enviada! Un asesor se comunicará contigo pronto.');
+    }
+
+    // DASHBOARD
+    function increaseProgress(delta){
+      const bar = refs.progressInner;
+      const current = parseInt(bar.style.width.replace('%','')) || 0;
+      const next = Math.max(0, Math.min(100, current + delta));
+      bar.style.width = next + '%';
+    }
+    function addHito(){
+      alert('Sube evidencias de obra: fotos, notas y fechas. (Módulo próximamente)');
+    }
+
+    // MODALES: LOGIN y MENÚ
+    const loginModal = document.getElementById('loginModal');
+    const openLoginBtn = document.getElementById('openLogin');
+    const closeLoginBtn = document.getElementById('closeLogin');
+    openLoginBtn.onclick = ()=> loginModal.classList.add('open');
+    closeLoginBtn.onclick = ()=> loginModal.classList.remove('open');
+    loginModal.onclick = e => { if(e.target===loginModal) loginModal.classList.remove('open'); };
+
+    const menuModal = document.getElementById('menuModal');
+    const openMenuBtn = document.getElementById('openMenu');
+    const closeMenuBtn = document.getElementById('closeMenu');
+    openMenuBtn.onclick = ()=> menuModal.classList.add('open');
+    closeMenuBtn.onclick = ()=> menuModal.classList.remove('open');
+    menuModal.onclick = e => { if(e.target===menuModal) menuModal.classList.remove('open'); };
+    function closeMenu(){ menuModal.classList.remove('open'); }
+
+    // LOGIN FAKE
+    function fakeLogin(){
+      const email = document.getElementById('emailLogin').value.trim();
+      const pass = document.getElementById('passLogin').value.trim();
+      if(!email || !pass){ alert('Ingresa tus credenciales.'); return; }
+      // Aquí integras tu auth (Firebase / backend propio)
+      alert('Acceso correcto. Bienvenido a tu panel.');
+      loginModal.classList.remove('open');
+      document.getElementById('dashboard').scrollIntoView({behavior:'smooth'});
+    }
+
+    // INIT
+    bindEvents(); updateSummary(); calc(); renderSteps();
+  </script>
 </body>
 </html>
