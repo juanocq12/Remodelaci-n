@@ -1,42 +1,228 @@
-// Navegación activa y scroll suave
-document.addEventListener('DOMContentLoaded', () => {
-  const links = document.querySelectorAll('nav ul li a');
-  links.forEach(link => {
-    link.addEventListener('click', function() {
-      links.forEach(l => l.classList.remove('active'));
-      this.classList.add('active');
-    });
-  });
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: #f7f7f7;
+  color: #232424;
+  margin: 0;
+}
+.main-nav {
+  background: #fff;
+  box-shadow: 0 2px 16px #1b263825;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 3vw;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.logo-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1.42rem;
+}
+.logo {
+  width: 43px;
+  height: 43px;
+  object-fit: contain;
+}
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+.main-nav a {
+  color: #222;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.15rem;
+  transition: color .15s;
+}
+.main-nav a.active, .main-nav a:hover {
+  color: #fd7f34;
+}
+.cta-btn-nav {
+  background: linear-gradient(90deg,#fd7f34,#ffb657 70%);
+  color: #fff !important;
+  padding: 10px 28px;
+  border-radius: 30px;
+  font-size: 1.02rem;
+  font-weight: bold;
+  box-shadow: 0 1px 9px #ad520060;
+  transition: background .12s, color .1s;
+}
 
-  // Sombra a la navbar en scroll
-  const nav = document.querySelector('nav');
-  window.addEventListener('scroll', function() {
-    if(window.scrollY > 60) {
-      nav.style.boxShadow = '0 2px 20px #1b263832';
-    } else {
-      nav.style.boxShadow = 'none';
-    }
-  });
+.cta-btn-nav:hover {
+  background: linear-gradient(90deg,#ffb657,#fd7f34 90%);
+  color: #232424 !important;
+}
 
-  // Selector interactivo: qué desea cotizar
-  const optionBtns = document.querySelectorAll('.option-btn');
-  const detail = document.getElementById('selection-detail');
-  const servicioInput = document.getElementById('servicio-input');
-  const detalles = {
-    pintura: `<b>Pintura de Pared</b><br>Elige el color y tipo de pintura perfecta para tu ambiente. Incluye reparación de imperfecciones, aplicación profesional y asesoría.<br><i class="fa-solid fa-brush"></i> Tip: La calidad de la pintura define la duración y el acabado.`,
-    enchapes: `<b>Enchapes / Pisos</b><br>Renueva baños, cocinas o salas con enchapes de cerámica, porcelanato o nuevos pisos. <br><i class="fa-solid fa-grip-lines"></i> Tip: Un buen piso aumenta el valor de tu propiedad.`,
-    bano: `<b>Baños Modernos</b><br>Remodela tu baño con acabados modernos, accesorios, muebles, grifería y duchas de vidrio. <br><i class="fa-solid fa-shower"></i> Consejo: Aprovecha para mejorar iluminación y ventilación.`,
-    persianas: `<b>Persianas</b><br>Instalación de persianas enrollables, blackout, sheer, motorizadas y más.<br><i class="fa-solid fa-blinds"></i> Estilo y control de luz a tu medida.`,
-    vidrios: `<b>Vidrios / Espejos</b><br>Divisiones de baño, puertas, ventanas, espejos decorativos y vidrio templado.<br><i class="fa-solid fa-door-open"></i> Seguridad y elegancia con instalación profesional.`,
-    otro: `<b>Otro Servicio</b><br>Cuéntanos tu necesidad: plomería, carpintería, iluminación, diseño o cualquier adecuación de remodelación.<br><i class="fa-solid fa-hammer"></i> ¡Nos adaptamos a tu proyecto!`
-  };
-  optionBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      optionBtns.forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      const target = this.getAttribute('data-target');
-      detail.innerHTML = detalles[target] || '<span class="placeholder">Selecciona una opción</span>';
-      servicioInput.value = this.textContent.trim();
-    });
-  });
-});
+/* MULTIMEDIA Y VIDEO */
+.cotiza-section {
+  margin: 38px auto 0 auto;
+  max-width: 950px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.cotiza-media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
+}
+.cotiza-media iframe {
+  border-radius: 16px;
+  box-shadow: 0 4px 32px #23242413;
+  margin-bottom: 14px;
+}
+.cotiza-mini-gal {
+  display: flex;
+  gap: 10px;
+  margin: 8px 0 0 0;
+}
+.cotiza-mini-gal img {
+  width: 70px; height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 1px 8px #d97f3f18;
+  background: #eaeaea;
+  transition: transform .15s;
+}
+.cotiza-mini-gal img:hover {
+  transform: scale(1.09);
+  box-shadow: 0 5px 16px #fd835d35;
+}
+
+/* POR QUE ELEGIRNOS */
+.porque-section {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 14px #eba4702a;
+  margin: 44px auto 0 auto;
+  max-width: 1100px;
+  padding: 35px 2vw 37px 2vw;
+}
+.porque-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.porque-img img {
+  width: 330px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 4px 32px #8e654313;
+  background: #eee;
+}
+.porque-table {
+  flex: 1 1 340px;
+  min-width: 290px;
+}
+.porque-table h2 {
+  color: #fd7f34;
+  font-size: 2.1rem;
+  margin-bottom: 29px;
+  font-weight: 800;
+}
+.comp-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #fffaee;
+  border-radius: 13px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px #fd7f3454;
+}
+.comp-table .cell {
+  padding: 23px 14px;
+  font-size: 1.12rem;
+  color: #33250a;
+}
+.comp-table .cell.head {
+  background: linear-gradient(90deg,#fd7f34,#ffb657 82%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.16rem;
+  text-align: center;
+}
+.comp-table ul {
+  padding-left: 16px;
+  margin: 0;
+  list-style: disc;
+}
+.comp-table li {
+  margin-bottom: 7px;
+}
+
+/* ALIADOS */
+.aliados-section {
+  background:#fff;
+  margin: 40px auto 0 auto;
+  max-width: 1000px;
+  padding: 32px 2vw 40px 2vw;
+  border-radius: 18px;
+  box-shadow: 0 2px 10px #ccb92711;
+  text-align: center;
+}
+.aliados-content h3 {
+  color: #2c2c2c;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+.aliados-content h3 span {
+  color: #fd7f34;
+}
+.aliados-content p {
+  color: #858585;
+  margin-bottom: 17px;
+  font-size: 1.13rem;
+}
+.aliados-logos {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 17px;
+}
+.aliados-logos img {
+  height: 38px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+  padding: 3px 10px;
+  box-shadow: 0 1.5px 7px #deb37a22;
+}
+
+footer {
+  background: #fff;
+  color: #888;
+  padding: 18px 0 19px 0;
+  text-align: center;
+  font-size: 1.08rem;
+  border-radius: 0 0 14px 14px;
+  box-shadow: 0 -2px 14px #8882;
+  margin-top: 40px;
+}
+
+@media (max-width: 990px) {
+  .porque-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.1rem;
+  }
+  .porque-img img { width: 96vw; max-width: 400px;}
+}
+@media (max-width: 600px) {
+  .main-nav { flex-direction: column; gap: 0.5rem;}
+  .logo-nav {margin-bottom: 7px;}
+  .porque-table h2 {font-size: 1.09rem;}
+  .porque-img img, .aliados-logos img {max-width: 98vw; width: 100%;}
+  .aliados-logos {gap: 14px;}
+  .cotiza-media {width: 96vw;}
+}
