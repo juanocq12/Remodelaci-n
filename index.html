@@ -3,21 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Acabados VIS | Calidad en cada detalle</title>
-  <meta name="description" content="Expertos en acabados arquitectónicos, interiorismo y remodelación. Transforma tus espacios con Acabados VIS.">
+  <title>RenovaVis | Cotiza tu Remodelación</title>
+  <meta name="description" content="Cotiza en línea pintura, enchapes, baños, persianas, vidrios y todos los acabados. Tu remodelación profesional empieza aquí.">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+  <a href="https://wa.me/573005551234" target="_blank" class="wp-float" title="Cotiza por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
   <header>
     <nav>
       <a href="#" class="brand">
-        <img src="https://cdn.pixabay.com/photo/2014/04/03/11/51/home-312705_1280.png" alt="Logo VIS" class="logo">
-        <span>ACABADOS VIS</span>
+        <img src="https://cdn.pixabay.com/photo/2014/04/03/11/51/home-312705_1280.png" alt="Logo RenovaVis" class="logo">
+        <span>RENOVAVIS</span>
       </a>
       <ul>
         <li><a href="#inicio" class="active">Inicio</a></li>
+        <li><a href="#cotizar">Cotizar</a></li>
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#galeria">Galería</a></li>
         <li><a href="#contacto">Contacto</a></li>
@@ -25,58 +29,104 @@
     </nav>
     <section class="hero" id="inicio">
       <div class="hero-text">
-        <h1>Transforma tus espacios<br>Con elegancia y calidad</h1>
-        <p>Remodelación, diseño arquitectónico y acabados con los más altos estándares. Haz realidad tus proyectos con expertos.</p>
-        <a href="#contacto" class="cta-btn"> Solicita tu Cotización </a>
+        <h1>La mejor manera de <span class="gradient-text">remodelar y cotizar</span> <br> en un solo lugar</h1>
+        <p>Selecciona lo que necesitas: pintura de paredes, enchapes, baños, persianas, vidrios y más. ¡Haz tu cotización en minutos con profesionales expertos!</p>
+        <a href="#cotizar" class="cta-btn"> Cotizar mi Proyecto </a>
       </div>
       <div class="hero-img">
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Interiorismo profesional">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Remodelación moderna">
       </div>
     </section>
   </header>
 
   <main>
+    <section class="need-section" id="cotizar">
+      <h2 class="selector-title">¿Qué deseas cotizar?</h2>
+      <div class="selector-grid">
+        <button class="option-btn" data-target="pintura">
+          <span><i class="fa-solid fa-paint-roller"></i> Pintura de Pared</span>
+        </button>
+        <button class="option-btn" data-target="enchapes">
+          <span><i class="fa-solid fa-border-all"></i> Enchapes / Pisos</span>
+        </button>
+        <button class="option-btn" data-target="bano">
+          <span><i class="fa-solid fa-bath"></i> Baños Modernos</span>
+        </button>
+        <button class="option-btn" data-target="persianas">
+          <span><i class="fa-solid fa-blinds"></i> Persianas</span>
+        </button>
+        <button class="option-btn" data-target="vidrios">
+          <span><i class="fa-solid fa-door-open"></i> Vidrios / Espejos</span>
+        </button>
+        <button class="option-btn" data-target="otro">
+          <span><i class="fa-solid fa-hammer"></i> Otro Servicio</span>
+        </button>
+      </div>
+      <div class="need-detail" id="selection-detail">
+        <p class="placeholder">Elige un servicio para ver detalles y cotizar fácilmente.</p>
+      </div>
+      <form class="contact-form need-form" id="cotizar-form" action="https://formspree.io/f/xqkrnzwj" method="POST">
+        <input type="hidden" name="servicio" id="servicio-input" value="">
+        <input type="text" name="nombre" placeholder="Tu Nombre" required>
+        <input type="email" name="email" placeholder="Correo electrónico" required>
+        <textarea name="mensaje" placeholder="Cuéntanos de tu proyecto o requerimiento..." required></textarea>
+        <button type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar Solicitud</button>
+      </form>
+    </section>
+
     <section class="services-section" id="servicios">
-      <h2>Nuestros Servicios</h2>
+      <h2>Servicios Especializados</h2>
       <div class="services-cards">
         <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=400&q=80" alt="Remodelaciones">
-          <h3>Remodelaciones Integrales</h3>
-          <p>Moderniza y transforma cualquier espacio, residencial o comercial, con materiales de calidad y diseños innovadores.</p>
+          <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=400&q=80" alt="Pintura de Pared">
+          <h3>Pintura de Pared</h3>
+          <p>Renueva tu hogar con pintura profesional, acabados modernos y asesoría en color.</p>
         </div>
         <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1519222970733-f546218fa6d1?auto=format&fit=crop&w=400&q=80" alt="Pintura">
-          <h3>Pintura y Decoración</h3>
-          <p>Técnicas profesionales, acabados modernos, murales, texturas y asesoría de color según la tendencia.</p>
+          <img src="https://images.unsplash.com/photo-1519222970733-f546218fa6d1?auto=format&fit=crop&w=400&q=80" alt="Enchapes y pisos">
+          <h3>Enchapes y Pisos</h3>
+          <p>Instalación de pisos laminados, porcelanato, cerámica y enchapes para baños y cocinas.</p>
         </div>
         <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1503389152951-9c3d0281cb65?auto=format&fit=crop&w=400&q=80" alt="Drywall y cielo raso">
-          <h3>Drywall y Cielo Raso</h3>
-          <p>Divisiones, techos modernos y soluciones funcionales en drywall para hogares, negocios y oficinas.</p>
+          <img src="https://images.unsplash.com/photo-1472224371017-08207f84aaae?auto=format&fit=crop&w=400&q=80" alt="Baños modernos">
+          <h3>Remodelación de Baño</h3>
+          <p>Diseño, accesorios y acabados en baños, duchas, divisiones de vidrio y más.</p>
         </div>
         <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Acabados decorativos">
-          <h3>Acabados Decorativos</h3>
-          <p>Enchapes, pisos, iluminación y detalles en piedra, madera y microcemento para dar vida y distinción a tus ambientes.</p>
+          <img src="https://images.unsplash.com/photo-1503389152951-9c3d0281cb65?auto=format&fit=crop&w=400&q=80" alt="Persianas">
+          <h3>Persianas y Cortinas</h3>
+          <p>Instalación de persianas modernas, enrollables, tipo sheer, blackout y motorizadas.</p>
+        </div>
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1461938331042-8492d74a5a62?auto=format&fit=crop&w=400&q=80" alt="Vidrios de baño">
+          <h3>Vidrios y Espejos</h3>
+          <p>Divisiones, puertas de baño en vidrio templado, espejos decorativos y más.</p>
+        </div>
+        <div class="service-card">
+          <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3c8b?auto=format&fit=crop&w=400&q=80" alt="Otros servicios de remodelación">
+          <h3>Más Servicios</h3>
+          <p>Iluminación, carpintería, plomería y adecuaciones integrales para tu espacio.</p>
         </div>
       </div>
     </section>
+
     <section class="gallery-section" id="galeria">
       <h2>Galería de Proyectos</h2>
       <div class="gallery-grid">
-        <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=400&q=80" alt="Proyecto 1">
-        <img src="https://images.unsplash.com/photo-1502003148287-a258c3a79983?auto=format&fit=crop&w=400&q=80" alt="Proyecto 2">
-        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="Proyecto 3">
-        <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3c8b?auto=format&fit=crop&w=400&q=80" alt="Proyecto 4">
-        <img src="https://images.unsplash.com/photo-1461938331042-8492d74a5a62?auto=format&fit=crop&w=400&q=80" alt="Proyecto 5">
-        <img src="https://images.unsplash.com/photo-1472224371017-08207f84aaae?auto=format&fit=crop&w=400&q=80" alt="Proyecto 6">
+        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=400&q=80" alt="Proyecto pintura">
+        <img src="https://images.unsplash.com/photo-1502003148287-a258c3a79983?auto=format&fit=crop&w=400&q=80" alt="Proyecto baño">
+        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80" alt="Proyecto enchape">
+        <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=400&q=80" alt="Proyecto persianas">
+        <img src="https://images.unsplash.com/photo-1503389152951-9c3d0281cb65?auto=format&fit=crop&w=400&q=80" alt="Proyecto vidrio">
+        <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Proyecto remodelación">
       </div>
     </section>
+
     <section class="contact-section" id="contacto">
       <div class="contact-info">
         <h2>Contacto</h2>
         <p><i class="fa-solid fa-phone"></i> +57 300 555 1234</p>
-        <p><i class="fa-solid fa-envelope"></i> contacto@acabadosvis.com</p>
+        <p><i class="fa-solid fa-envelope"></i> contacto@renovavis.com</p>
         <div class="social-links">
           <a href="https://wa.me/573005551234" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -86,14 +136,13 @@
       <form class="contact-form" action="https://formspree.io/f/xqkrnzwj" method="POST">
         <input type="text" name="name" placeholder="Nombre" required>
         <input type="email" name="email" placeholder="Correo electrónico" required>
-        <textarea name="message" placeholder="Mensaje" required></textarea>
-        <button type="submit">Enviar</button>
+        <textarea name="message" placeholder="¿Cómo podemos asesorarte?" required></textarea>
+        <button type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar</button>
       </form>
     </section>
   </main>
-
   <footer>
-    <p>&copy; 2025 Acabados VIS | Inspirado en el diseño original</p>
+    <p>&copy; 2025 RenovaVis | Remodelación Profesional</p>
   </footer>
   <script src="script.js"></script>
 </body>
