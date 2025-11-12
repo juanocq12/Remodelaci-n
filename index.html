@@ -2,14 +2,409 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RenovaVis | ¿Por qué elegirnos?</title>
-  <meta name="description" content="Cotización en línea de acabados y remodelación. Conoce por qué elegirnos y nuestros aliados.">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>RenovaVis | Cotización y Confianza en Remodelación</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --orange1: #fd7f34;
+      --orange2: #ffb657;
+      --gray-bg: #f7f7f7;
+      --dark: #232323;
+      --white: #fff;
+    }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0;
+      background: var(--gray-bg);
+      color: var(--dark);
+      min-height: 100vh;
+    }
+    /* Navigation */
+    nav.main-nav {
+      background: var(--white);
+      box-shadow: 0 2px 16px rgba(35,35,35,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 4vw;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.43rem;
+      letter-spacing: 0.5px;
+      color: var(--orange1);
+    }
+    .logo-nav img.logo {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+    nav.main-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.6rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav.main-nav ul li a {
+      color: #232323;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.12rem;
+      border-bottom: 2px solid transparent;
+      transition: color 0.18s, border-color 0.16s;
+      padding-bottom: 3px;
+    }
+    nav.main-nav ul li a.active,
+    nav.main-nav ul li a:hover {
+      color: var(--orange1);
+      border-color: var(--orange1);
+    }
+    .cta-btn-nav {
+      background: linear-gradient(90deg,var(--orange1),var(--orange2) 65%);
+      color: #fff !important;
+      padding: 10px 28px;
+      border-radius: 30px;
+      font-size: 1.07rem;
+      font-weight: bold;
+      box-shadow: 0 1px 9px #ad520060;
+      text-decoration: none;
+      margin-left: 12px;
+      transition: background 0.15s;
+    }
+    .cta-btn-nav:hover { background: linear-gradient(90deg,var(--orange2),var(--orange1) 90%); color: #232323 !important;}
+
+    /* Main Container */
+    main {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 2vw 60px 2vw;
+    }
+
+    /* Multimedia y Galería */
+    .cotiza-section {
+      margin: 48px auto 0 auto;
+      background: #fff;
+      border-radius: 30px;
+      box-shadow: 0 3px 24px #d6b61110;
+      display: flex;
+      gap: 3.5vw;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 40px 3vw 45px 3vw;
+    }
+    .cotiza-media {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 360px;
+      min-width: 220px;
+    }
+    .cotiza-media iframe {
+      border-radius: 18px;
+      box-shadow: 0 4px 32px #2324241c;
+      margin-bottom: 14px;
+      width: 100%;
+      max-width: 340px;
+      aspect-ratio: 16/10;
+      background: #eee;
+    }
+    .cotiza-mini-gal {
+      display: flex;
+      gap: 10px;
+      margin: 8px 0 0 0;
+    }
+    .cotiza-mini-gal img {
+      width: 70px; height: 70px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 1px 8px #d97f3f18;
+      background: #eaeaea;
+      transition: transform .14s;
+    }
+    .cotiza-mini-gal img:hover {
+      transform: scale(1.09);
+      box-shadow: 0 5px 16px #fd835d35;
+    }
+    .cotiza-interactivo {
+      flex: 1 1 350px;
+      min-width: 260px;
+      background: #fcfaf7;
+      border-radius: 24px;
+      box-shadow: 0 3px 24px #edb57217;
+      padding: 32px 22px;
+      margin: 0;
+    }
+    .cotiza-interactivo h1 {
+      font-size: 1.7rem;
+      color: var(--orange1);
+      margin: 0 0 10px 0;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+    .cotiza-interactivo p {
+      font-size: 1.13rem;
+      margin-bottom: 25px;
+      color: #424240;
+      line-height: 1.6;
+    }
+    .cotiza-form label {
+      font-size: 1rem;
+      margin-bottom: 4px;
+      color: #513d18;
+      font-weight: 600;
+      display: block;
+      margin-top: 7px;
+    }
+    .cotiza-form select,
+    .cotiza-form input,
+    .cotiza-form textarea {
+      width: 100%;
+      padding: 11px;
+      border-radius: 8px;
+      border: 1.2px solid #eeeeee;
+      background: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: var(--dark);
+      transition: border .13s;
+    }
+    .cotiza-form input:focus, 
+    .cotiza-form textarea:focus,
+    .cotiza-form select:focus {
+      border: 2px solid var(--orange1);
+      outline: none;
+    }
+    .cotiza-form button {
+      background: linear-gradient(93deg,var(--orange1),var(--orange2) 85%);
+      color: #fff;
+      border: none;
+      border-radius: 15px;
+      padding: 13px 0;
+      font-size: 1.1rem;
+      font-weight: bold;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 7px;
+      box-shadow: 0 1px 13px #fd7f3460;
+      transition: background .14s;
+    }
+    .cotiza-form button:hover {
+      background: linear-gradient(96deg,var(--orange2),var(--orange1) 90%);
+      color: #232323;
+    }
+    #cotiza-result {
+      margin-top: 13px;
+      font-size: 1.11rem;
+      color: var(--orange1);
+      font-weight: 700;
+    }
+
+    /* Por qué elegirnos */
+    .porque-section {
+      background: #fff;
+      border-radius: 30px;
+      box-shadow: 0 2px 16px #eba47022;
+      margin: 44px auto 0 auto;
+      max-width: 1120px;
+      padding: 38px 3vw 44px 3vw;
+    }
+    .porque-wrapper{
+      display: flex;
+      align-items: flex-start;
+      gap: 3.3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .porque-img img{
+      width: 330px;
+      border-radius: 22px;
+      object-fit: cover;
+      box-shadow: 0 4px 36px #a5733115;
+      background: #f0f0f0;
+      display: block;
+    }
+    .porque-table{
+      flex: 1 1 350px;
+      min-width: 310px;
+      margin-top: 0;
+    }
+    .porque-table h2{
+      color: var(--orange1);
+      font-size: 2rem;
+      margin-bottom: 24px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+    }
+    .comp-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #fff9ee;
+      border-radius: 17px;
+      overflow: hidden;
+      box-shadow: 0 2px 15px #fd7f3477;
+      border: 1px solid #fbe7ca;
+    }
+    .comp-table .cell {
+      padding: 23px 14px;
+      font-size: 1.13rem;
+      color: #513d18;
+      background: transparent;
+    }
+    .comp-table .cell.head {
+      background: linear-gradient(90deg,var(--orange1),var(--orange2) 80%);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.19rem;
+      text-align: center;
+      border-right: 2px solid #fff2e0;
+    }
+    .comp-table .cell.head:last-child {
+      border-right: none;
+    }
+    .comp-table ul {
+      padding-left: 17px;
+      margin: 0;
+      list-style: disc;
+      font-size: 1rem;
+    }
+    .comp-table li {
+      margin-bottom: 7px;
+    }
+
+    /* Aliados */
+    .aliados-section {
+      background: #fff;
+      margin: 35px auto 0 auto;
+      max-width: 1000px;
+      padding: 34px 2vw 38px 2vw;
+      border-radius: 17px;
+      box-shadow: 0 2px 8px #d6b61113;
+      text-align: center;
+    }
+    .aliados-content h3{
+      color: #2c2c2c;
+      font-weight: 700;
+      font-size: 1.45rem;
+      letter-spacing: 1px;
+    }
+    .aliados-content h3 span {
+      color: var(--orange1);
+    }
+    .aliados-content p{
+      color: #6e6e6e;
+      margin-bottom: 14px;
+      font-size: 1.08rem;
+    }
+    .aliados-logos {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 19px;
+    }
+    .aliados-logos img {
+      height: 38px;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 8px;
+      padding: 2.5px 9px;
+      box-shadow: 0 0.5px 5px #deb37a33;
+    }
+
+    /* Footer */
+    footer {
+      background: #fff;
+      color: #888;
+      padding: 18px 0 19px 0;
+      text-align: center;
+      font-size: 1.1rem;
+      border-radius: 0 0 13px 13px;
+      box-shadow: 0 -2px 14px #d6b61122;
+      margin-top: 44px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Social bar & WhatsApp button */
+    .social-bar {
+      position: fixed;
+      top: 44%;
+      left: 18px;
+      z-index: 110;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.33rem;
+      text-decoration: none;
+      transition: background .16s, color .12s;
+      box-shadow: 0 2px 8px #d97f3f14;
+    }
+    .fb { background: #1877f3;}
+    .ig { background: linear-gradient(45deg,#fd1d1d,#fcb045 80%);}
+    .tt { background: #000;}
+    .social-icon:hover { opacity: .8;}
+    .whatsapp-btn {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      background: #25d366;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+      padding: 12px 20px 12px 15px;
+      font-size: 1.06rem;
+      font-weight: 700;
+      border-radius: 25px;
+      box-shadow: 0 2px 13px #25d366a3;
+      text-decoration: none;
+      z-index: 110;
+      transition: background .15s;
+    }
+    .whatsapp-btn:hover { background: #1ea958; color: #fff;}
+    .whatsapp-btn i { font-size: 1.23em;}
+
+    /* Responsive */
+    @media (max-width: 990px) {
+      .cotiza-section{flex-direction: column; align-items: center; gap: 1.5rem;}
+      .cotiza-media,.cotiza-interactivo {max-width: 97vw;}
+      .porque-wrapper { flex-direction: column; gap: 2.1rem;}
+      .porque-img img { width: 96vw; max-width: 400px;}
+      .comp-table .cell {padding: 14px 7px;}
+    }
+    @media (max-width: 600px) {
+      .main-nav { flex-direction: column; gap: 0.5rem;}
+      .logo-nav {margin-bottom: 10px;}
+      .porque-table h2 {font-size: 1.13rem;}
+      .aliados-logos {gap: 10px;}
+      .cotiza-media,.cotiza-interactivo {max-width: 99vw;}
+      .social-bar {left: 6px;}
+      .comp-table .cell {font-size: 0.95rem;}
+    }
+  </style>
 </head>
 <body>
+  <!-- Nav -->
   <nav class="main-nav">
     <div class="logo-nav">
       <img src="https://i.ibb.co/RhY1dG9/logo-sample-vis.png" alt="Logo RenovaVis" class="logo">
@@ -23,32 +418,54 @@
     </ul>
     <a class="cta-btn-nav" href="#cotiza">Cotiza en Línea</a>
   </nav>
-
   <main>
-    <!-- EMBED VIDEOS Y MINI GALERIA -->
+    <!-- Multimedia y Galería -->
     <section class="cotiza-section" id="cotiza">
       <div class="cotiza-media">
-        <!-- Video ejemplo representativo -->
-        <iframe width="340" height="220" src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=1"
-          title="Video de acabados" frameborder="0" allowfullscreen></iframe>
+        <iframe width="340" height="220" src="https://www.youtube.com/embed/LEtntL1Hn6A" title="Video de acabados" frameborder="0" allowfullscreen></iframe>
         <div class="cotiza-mini-gal">
-          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=400&q=80" alt="Proyecto cocina">
-          <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3c8b?auto=format&fit=crop&w=400&q=80" alt="Proyecto lámparas">
-          <img src="https://images.unsplash.com/photo-1461938331042-8492d74a5a62?auto=format&fit=crop&w=400&q=80" alt="Proyecto almacenamiento">
+          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=400&q=80" alt="Cocina moderna" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3c8b?auto=format&fit=crop&w=400&q=80" alt="Lámparas diseño" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1461938331042-8492d74a5a62?auto=format&fit=crop&w=400&q=80" alt="Closet moderno" loading="lazy">
         </div>
+      </div>
+      <div class="cotiza-interactivo">
+        <h1>Cotiza fácil tu proyecto</h1>
+        <p>
+          Usa nuestra calculadora y obtén una cotización orientativa gratuita para pintura, enchapes, baño, persianas, vidrios o el servicio que requieres.<br>
+          <b>¡Recibe atención personalizada y seguimiento en tiempo real!</b>
+        </p>
+        <form id="cotiza-form" class="cotiza-form" action="#" method="POST" autocomplete="off">
+          <label for="tipo-servicio"><b>¿Qué deseas cotizar?</b></label>
+          <select name="tipo-servicio" id="tipo-servicio" required>
+            <option value="">Selecciona una opción</option>
+            <option value="pintura">Pintura de pared</option>
+            <option value="enchapes">Enchapes / Pisos</option>
+            <option value="bano">Remodelación de baño</option>
+            <option value="persianas">Persianas / Cortinas</option>
+            <option value="vidrios">Vidrios / Espejos</option>
+            <option value="otro">Otro servicio</option>
+          </select>
+          <label for="metros2">Metros cuadrados estimados</label>
+          <input type="number" name="metros2" id="metros2" min="1" max="999" placeholder="Ej: 30" required>
+          <label for="info">Cuéntanos tu requerimiento</label>
+          <textarea id="info" name="info" rows="3" placeholder="Describe detalles, ubicación u otras necesidades" required></textarea>
+          <button type="submit">Cotizar ahora <i class="fa-solid fa-arrow-right"></i></button>
+        </form>
+        <div id="cotiza-result"></div>
       </div>
     </section>
 
-    <!-- POR QUÉ ELEGIRNOS -->
+    <!-- Por qué elegirnos -->
     <section class="porque-section" id="ventajas">
       <div class="porque-wrapper">
         <div class="porque-img">
-          <img src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?auto=format&fit=crop&w=450&q=80" alt="Pareja feliz en remodelación">
+          <img src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?auto=format&fit=crop&w=450&q=80" alt="Clientes felices en remodelación">
         </div>
         <div class="porque-table">
           <h2>¿POR QUÉ ELEGIRNOS?</h2>
           <div class="comp-table">
-            <div class="cell head">AcabadosVIS</div>
+            <div class="cell head">RenovaVis</div>
             <div class="cell head">Otros contratistas</div>
             <div class="cell">
               <ul>
@@ -71,12 +488,12 @@
       </div>
     </section>
 
-    <!-- ALIADOS -->
+    <!-- Aliados -->
     <section class="aliados-section" id="aliados">
       <div class="aliados-content">
         <h3>Nuestros <span>Aliados</span></h3>
         <p>
-          Trabajamos con aliados estratégicos para brindarte materiales de calidad y acompañamiento en cada etapa de tu proyecto.
+          Trabajamos con aliados estratégicos para brindarte materiales de calidad y acompañamiento en todas las etapas de tu proyecto.
         </p>
         <div class="aliados-logos">
           <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Sodimac-logo.png" alt="Sodimac" />
@@ -86,11 +503,80 @@
       </div>
     </section>
   </main>
-
   <footer>
     <div class="footer-content">
       <p>&copy; 2025 RenovaVis · Todos los derechos reservados</p>
     </div>
   </footer>
+  <!-- Social bar y WhatsApp flotante -->
+  <div class="social-bar">
+    <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="social-icon fb">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="social-icon ig">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok" class="social-icon tt">
+      <i class="fab fa-tiktok"></i>
+    </a>
+  </div>
+  <a class="whatsapp-btn" href="https://wa.me/573005551234" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+    <span>¿Dudas? ¡Escríbenos!</span>
+  </a>
+  <script>
+    // Menu activo
+    document.addEventListener("DOMContentLoaded", ()=>{
+      let enlaces = document.querySelectorAll('.main-nav ul li a');
+      enlaces.forEach(link=>{
+        link.addEventListener('click', function(){
+          enlaces.forEach(el=>el.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+    });
+    // Form cotización (demo)
+    document.addEventListener("DOMContentLoaded", ()=>{
+      const cotiza = document.getElementById('cotiza-form');
+      if(!cotiza) return;
+      cotiza.addEventListener('submit', function(e){
+        e.preventDefault();
+        const servicio = cotiza["tipo-servicio"].value;
+        const metros = cotiza["metros2"].value;
+        let msg = "";
+        if(!servicio){
+          msg = "Por favor, selecciona un servicio.";
+        } else {
+          let estimado = "";
+          switch(servicio) {
+            case "pintura":
+              estimado = metros ? `${(metros*21000).toLocaleString('es-CO')} COP` : "";
+              msg = `Estimación de pintura para ${metros} m²: <b>${estimado}</b>. ¡Un asesor se comunicará contigo!`;
+              break;
+            case "enchapes":
+              estimado = metros ? `${(metros*52000).toLocaleString('es-CO')} COP` : "";
+              msg = `Enchape/piso (<b>${metros} m²</b>): ${estimado}. Pronto te enviaremos información y asesoría detallada.`;
+              break;
+            case "bano":
+              estimado = metros ? `Desde ${(metros*80000).toLocaleString('es-CO')} COP` : "";
+              msg = `Para la remodelación de baño, tu inversión estimada es ${estimado}.`;
+              break;
+            case "persianas":
+              msg = "¡Recibido! Pronto contactaremos para sugerirte el mejor tipo de persiana para tu espacio.";
+              break;
+            case "vidrios":
+              msg = "Ya recibimos tu solicitud de vidrio/espejo. Un asesor se pondrá en contacto.";
+              break;
+            case "otro":
+              msg = "¡Gracias por escribir! Analizaremos tu requerimiento y recibirás respuesta personalizada.";
+              break;
+            default: msg = "Recibido.";
+          }
+        }
+        document.getElementById('cotiza-result').innerHTML = msg;
+        cotiza.reset();
+      });
+    });
+  </script>
 </body>
 </html>
