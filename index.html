@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>RenovaVis | Cotiza Tu Proyecto Fácil y Seguro</title>
+  <title>RenovaVis | Cotiza tu Remodelación</title>
+  <meta name="theme-color" content="#fd7f34">
+  <meta name="description" content="Cotiza tu remodelación fácil, rápido y seguro. Recibe garantía, asesoría y atención personalizada. ¡Mejora tu espacio con RenovaVis!">
+  <link rel="icon" href="https://i.ibb.co/RhY1dG9/logo-sample-vis.png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
@@ -13,501 +16,293 @@
       --gray-bg: #f7f5f1;
       --dark: #232323;
       --white: #fff;
-      --shadow: 0 8px 32px #ea843010;
+      --shadow: 0 8px 32px #ea84301b;
       --radius: 30px;
+      --transition: cubic-bezier(.51,.95,.38,1);
     }
-    html {
-      scroll-behavior: smooth;
+    [data-theme="dark"] {
+      --gray-bg: #191b20;
+      --dark: #fafafa;
+      --white: #222326;
     }
+
+    html, body {height:100%;width:100%;scroll-behavior: smooth;}
     body {
       font-family: 'Montserrat', Arial, sans-serif;
-      margin: 0;
-      background: var(--gray-bg);
-      color: var(--dark);
-      min-height: 100vh;
+      margin: 0; background: var(--gray-bg); color: var(--dark);
+      min-height: 100vh; overflow-x: hidden;
+      transition: background .26s var(--transition), color .23s var(--transition);
     }
-    header {
-      background: linear-gradient(90deg,var(--orange2) 0%,var(--orange1) 100%);
-      padding: 50px 10vw 80px 10vw;
-      text-align: left;
-      color: var(--white);
-      border-radius: 0 0 100px 0;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    .header-content {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 2;
-      position: relative;
-    }
-    .header-info {
-      flex: 1.1;
-      min-width: 260px;
-      padding-right: 30px;
-      z-index: 1;
-    }
-    .header-info h1 {
-      font-size: 2.75rem;
-      font-weight: 800;
-      letter-spacing: 1px;
-      margin: 0 0 20px 0;
-      line-height: 1.08;
-      text-shadow: 0 1px 9px #0002;
-    }
-    .header-info p {
-      font-size: 1.21rem;
-      margin-bottom: 30px;
-      font-weight: 500;
-    }
-    .cta-hero {
-      background: linear-gradient(90deg, var(--orange1), var(--orange2) 70%);
-      color: #fff;
-      padding: 16px 38px;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.16rem;
-      font-weight: bold;
-      text-decoration: none;
-      box-shadow: 0 2px 18px #fd7f3433;
-      cursor: pointer;
-      transition: background .18s,color .16s,box-shadow .19s;
-    }
-    .cta-hero:hover {
-      background: linear-gradient(92deg,var(--orange2),var(--orange1) 90%);
-      color: var(--dark);
-      transform: translateY(-2px) scale(1.025);
-      box-shadow: 0 4px 29px #fd7f3433;
-    }
-    .header-img {
-      flex: 1;
-      min-width: 230px;
-      display: flex;
-      justify-content: flex-end;
-      z-index: 1;
-    }
-    .header-img img {
-      width: 330px;
-      max-width: 90vw;
-      border-radius: 25px 60px 95px 18px;
-      box-shadow: 0 8px 60px #42291122;
-      object-fit: cover;
-      border: 3px solid #fff2;
-      opacity: 0.98;
-    }
+
+    /* Animaciones globales */
+    .fadeUp { opacity:0; transform: translateY(50px);}
+    .fadeIn { opacity:0; }
+    .show { opacity:1 !important; transform: none !important; transition: all 1s var(--transition); }
+
     nav.main-nav {
-      background: var(--white);
-      box-shadow: 0 2px 16px rgba(35,35,35,0.07);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.6rem 7vw;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background: var(--white); box-shadow: 0 2px 16px #23232311;
+      padding: .6rem 5vw; display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top:0; z-index: 100;
+      transition: background .22s var(--transition);
     }
     .logo-nav {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      font-weight: 700;
-      font-size: 1.4rem;
-      letter-spacing: 0.5px;
-      color: var(--orange1);
+      display: flex; align-items: center; gap: 10px; font-weight: 900;
+      font-size: 1.48rem; color: var(--orange1); letter-spacing: .15rem;
     }
-    .logo-nav img {
-      width: 44px;
-      height: 44px;
-      object-fit: contain;
-    }
+    .logo-nav img { width: 42px; height: 42px; object-fit: contain;}
     nav.main-nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.6rem;
-      margin: 0;
-      padding: 0;
+      display: flex; gap: 1.25rem; list-style: none; margin: 0;
     }
     nav.main-nav ul li a {
-      color: #232323;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.05rem;
-      border-bottom: 2px solid transparent;
-      transition: color .18s, border-color .14s;
-      padding-bottom: 3px;
-      letter-spacing: .25px;
-    }
-    nav.main-nav ul li a.active,
-    nav.main-nav ul li a:hover {
-      color: var(--orange1);
-      border-color: var(--orange1);
-    }
-    .cta-btn-nav {
-      background: linear-gradient(90deg,var(--orange1),var(--orange2) 65%);
-      color: #fff !important;
-      padding: 8px 24px;
-      border-radius: 30px;
-      font-size: 1.08rem;
-      font-weight: 700;
-      box-shadow: 0 1px 9px #ad520060;
-      text-decoration: none;
-      margin-left: 14px;
-      transition: background .17s;
-    }
-    .cta-btn-nav:hover { background: linear-gradient(90deg,var(--orange2),var(--orange1) 85%); color: #232323 !important;}
-
-    /* Cotización */
-    .cotiza-section {
-      margin: -65px auto 0 auto;
-      background: #fff;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      display: flex;
-      gap: 3.5vw;
-      justify-content: flex-start;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      padding: 40px 3vw 45px 3vw;
-      max-width: 1140px;
-      position: relative;
-      z-index: 3;
-      animation: appearUp .8s cubic-bezier(.51,.95,.38,1) 0.11s backwards;
-    }
-    @keyframes appearUp {
-      from { opacity: 0; transform: translateY(60px);}
-      to   { opacity: 1; transform: translateY(0);}
-    }
-    .cotiza-media {
-      flex: 1.1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      min-width: 220px;
-    }
-    .cotiza-media iframe {
-      border-radius: 15px;
-      box-shadow: 0 8px 32px #da99412a;
-      margin-bottom: 6px;
-      width: 100%;
-      max-width: 330px;
-      aspect-ratio: 16/10;
-      background: #eee;
-      border: 0;
-      min-height: 175px;
-    }
-    .cotiza-mini-gal {
-      display: flex;
-      gap: 13px;
-      margin-top: 4px;
-    }
-    .cotiza-mini-gal img {
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 14px;
-      transition: transform .12s,box-shadow .13s;
-      box-shadow: 0 2px 12px #ff7f1811;
-      cursor: pointer;
-      background: #faf8f5;
-      filter: grayscale(.12);
-    }
-    .cotiza-mini-gal img:hover {
-      transform: translateY(-5px) scale(1.08) rotate(-3deg);
-      box-shadow: 0 8px 32px #fd835d48;
-      filter: none;
-    }
-    .cotiza-interactivo {
-      flex: 1.5 1 354px;
-      min-width: 260px;
-      background: #fefffc;
-      border-radius: 24px;
-      box-shadow: 0 3px 24px #edb57210;
-      padding: 35px 28px 31px 28px;
-      margin: 0;
-      position: relative;
-    }
-    .cotiza-interactivo h2 {
-      font-size: 2.00rem;
-      color: var(--orange1);
-      margin: 0 0 10px 0;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-    }
-    .cotiza-interactivo p {
-      font-size: 1.13rem;
-      margin-bottom: 18px;
-      color: #564526;
-      line-height: 1.6;
-    }
-    .cotiza-form label {
-      font-size: 1rem;
-      color: #513d18;
-      font-weight: 700;
-      margin-bottom: 2px;
-      display: block;
-      margin-top: 9px;
-    }
-    .cotiza-form select,
-    .cotiza-form input,
-    .cotiza-form textarea {
-      width: 100%;
-      padding: 10px;
-      border-radius: 7px;
-      border: 1px solid #ece7e2;
-      background: #fff;
-      font-family: inherit;
-      font-size: 1em;
-      margin-bottom: 7px;
-      color: var(--dark);
-      transition: border .16s;
-      box-sizing: border-box;
-    }
-    .cotiza-form input:focus, 
-    .cotiza-form textarea:focus,
-    .cotiza-form select:focus {
-      border: 2px solid var(--orange1);
+      font-weight: 700; font-size: 1.1rem; color: inherit; text-decoration: none;
+      border-bottom: 2px solid transparent; padding-bottom: 2px; border-radius:2px;
+      cursor: pointer; transition: color .15s, border-color .15s;
       outline: none;
     }
-    .cotiza-form button {
-      background: linear-gradient(93deg,var(--orange1),var(--orange2) 90%);
-      color: #fff;
-      border: none;
-      border-radius: 16px;
-      padding: 12px 0;
-      font-size: 1.09rem;
-      font-weight: bold;
-      width: 100%;
-      cursor: pointer;
-      margin-top: 10px;
-      box-shadow: 0 1px 13px #fd7f3460;
-      transition: background .14s,color .15s,box-shadow .16s;
+    nav.main-nav ul li a.active, nav.main-nav ul li a:focus, nav.main-nav ul li a:hover {
+      color: var(--orange1); border-color: var(--orange1); background: #fff0e91c;
     }
-    .cotiza-form button:hover {
-      background: linear-gradient(95deg,var(--orange2),var(--orange1) 88%);
-      color: #232323;
-      box-shadow: 0 3px 18px #fd7f344a;
+    .cta-btn-nav {
+      background: linear-gradient(90deg, var(--orange1), var(--orange2) 60%);
+      color: #fff !important; font-weight: bold; border-radius: 27px; padding: 9px 29px;
+      font-size: 1.08rem; margin-left: 12px; box-shadow: 0 1px 9px #ad520033;
+      text-decoration: none; transition: background .17s, color .15s;
     }
-    #cotiza-result {
-      margin-top: 13px;
-      font-size: 1.12rem;
-      color: var(--orange1);
-      font-weight: 700;
-      min-height: 1.4em;
-      transition: color .17s;
-      letter-spacing: 0.2px;
+    .cta-btn-nav:hover,.cta-btn-nav:focus {
+      background: linear-gradient(90deg,var(--orange2),var(--orange1) 90%); color: #232323 !important;
+    }
+    .toggle-theme {
+      margin-left:18px; cursor:pointer; font-size:1.32em; background: #fff7; border:none;border-radius:20px;
+      padding:4px 11px;transition:background .13s;
+    }
+    .toggle-theme:active { background: #ffdba5; }
+
+    /* HERO MODERNO */
+    .hero {
+      background: linear-gradient(90deg, var(--orange2) 0%, var(--orange1) 100%);
+      color: var(--white); padding: 46px 8vw 92px 8vw; border-radius: 0 0 110px 0;
+      box-shadow: var(--shadow);
+      position: relative; overflow: hidden; margin-bottom: -100px; z-index:2;
+      min-height: 340px;
+      display: flex; flex-direction:column; align-items:flex-start; justify-content:center;
+    }
+    .hero h1 {
+      font-size: 2.85rem; margin: 0 0 10px 0; font-weight: 900; letter-spacing: 1.2px; 
+      text-shadow:0 1px 9px #0002;
+      animation: textPop .95s cubic-bezier(.61,1.42,.41,1.09) .13s both;
+    }
+    @keyframes textPop {
+      from {transform:scale(.91); opacity:0;} to {transform:none; opacity:1;}
+    }
+    .hero-description {
+      font-size: 1.18rem;max-width:500px;margin-bottom:33px; line-height:1.57;
+      text-shadow:0 2px 6px #191b2057;
+      filter: drop-shadow(1px 4px 8px #fa7f3439);
+      animation:fadeUp .9s .18s cubic-bezier(.41,1.2,.51,1) both;
+    }
+    @keyframes fadeUp {from{opacity:0;transform:translateY(32px);} to{opacity:1;transform:none;}}
+    .hero .cta-hero {
+      background: linear-gradient(90deg, var(--orange1), var(--orange2) 70%);
+      color: #fff; padding: 14px 38px; border: none;
+      border-radius: 50px; font-size: 1.14rem; font-weight: bold;
+      box-shadow: 0 2px 18px #fd7f3433; cursor: pointer;
+      transition: background .18s, color .16s, box-shadow .19s;
+      position:relative; z-index:3;
+      animation: fadeIn .99s .29s cubic-bezier(.65,1,0,.9) both;
+    }
+    @keyframes fadeIn {from{opacity:0;} to{opacity:1;}}
+    .cta-hero:hover { background:linear-gradient(93deg,var(--orange2),var(--orange1) 88%); color:var(--dark);}
+    .hero-figure {
+      position: absolute; right:4vw; bottom:10px; pointer-events: none;
+      width:340px; max-width:33vw; z-index:1; filter: brightness(0.97);
+      animation: heroFloat 5.5s infinite alternate cubic-bezier(.8,.17,.61,.46);
+      border-radius: 40px 90px 70px 15px; box-shadow:0 15px 60px #ffdbb622;
+    }
+    @keyframes heroFloat {to {transform:translateY(-18px) scale(1.011);}}
+
+    /* COUNTERS */
+    .animated-counters {
+      display:flex; justify-content:center; align-items:center;
+      gap:45px; background: transparent; padding:20px 0 24px 0;
+      margin:-60px auto 28px auto; z-index:9; position:relative;
+    }
+    .counter-card {
+      background: var(--white); padding:20px 29px;
+      border-radius:19px; box-shadow:0 1px 10px #fca5431a;
+      display:flex; flex-direction:column; align-items:center;
+      font-size:1.25rem; color:var(--orange1); font-weight:800; gap:6px;
+      min-width:133px; min-height:82px; opacity:.93;
+      transition: box-shadow .17s;
+    }
+    .counter-card:hover {box-shadow:0 4px 26px #fca5432c;}
+    .counter-val { font-size:2em;font-weight:900;}
+    .counter-label { color:#513d18;font-size:1.06em;font-weight:700;letter-spacing:.07em;}
+    [data-theme="dark"] .counter-card{background:#191b207d;border:.8px solid #fd7f3420;}
+    [data-theme="dark"] .counter-label{color:var(--white);}
+
+    /* FORMS - STEPPER */
+
+    .cotiza-section {
+      margin: 38px auto 0 auto; background: var(--white); border-radius: var(--radius);
+      box-shadow: var(--shadow); display: flex; gap: 3vw;
+      padding: 43px 3vw 48px 3vw; max-width: 1160px; flex-wrap:wrap;position:relative;
+      animation:fadeUp 1.1s .16s both;
+    }
+    .cotiza-media {
+      display: flex; flex-direction: column; align-items: center; gap: 11px; width:310px; min-width:210px;
+    }
+    .cotiza-media iframe {
+      border-radius: 14px; box-shadow: 0 4px 24px #da99412a; margin-bottom: 3px;
+      width: 100%; max-width: 290px; aspect-ratio:16/9; background: #eee;
+      border:none; min-height:170px; transition: box-shadow .14s;
+    }
+    .cotiza-mini-gal {display:flex;gap:11px;}
+    .cotiza-mini-gal img {
+      width:55px; height:55px;object-fit:cover; border-radius:11px;
+      box-shadow:0 2px 11px #ff7f1810;cursor:pointer;
+      background:#fcfaf8;filter:grayscale(.13);transition:box-shadow .12s, transform .13s, filter .10s;
+    }
+    .cotiza-mini-gal img:hover {box-shadow:0 6px 17px #fd835d39;transform:scale(1.07) rotate(-3deg);filter:none;}
+    .cotiza-stepper {
+      flex: 1 1 350px; min-width: 260px; background: #fcfaf7; border-radius: 23px;
+      box-shadow: 0 3px 18px #edb57217; padding: 32px 24px 22px 24px;margin:0; position:relative;
+      transition: background .19s;
+    }
+    [data-theme="dark"] .cotiza-stepper{background:#222326;}
+
+    .stepper-head {
+      font-size: 1.43rem; color: var(--orange1); margin: 0 0 10px 0; font-weight: 800;letter-spacing:.4px;
+      display: flex; align-items: center;gap:10px;
+    }
+    .step-indicator {font-size:.7em;color:var(--orange2);font-weight:900; background: #fff5e7; border-radius:10px;
+      padding:2px 11px 2px 8px; margin-left:8px;letter-spacing:.13em;}
+    .step-form {margin-top:7px;}
+    .step-form label {font-size:.99rem;margin-bottom:2px; color:#513d18; font-weight:700; display:block;}
+    .step-form input, .step-form select, .step-form textarea {
+      font-size:1.04em; border-radius:8px; padding:10px; margin-bottom:6px; width:100%;
+      border:1.1px solid #ece7e2; background: #fff;font-family:inherit;color: var(--dark);
+      transition: border .13s, background .13s;
+    }
+    [data-theme="dark"] .step-form input, [data-theme="dark"] .step-form select, [data-theme="dark"] .step-form textarea{
+      background:#1a1a21;color:var(--white);
+    }
+    .step-form textarea {resize:vertical;}
+    .step-form input:focus, .step-form select:focus, .step-form textarea:focus {border:2px solid var(--orange1); outline:none;}
+    .stepper-btns {display: flex; gap:10px;margin-top:11px;}
+    .stepper-btn {
+      font-size:1rem; font-weight:700; border-radius:13px; padding:11px 0;
+      background:linear-gradient(92deg,var(--orange1) 80%,var(--orange2)); color:#fff;
+      border:none;width:100%;box-shadow: 0 1px 9px #fd7f3450; cursor:pointer;
+      transition:background .12s,color .14s, box-shadow .13s;
+    }
+    .stepper-btn:hover, .stepper-btn:focus {background:linear-gradient(98deg,var(--orange2),var(--orange1) 92%);color:#232323;}
+    .stepper-btn[disabled]{background:#fcf6ef;color:#c5a474;cursor:not-allowed;}
+    .tip-help {
+      font-size:1em;color:#c08624; background:#fffbe5; border-radius:7px; padding:3px 8px; margin:2px 0 10px 0;
+      display:inline-block;line-height:1.3; border:1px solid #ffe4a2;
+      animation:fadeIn .7s .1s both;
     }
 
-    /* Por qué elegirnos */
-    .porque-section {
-      background: #fff;
-      border-radius: var(--radius);
-      box-shadow: 0 2px 14px #eba47018;
-      margin: 64px auto 0 auto;
-      max-width: 1100px;
-      padding: 45px 3vw 42px 3vw;
-      animation: appearUp .9s cubic-bezier(.51,.95,.38,1) .18s both;
+    /* Custom Success modal */
+    .modal-bg {
+      display:none; z-index:2222; position:fixed; inset:0; background:#23232396; align-items:center;justify-content:center;
     }
-    .porque-wrapper{
-      display: flex;
-      align-items: flex-start;
-      gap: 3.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+    .modal-bg.show {display:flex;}
+    .modal-cot-ext {
+      background: #fff; border-radius:24px; padding:33px 39px; box-shadow:0 7px 44px #fd7f3443;
+      color:#232323; max-width:370px; font-weight:700; font-size:1.19em; min-width:250px;
+      display:flex; flex-direction:column;align-items:center; animation:fadeIn .41s both;
     }
-    .porque-img img{
-      width: 310px;
-      max-width: 90vw;
-      border-radius: 22px;
-      object-fit: cover;
-      box-shadow: 0 8px 36px #cd954810;
-      display: block;
-    }
-    .porque-table{
-      flex: 1 1 350px;
-      min-width: 300px;
-      margin-top: 0;
-    }
-    .porque-table h2{
-      color: var(--orange1);
-      font-size: 1.92rem;
-      margin-bottom: 24px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-    }
-    .comp-table {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: #fff9ee;
-      border-radius: 17px;
-      overflow: hidden;
-      box-shadow: 0 2px 15px #fd7f3412;
-      border: 1px solid #f7ddb5;
-    }
-    .comp-table .cell {
-      padding: 22px 13px;
-      font-size: 1.10rem;
-      color: #5e381a;
-      background: transparent;
-    }
-    .comp-table .cell.head {
-      background: linear-gradient(90deg,var(--orange1),var(--orange2) 80%);
-      color: #fff;
-      font-weight: 700;
-      font-size: 1.17rem;
-      text-align: center;
-      border-right: 2px solid #fff2e0;
-      letter-spacing:.45px;
-    }
-    .comp-table .cell.head:last-child {
-      border-right: none;
-    }
-    .comp-table ul {
-      padding-left: 16px;
-      margin: 0;
-      list-style: disc;
-      font-size: 1em;
-    }
-    .comp-table li {
-      margin-bottom: 7px;
-    }
+    .modal-cot-ext .fa-circle-check{color:var(--orange1);font-size:2.4em;margin-bottom:9px;}
+    .modal-cot-ext button {margin-top:14px; border:none;background:linear-gradient(93deg,var(--orange1),var(--orange2));color:#fff;font-size:1.09em;border-radius:9px;padding:8px 30px;cursor:pointer;}
+    .modal-cot-ext button:hover {background:linear-gradient(90deg,var(--orange2),var(--orange1) 81%);color:var(--dark);}
+    [data-theme="dark"] .modal-cot-ext{background:#191b20;color:#fff;}
 
-    /* Aliados */
-    .aliados-section {
-      background: #fff;
-      margin: 40px auto 0 auto;
-      max-width: 930px;
-      padding: 33px 2vw 38px 2vw;
-      border-radius: 19px;
-      box-shadow: 0 2px 8px #d6b61113;
-      text-align: center;
+    /* Card Advantages (Ventajas) */
+    .ventajas-section {
+      background:var(--white);border-radius:var(--radius);box-shadow:0 2px 16px #eba47022;
+      margin:40px auto 0 auto;max-width:1050px;padding:40px 3vw 46px 3vw;
+      animation:fadeUp 1.2s .21s both;
     }
-    .aliados-content h3{
-      color: #2c2c2c;
-      font-weight: 800;
-      font-size: 1.41rem;
-      letter-spacing: 1px;
+    .ventajas-cards {display:flex;gap:28px;flex-wrap:wrap;justify-content:center;}
+    .ventaja-card {
+      flex:1 1 170px;min-width:220px;max-width:270px;
+      background:#fff9ee;padding:32px 24px 24px 24px;border-radius:18px;
+      box-shadow:0 5px 15px #fa7f3417;display:flex;flex-direction:column;align-items:center;gap:11px;
+      transition: background .18s, box-shadow .16s;
+      position:relative;overflow:hidden;
+      z-index:2;margin-bottom:15px;
+      animation:fadeIn 0.83s backwards;
     }
-    .aliados-content h3 span {
-      color: var(--orange1);
+    .ventaja-card i{
+      color:var(--orange2);font-size:1.9em;margin-bottom:6px;filter:drop-shadow(0 1px 3px #fd7f3446);
     }
-    .aliados-content p{
-      color: #6e6e6e;
-      margin-bottom: 14px;
-      font-size: 1.08rem;
+    .ventaja-title {font-weight:800;font-size:1.13em;color:var(--orange1);}
+    .ventaja-desc {color:#513d18;font-size:1em;}
+    .ventaja-card::after{
+      content:""; display:block; position:absolute;top:0;right:0;width:50px;height:50px;
+      background:linear-gradient(45deg,#fff8ee 70%,#fd7f3432 100%);border-radius:0 0 0 50px;z-index:-1;opacity:.53;
     }
-    .aliados-logos {
-      display: flex;
-      gap: 30px;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 19px;
-    }
-    .aliados-logos img {
-      height: 38px;
-      object-fit: contain;
-      background: #fff;
-      border-radius: 8px;
-      padding: 3px 11px;
-      box-shadow: 0 1px 9px #deb37a18;
-      transition: filter .17s,box-shadow .15s;
-    }
-    .aliados-logos img:hover {
-      filter: brightness(0.92) contrast(1.14);
-      box-shadow: 0 4px 20px #fd7f3421;
-    }
+    [data-theme="dark"] .ventajas-section,[data-theme="dark"] .ventaja-card{background:#191b20;}
+    [data-theme="dark"] .ventaja-desc{color:var(--white);}
+    [data-theme="dark"] .ventaja-card{box-shadow:0 5px 15px #fd7f344a;}
 
-    /* Footer */
-    footer {
-      background: #fff;
-      color: #8a8886;
-      padding: 16px 0 18px 0;
-      text-align: center;
-      font-size: 1.08rem;
-      border-radius: 0 0 17px 17px;
-      box-shadow: 0 -2px 15px #dea26714;
-      margin-top: 28px;
-      letter-spacing: 0.5px;
-    }
+    /* Socios */
+    .aliados-section { /*...igual que anteriores*/ }
 
-    /* Social bar & WhatsApp floating */
+    /* Barra Social + WhatsApp QuickChat */
     .social-bar {
-      position: fixed;
-      top: 45%;
-      left: 18px;
-      z-index: 110;
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
+      position: fixed; top: 48%; left: 9px; z-index:111;
+      display:flex;flex-direction:column;gap:11px;
     }
-    .social-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      color: #fff;
-      font-size: 1.33rem;
-      text-decoration: none;
-      background: #6e6e6e;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background .15s, color .12s, box-shadow .16s;
-      box-shadow: 0 4px 12px #d97f3f20;
-    }
-    .fb { background: #1877f3;}
-    .ig { background: linear-gradient(45deg,#fd1d1d,#fcb045 80%);}
-    .tt { background: #000;}
-    .social-icon:hover { opacity: .82; background: var(--orange1);}
+    .social-icon {width:38px;height:38px;border-radius:50%;color:#fff;font-size:1.33rem;text-decoration:none;
+      background: #bbb;display: flex;align-items: center;justify-content: center; box-shadow: 0 2px 8px #fd7f3440;
+      transition: background .16s, color .12s; border:none;}
+    .fb {background:#1877f3;} .ig {background:linear-gradient(45deg,#fd1d1d,#fcb045 80%);} .tt {background:#000;}
+    .social-icon:hover {background:var(--orange1);opacity:.9;}
     .whatsapp-btn {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      background: #25d366;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #fff;
-      padding: 13px 22px 13px 16px;
-      font-size: 1.07rem;
-      font-weight: 700;
-      border-radius: 25px;
-      box-shadow: 0 3px 15px #25d36661;
-      text-decoration: none;
-      z-index: 110;
-      transition: background .14s;
-      letter-spacing: .12px;
+      position:fixed;right:20px;bottom:20px;background:#25d366;display:flex;align-items:center;gap:8px;
+      color:#fff;padding:14px 22px 14px 16px;font-size:1.07rem;font-weight:700;border-radius:25px;
+      box-shadow: 0 3px 15px #25d36661; text-decoration:none; z-index:111; transition:background .14s;letter-spacing:.09px;
     }
-    .whatsapp-btn:hover { background: #1ea958; color: #fff;}
-    .whatsapp-btn i { font-size: 1.26em;}
+    .whatsapp-btn:hover,.whatsapp-btn:focus {background:#1ea958; color:#fff;}
+    .wa-quickchat {position:fixed;right:22px;bottom:72px;z-index:222;
+      background:#fff;border-radius:19px;box-shadow:0 6px 34px #25d36693;padding:24px 22px 16px 22px;
+      max-width:310px;min-width:200px;display:none;flex-direction:column;}
+    .wa-quickchat.show {display:flex;}
+    .wa-quickchat h4{margin:0 0 10px 0;color:#25d366;font-size:1.15em;}
+    .wa-msg {font-size:1em;color: #222;margin-bottom:11px;}
+    .wa-start-btn{
+      background:linear-gradient(94deg,#25d366 70%,#1ea958 100%);color:#fff;font-weight:700;border:none;
+      border-radius:7px;padding:8px 17px;font-size:.97em;cursor:pointer;
+      transition:background .15s;
+    }
+    .wa-start-btn:hover{background:linear-gradient(91deg,#25d366,#fd7f34);}
+    .wa-quickchat .close{
+      position:absolute;top:9px;right:10px;background:none;border:none;font-size:1.04em;color:#999;cursor:pointer;}
+    .wa-quickchat .close:hover{color:#fa6235;}
 
-    /* Responsive */
-    @media (max-width: 1080px) {
-      .header-content {flex-direction: column;align-items: flex-start;text-align:left;}
-      .header-img {justify-content: center;padding-top:30px;}
-      .header-info {padding-right:0;}
+    /* Up Button */
+    .go-top-btn {
+      position:fixed; right:22px; bottom:114px; background:var(--orange1); color:#fff; border:none;
+      border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+      font-size:1.48em;box-shadow:0 4px 16px #fd7f3444;opacity: 0; pointer-events:none; transition:opacity .16s;
+      z-index:120;
     }
-    @media (max-width: 900px) {
-      header {padding: 36px 2vw 66px 2vw;}
-      .cotiza-section {flex-direction: column;gap:1.6rem;}
-      .cotiza-media,.cotiza-interactivo {max-width: 98vw;}
-      .porque-wrapper { flex-direction: column; gap: 2.2rem;}
-      .porque-img img { width: 96vw; max-width: 370px;}
-      .comp-table .cell {padding: 13px 7px;}
+    .go-top-btn.show{opacity:.9;pointer-events:auto;}
+
+    /* Responsive design para mobile */
+    @media (max-width: 980px){
+      .cotiza-section{flex-direction:column;align-items:center;gap:1.5rem;}
+      .animated-counters{gap:19px;}
     }
-    @media (max-width: 600px) {
-      .main-nav { flex-direction: column; gap: .3rem; padding: 0.6rem 3vw;}
-      .logo-nav {margin-bottom: 7px;}
-      .porque-table h2 { font-size: 1.12rem;}
-      .aliados-logos {gap: 10px;}
-      .cotiza-media,.cotiza-interactivo {max-width: 99vw;}
-      .social-bar {left: 6px;}
-      .comp-table .cell { font-size: .97rem;}
-      .header-img img { width: 97vw; max-width: 310px;}
-      header{padding-bottom:36px;}
+    @media (max-width: 600px){
+      .main-nav { flex-direction: column; gap: .3rem; padding: 0.6rem 2vw;}
+      .logo-nav {margin-bottom: 6px;}
+      .ventajas-cards{gap:10px;}
+      .cotiza-media,.cotiza-stepper {max-width:99vw;}
+      .hero-figure{display:none;}
+      .counter-card{min-width:99px;}
     }
   </style>
 </head>
@@ -520,137 +315,315 @@
     </div>
     <ul>
       <li><a href="#cotiza" class="active">Inicio</a></li>
-      <li><a href="#ventajas">¿Por qué elegirnos?</a></li>
+      <li><a href="#ventajas">Ventajas</a></li>
       <li><a href="#aliados">Aliados</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
-    <a class="cta-btn-nav" href="#cotiza">Cotiza en Línea</a>
+    <a class="cta-btn-nav" href="#cotiza">Cotiza Online</a>
+    <button class="toggle-theme" id="theme-toggle" aria-label="Cambiar modo"><i class="fa fa-moon"></i></button>
   </nav>
 
-  <!-- HERO / Header -->
-  <header>
-    <div class="header-content">
-      <div class="header-info">
-        <h1>RenovaVis <br>Remodela Fácil, Seguro y con Confianza</h1>
-        <p>
-          Mejora tu hogar o negocio con nuestro equipo de expertos en pintura, enchapes, baños, persianas o vidrios.<br>
-          <span style="color:#ffd58c;"><b>Obtén tu cotización online gratis y atención personalizada.</b></span>
-        </p>
-        <a class="cta-hero" href="#cotiza">Cotiza Gratis Ahora</a>
-      </div>
-      <div class="header-img">
-        <img src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?auto=format&fit=crop&w=450&q=80" alt="Clientes felices en remodelación">
+  <!-- HERO -->
+  <section class="hero fadeUp">
+    <h1>Remodela sin complicaciones</h1>
+    <div class="hero-description">
+      Cotiza gratis tu proyecto <b>en minutos</b>.<br>
+      Clientes felices, entregas garantizadas, precios transparentes.<br>
+      <span style="color:#fad67a;font-weight:bold;">¡Transforma tu espacio con el equipo más confiable!</span>
+    </div>
+    <a class="cta-hero" href="#cotiza" tabindex="0">Cotizar mi proyecto</a>
+    <img class="hero-figure" src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?auto=format&fit=crop&w=450&q=80" alt="Equipo RenovaVis trabajando">
+  </section>
+
+  <!-- CONTADORES ANIMADOS -->
+  <section class="animated-counters">
+    <div class="counter-card fadeUp" style="animation-delay:.11s">
+      <span class="counter-val" data-count="125+">0</span>
+      <span class="counter-label">Proyectos entregados</span>
+    </div>
+    <div class="counter-card fadeUp" style="animation-delay:.19s">
+      <span class="counter-val" data-count="98%">0</span>
+      <span class="counter-label">Clientes satisfechos</span>
+    </div>
+    <div class="counter-card fadeUp" style="animation-delay:.24s">
+      <span class="counter-val" data-count="12">0</span>
+      <span class="counter-label">Meses de garantía</span>
+    </div>
+  </section>
+
+  <!-- FORMULARIO INTERACTIVO STEPPER -->
+  <section class="cotiza-section" id="cotiza">
+    <div class="cotiza-media fadeUp">
+      <iframe width="290" height="175" src="https://www.youtube.com/embed/LEtntL1Hn6A" title="Video de acabados" allowfullscreen></iframe>
+      <div class="cotiza-mini-gal">
+        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=400&q=80" alt="Cocina moderna">
+        <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3c8b?auto=format&fit=crop&w=400&q=80" alt="Lámparas diseño">
+        <img src="https://images.unsplash.com/photo-1461938331042-8492d74a5a62?auto=format&fit=crop&w=400&q=80" alt="Closet moderno">
       </div>
     </div>
-  </header>
+    <div class="cotiza-stepper fadeUp">
+      <form id="step-form" autocomplete="off">
+        <div class="stepper-head">
+          Cotiza tu proyecto
+          <span class="step-indicator" id="step-indicator">Paso 1/3</span>
+        </div>
+        <div id="steps-container">
+          <!-- Pasos del form, JS! -->
+        </div>
+        <div class="stepper-btns">
+          <button class="stepper-btn" type="button" id="prevStep" disabled>Anterior</button>
+          <button class="stepper-btn" type="submit" id="nextStep">Siguiente</button>
+        </div>
+        <div id="form-tip" class="tip-help" style="display:none;"></div>
+      </form>
+    </div>
+  </section>
 
-  <main>
-    <!-- Cotización Interactiva -->
-    <section class="cotiza-section" id="cotiza">
-      <div class="cotiza-media">
-        <iframe width="340" height="220" src="https://www.youtube.com/embed/LEtntL1Hn6A" title="Video de acabados" allowfullscreen></iframe>
-        <div class="cotiza-mini-gal">
-          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=400&q=80" alt="Cocina moderna" loading="lazy">
-          <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3c8b?auto=format&fit=crop&w=400&q=80" alt="Lámparas diseño" loading="lazy">
-          <img src="https://images.unsplash.com/photo-1461938331042-8492d74a5a62?auto=format&fit=crop&w=400&q=80" alt="Closet moderno" loading="lazy">
-        </div>
+  <!-- VENTAJAS presentadas como cards modernas -->
+  <section class="ventajas-section" id="ventajas">
+    <h2 style="text-align:center;font-size:2rem;margin-top:0;margin-bottom:26px;">Ventajas de trabajar con <span style="color:var(--orange1);">RenovaVis</span></h2>
+    <div class="ventajas-cards">
+      <div class="ventaja-card fadeUp"><i class="fa fa-calendar-check"></i>
+        <div class="ventaja-title">Entrega en 2 meses</div>
+        <div class="ventaja-desc">Fechas claras y pactadas por contrato para tu tranquilidad.</div>
       </div>
-      <div class="cotiza-interactivo">
-        <h2>Cotiza fácil tu proyecto</h2>
-        <p>
-          Usa nuestra calculadora y obtén una cotización orientativa gratuita para pintura, enchapes, baño, persianas, vidrios o el servicio que requieres.<br>
-          <b>¡Recibe atención personalizada y seguimiento en tiempo real!</b>
-        </p>
-        <form id="cotiza-form" class="cotiza-form" action="#" method="POST" autocomplete="off">
-          <label for="tipo-servicio"><b>¿Qué deseas cotizar?</b></label>
-          <select name="tipo-servicio" id="tipo-servicio" required>
-            <option value="">Selecciona una opción</option>
-            <option value="pintura">Pintura de pared</option>
-            <option value="enchapes">Enchapes / Pisos</option>
-            <option value="bano">Remodelación de baño</option>
-            <option value="persianas">Persianas / Cortinas</option>
-            <option value="vidrios">Vidrios / Espejos</option>
-            <option value="otro">Otro servicio</option>
-          </select>
-          <label for="metros2">Metros cuadrados estimados</label>
-          <input type="number" name="metros2" id="metros2" min="1" max="999" placeholder="Ej: 30" required>
-          <label for="info">Cuéntanos tu requerimiento</label>
-          <textarea id="info" name="info" rows="3" placeholder="Describe detalles, ubicación u otras necesidades" required></textarea>
-          <button type="submit">Cotizar ahora <i class="fa-solid fa-arrow-right"></i></button>
-        </form>
-        <div id="cotiza-result"></div>
+      <div class="ventaja-card fadeUp" style="animation-delay:.06s"><i class="fa fa-shield-halved"></i>
+        <div class="ventaja-title">12 meses de garantía</div>
+        <div class="ventaja-desc">Póliza de cumplimiento sobre todo nuestro trabajo.</div>
       </div>
-    </section>
+      <div class="ventaja-card fadeUp" style="animation-delay:.12s"><i class="fa fa-money-check-alt"></i>
+        <div class="ventaja-title">Precios sin sorpresas</div>
+        <div class="ventaja-desc">Pagas solo lo pactado, cero cobros ocultos ni sobrecostos.</div>
+      </div>
+      <div class="ventaja-card fadeUp" style="animation-delay:.18s"><i class="fa fa-recycle"></i>
+        <div class="ventaja-title">Plan ambiental</div>
+        <div class="ventaja-desc">Manejo profesional y minimizar residuos en cada proyecto.</div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Ventajas section -->
-    <section class="porque-section" id="ventajas">
-      <div class="porque-wrapper">
-        <div class="porque-img">
-          <img src="https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?auto=format&fit=crop&w=450&q=80" alt="Clientes felices en remodelación">
-        </div>
-        <div class="porque-table">
-          <h2>¿POR QUÉ ELEGIRNOS?</h2>
-          <div class="comp-table">
-            <div class="cell head">RenovaVis</div>
-            <div class="cell head">Otros contratistas</div>
-            <div class="cell">
-              <ul>
-                <li><b>Entrega</b> de tu proyecto en <b>2 meses o menos</b>, estipulado por contrato.</li>
-                <li><b>12 meses de garantía</b> con póliza de cumplimiento.</li>
-                <li>Lo que contratas es lo que pagas, <b>sin sorpresas</b>.</li>
-                <li>Plan de minimización y manejo de residuos.</li>
-              </ul>
-            </div>
-            <div class="cell">
-              <ul>
-                <li><b>Fechas</b> de entrega no establecidas.</li>
-                <li>Sin garantías.</li>
-                <li>Sobrecostos y pagos extra.</li>
-                <li>No tienen un correcto manejo de residuos.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Aliados -->
-    <section class="aliados-section" id="aliados">
-      <div class="aliados-content">
-        <h3>Nuestros <span>Aliados</span></h3>
-        <p>
-          Trabajamos con aliados estratégicos para brindarte materiales de calidad y acompañamiento en todas las etapas de tu proyecto.
-        </p>
-        <div class="aliados-logos">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Sodimac-logo.png" alt="Sodimac" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Banco_de_Bogot%C3%A1_logo.png" alt="Banco de Bogotá" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Logo-Corona.svg" alt="Corona" />
-        </div>
-      </div>
-    </section>
-    <!-- Contacto/final -->
-    <footer id="contacto">
-      <div class="footer-content">
-        <p>&copy; 2025 RenovaVis · Todos los derechos reservados</p>
-      </div>
-    </footer>
-  </main>
-  <!-- Social bar y WhatsApp flotante -->
+  <!-- Socios -->
+  <section class="aliados-section" id="aliados" style="background:#fff;border-radius:20px;box-shadow:0 2px 8px #ecd0b01b;padding:36px 2vw 38px 2vw;max-width:900px;margin:40px auto 0 auto;text-align:center;">
+    <h3 style="color:#3f2c13;font-size:1.45rem;font-weight:800;">Nuestros <span style="color:#fd7f34;">Aliados</span></h3>
+    <p style="color:#6e6e6e;font-size:1.08rem;">Trabajamos con aliados estratégicos para ofrecer materiales y respaldo de calidad.</p>
+    <div style="display:flex;gap:30px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:19px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Sodimac-logo.png" alt="Sodimac" style="height:35px;border-radius:8px;padding:3px 11px;box-shadow:0 1px 9px #deb37a18;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Banco_de_Bogot%C3%A1_logo.png" alt="Banco de Bogotá" style="height:35px;border-radius:8px;padding:3px 11px;box-shadow:0 1px 9px #deb37a18;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Logo-Corona.svg" alt="Corona" style="height:35px;border-radius:8px;padding:3px 11px;box-shadow:0 1px 9px #deb37a18;">
+    </div>
+  </section>
+
+  <footer id="contacto" style="margin-top:34px;">
+    <div class="footer-content">
+      <p>&copy; 2025 RenovaVis · Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- Botonera social y floaters -->
   <div class="social-bar">
-    <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="social-icon fb">
-      <i class="fab fa-facebook-f"></i>
-    </a>
-    <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="social-icon ig">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok" class="social-icon tt">
-      <i class="fab fa-tiktok"></i>
-    </a>
+    <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="social-icon fb"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="social-icon ig"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok" class="social-icon tt"><i class="fab fa-tiktok"></i></a>
   </div>
-  <a class="whatsapp-btn" href="https://wa.me/573005551234" target="_blank">
+  <a class="whatsapp-btn" href="#" id="wa-fab">
     <i class="fab fa-whatsapp"></i>
-    <span>¿Dudas? ¡Escríbenos!</span>
+    <span>¿Dudas? ¡Chatea!</span>
   </a>
+  <div class="wa-quickchat" id="wa-chat">
+    <button class="close" title="Cerrar">&#10006;</button>
+    <h4><i class="fab fa-whatsapp"></i> ¡Hola! ¿En qué te ayudamos?</h4>
+    <div class="wa-msg">Escríbenos por WhatsApp y un asesor te responderá en minutos.</div>
+    <a href="https://wa.me/573005551234" target="_blank" class="wa-start-btn" rel="noopener">Ir a WhatsApp</a>
+  </div>
+  <button class="go-top-btn" id="goTop" aria-label="Regresar arriba"><i class="fa fa-arrow-up"></i></button>
+
+  <!-- MODAL de éxito cotización -->
+  <div class="modal-bg" id="mod-success">
+    <div class="modal-cot-ext">
+      <i class="fa fa-circle-check"></i>
+      <div id="mod-msg">¡Cotización enviada! Un asesor te contactará pronto.</div>
+      <button id="closeModal">Listo</button>
+    </div>
+  </div>
+
   <script>
+    // Animación de aparición al hacer scroll
+    function animateOnScroll() {
+      document.querySelectorAll('.fadeUp, .fadeIn').forEach(el=>{
+        const rect = el.getBoundingClientRect();
+        if(rect.top<window.innerHeight-60) el.classList.add('show');
+      });
+    }
+    window.addEventListener('scroll', animateOnScroll); window.addEventListener('DOMContentLoaded', animateOnScroll);
+
+    // Contadores animados
+    function animateCounter(el){
+      let val=el.getAttribute('data-count').replace(/\D+/g,'');  // solo números
+      let isPercent = el.getAttribute('data-count').includes('%');
+      let plus = el.getAttribute('data-count').includes('+');
+      let i=0,limit=+val,tmp=0;
+      let up = ()=> {
+        tmp = Math.floor(i*limit/77);
+        el.textContent= isPercent? (tmp+'%') : (plus?(tmp+'+'):(tmp));
+        if(i++<77) setTimeout(up, 18);
+        else el.textContent=el.getAttribute('data-count');
+      };
+      up();
+    }
+    window.addEventListener('DOMContentLoaded',()=>{
+      setTimeout(()=>{document.querySelectorAll('.counter-val').forEach(animateCounter)},690);
+    });
+
+    // Stepper cotización
+    const formSteps = [
+      {
+        label: "¿Qué deseas cotizar?",
+        type: "select",
+        name: "tipo-servicio",
+        required: true,
+        options: [
+          {value:"", text:"Selecciona una opción"},
+          {value:"pintura",text:"Pintura de pared"},
+          {value:"enchapes",text:"Enchapes / Pisos"},
+          {value:"bano",text:"Remodelación de baño"},
+          {value:"persianas", text:"Persianas / Cortinas"},
+          {value:"vidrios", text:"Vidrios / Espejos"},
+          {value:"otro",text:"Otro servicio"}
+        ],
+        tip:"Elige el tipo de servicio. Puedes cotizar varios en uno si es necesario."
+      },
+      {
+        label: "Metros cuadrados estimados",
+        type: "number",
+        name: "metros2",
+        required:true,
+        min:1,max:999,
+        placeholder: "Ej: 30",
+        tip:"Indica un aproximado. Usa 1 si solo requieres asesoría/apoyo en ideas."
+      },
+      {
+        label: "Cuéntanos tu requerimiento",
+        type: "textarea",
+        name: "info",
+        required:true,
+        rows:3,
+        placeholder:"Describe detalles, ubicación u otras necesidades",
+        tip:"Cuéntanos más para atender mejor. Ejemplo: zona, acabados, colores, urgencia, etc."
+      }
+    ];
+    const stepsContainer=document.getElementById("steps-container");
+    const stepIndicator=document.getElementById("step-indicator");
+    const prevBtn=document.getElementById("prevStep");
+    const nextBtn=document.getElementById("nextStep");
+    const formTip=document.getElementById("form-tip");
+    let currentStep=0, cotizaData={};
+    // Renderiza un paso
+    function renderStep(idx){
+      stepsContainer.innerHTML="";
+      const s=formSteps[idx];
+      let fEl=document.createElement('div');
+      fEl.classList.add("step-form");
+      let l=document.createElement('label');
+      l.htmlFor=s.name;
+      l.innerHTML=`${s.label}${s.required?'<span style="color:#fd7f34;">*</span>':''}`;
+      fEl.appendChild(l);
+      let inp;
+      if(s.type==="select"){
+        inp=document.createElement("select");inp.name=s.name;inp.id=s.name;
+        s.options.forEach(o=>{
+          let op=document.createElement("option");op.value=o.value;op.textContent=o.text;
+          inp.appendChild(op);
+        });
+      } else if(s.type==="number") {
+        inp=document.createElement("input");inp.type="number";inp.min=s.min;inp.max=s.max;inp.name=s.name;inp.id=s.name;inp.placeholder=s.placeholder;
+      } else if(s.type==="textarea"){
+        inp=document.createElement("textarea");inp.name=s.name;inp.id=s.name;inp.rows=s.rows;inp.placeholder=s.placeholder;
+      }
+      inp.required=s.required;
+      inp.value=(cotizaData[s.name]||"");
+      fEl.appendChild(inp);
+      stepsContainer.appendChild(fEl);
+
+      stepIndicator.textContent = `Paso ${idx+1}/${formSteps.length}`;
+      prevBtn.disabled=(idx===0);
+      nextBtn.textContent=idx===formSteps.length-1?"Enviar":"Siguiente";
+      formTip.textContent=s.tip;formTip.style.display="block";
+      setTimeout(()=>{inp.focus();},200);
+
+      // Tooltips focus
+      inp.onfocus=()=>{formTip.textContent=s.tip; formTip.style.display='block';};
+      inp.onblur=()=>{formTip.style.display='none';};
+      // Enter para siguiente paso
+      inp.onkeydown=(e)=>{if(e.key==="Enter" && s.type!=="textarea") { e.preventDefault(); nextBtn.click(); }};
+    }
+    renderStep(0);
+    prevBtn.onclick=()=>{if(currentStep>0){saveStep(false);currentStep--; renderStep(currentStep);}};
+    nextBtn.onclick=(e)=>{
+      e.preventDefault();
+      saveStep(true);
+      if(!stepsContainer.querySelector('input,select,textarea').checkValidity()) return;
+      if(currentStep<formSteps.length-1){currentStep++;renderStep(currentStep);}
+      else handleCotizaSend();
+    };
+    function saveStep(validate){
+      let field=formSteps[currentStep];let val=stepsContainer.querySelector(`#${field.name}`).value;
+      cotizaData[field.name]=val;
+      if(validate && field.required&&!val) {formTip.textContent="Este campo es obligatorio.";formTip.style.display='block';}
+    }
+    function handleCotizaSend(){
+      // Demo! Personaliza hook de integración aquí.
+      document.getElementById("mod-success").classList.add("show");
+      document.getElementById("mod-msg").innerHTML = crearMensajeCotiza();
+      cotizaData={};currentStep=0;setTimeout(()=>renderStep(0),1500);
+    }
+    document.getElementById("closeModal").onclick=()=>{document.getElementById("mod-success").classList.remove("show");};
+    document.getElementById("mod-success").onclick=(e)=>{if(e.target.classList.contains('modal-bg'))document.getElementById("mod-success").classList.remove("show");};
+    function crearMensajeCotiza(){
+      let s=cotizaData["tipo-servicio"];
+      let m=cotizaData["metros2"];
+      switch(s) {
+        case "pintura": return `Estimación: <b>${m*21000} COP</b> por <b>${m}</b> m² de pintura. ¡Un asesor te contactará!`;
+        case "enchapes": return `Piso/enchape: <b>${m*52000} COP</b> (${m} m²)`;
+        case "bano": return `Remodelación baño desde <b>${m*80000} COP</b>`;
+        case "persianas": return "Pronto te contactaremos con nuestra mejor recomendación de persianas.";
+        case "vidrios": return "Te asesoramos pronto para vidrios/espejos.";
+        case "otro": return "¡Gracias por tu solicitud! Responderemos pronto.";
+      }
+      return "¡Cotización enviada! Un asesor te contactará pronto.";
+    }
+    // Reset al cerrar modal de éxito
+    document.getElementById("closeModal").onclick=()=>{document.getElementById("mod-success").classList.remove("show");};
+    document.getElementById("mod-success").onclick=(e)=>{if(e.target.classList.contains('modal-bg'))document.getElementById("mod-success").classList.remove("show");};
+
+    // Galería: video cambia al pasar mouse sobre miniaturas
+    document.querySelectorAll('.cotiza-mini-gal img').forEach((img, idx)=>{
+      img.addEventListener('mouseenter',()=>{
+        const videos=[
+          "https://www.youtube.com/embed/LEtntL1Hn6A",
+          "https://www.youtube.com/embed/N0UtiNqtSBE",
+          "https://www.youtube.com/embed/itEmvXZfNTk"
+        ];
+        let iframe=document.querySelector('.cotiza-media iframe');
+        if(iframe && videos[idx]) iframe.src=videos[idx];
+      });
+      img.addEventListener('mouseleave',()=>{
+        let iframe=document.querySelector('.cotiza-media iframe');
+        if(iframe) iframe.src="https://www.youtube.com/embed/LEtntL1Hn6A";
+      });
+    });
+
+    // WhatsApp flotante quickchat
+    const waFab=document.getElementById("wa-fab"),waChat=document.getElementById("wa-chat");
+    waFab.onclick=(e)=>{e.preventDefault();waChat.classList.toggle("show");};
+    waChat.querySelector(".close").onclick=()=>waChat.classList.remove("show");
+
+    // ScrollToTop
+    const goTopBtn=document.getElementById("goTop");
+    window.addEventListener("scroll",()=>{
+      goTopBtn.classList.toggle("show",window.scrollY>170);
+    });
+    goTopBtn.onclick=()=>{window.scrollTo({top:0,behavior:"smooth"});};
+
     // Navegación activa
     document.addEventListener("DOMContentLoaded", ()=>{
       let enlaces = document.querySelectorAll('.main-nav ul li a');
@@ -661,64 +634,18 @@
         });
       });
     });
-    // Cotización demo interactivo
-    document.addEventListener("DOMContentLoaded", ()=>{
-      const cotiza = document.getElementById('cotiza-form');
-      if(!cotiza) return;
-      cotiza.addEventListener('submit', function(e){
-        e.preventDefault();
-        const servicio = cotiza["tipo-servicio"].value;
-        const metros = cotiza["metros2"].value;
-        let msg = "";
-        if(!servicio){
-          msg = "Por favor, selecciona un servicio.";
-        } else {
-          let estimado = "";
-          switch(servicio) {
-            case "pintura":
-              estimado = metros ? `${(metros*21000).toLocaleString('es-CO')} COP` : "";
-              msg = `Estimación de pintura para ${metros} m²: <b>${estimado}</b>. ¡Un asesor se comunicará contigo!`;
-              break;
-            case "enchapes":
-              estimado = metros ? `${(metros*52000).toLocaleString('es-CO')} COP` : "";
-              msg = `Enchape/piso (<b>${metros} m²</b>): ${estimado}. Pronto te enviaremos información y asesoría detallada.`;
-              break;
-            case "bano":
-              estimado = metros ? `Desde ${(metros*80000).toLocaleString('es-CO')} COP` : "";
-              msg = `Para la remodelación de baño, tu inversión estimada es ${estimado}.`;
-              break;
-            case "persianas":
-              msg = "¡Recibido! Pronto contactaremos para sugerirte el mejor tipo de persiana para tu espacio.";
-              break;
-            case "vidrios":
-              msg = "Ya recibimos tu solicitud de vidrio/espejo. Un asesor se pondrá en contacto.";
-              break;
-            case "otro":
-              msg = "¡Gracias por escribir! Analizaremos tu requerimiento y recibirás respuesta personalizada.";
-              break;
-            default: msg = "Recibido.";
-          }
-        }
-        document.getElementById('cotiza-result').innerHTML = msg;
-        cotiza.reset();
-      });
-    });
-    // Efecto galería miniatura (cambia el video embed temporalmente)
-    document.querySelectorAll('.cotiza-mini-gal img').forEach((img, idx)=>{
-      img.addEventListener('mouseenter',()=>{
-        const videos = [
-          "https://www.youtube.com/embed/LEtntL1Hn6A",
-          "https://www.youtube.com/embed/N0UtiNqtSBE",
-          "https://www.youtube.com/embed/itEmvXZfNTk"
-        ];
-        const iframe = document.querySelector('.cotiza-media iframe');
-        if(iframe && videos[idx]) iframe.src = videos[idx];
-      });
-      img.addEventListener('mouseleave',()=>{
-        const iframe = document.querySelector('.cotiza-media iframe');
-        if(iframe) iframe.src = "https://www.youtube.com/embed/LEtntL1Hn6A";
-      });
-    });
+
+    // Dark mode toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.onclick=()=>{
+      let theme=document.body.getAttribute('data-theme');
+      document.body.setAttribute('data-theme', theme==='dark'?'light':'dark');
+      localStorage.setItem('theme',document.body.getAttribute('data-theme'));
+      themeToggle.innerHTML=`<i class="fa fa-${theme==='dark'?'moon':'sun'}"></i>`;
+    };
+    // Mantén tema seleccionado
+    (()=>{let t=localStorage.getItem('theme');if(t)document.body.setAttribute('data-theme',t);})();
+
   </script>
 </body>
 </html>
