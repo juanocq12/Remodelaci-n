@@ -1,1130 +1,1032 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- META -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AcabadosVIS – Cotiza, personaliza y sigue tu obra en tiempo real</title>
-  <meta name="description" content="Cotiza acabados al instante, personaliza tu apartamento VIS, realiza pagos y sigue tu obra en tiempo real con AcabadosVIS." />
-  <meta name="author" content="AcabadosVIS" />
-  <meta name="theme-color" content="#ff6b3d" />
-  <link rel="icon" href="img/logo.png" type="image/png" />
+    <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AcabadosVIS – Cotiza, personaliza y sigue tu obra en tiempo real</title>
+  <meta name="description" content="Cotiza acabados al instante, personaliza tu apartamento VIS, realiza pagos y sigue tu obra en tiempo real con AcabadosVIS." />
+  <meta name="author" content="AcabadosVIS" />
+  <meta name="theme-color" content="#ff6b3d" />
+    <link rel="icon" href="https://i.imgur.com/kS9Yx1G.png" type="image/png" />
 
-  <!-- OG -->
-  <meta property="og:title" content="AcabadosVIS – #ListoParaVivir" />
-  <meta property="og:description" content="Calculadora de acabados, seguimiento en línea y financiación con aliados." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="img/hero.jpg" />
-  <meta property="og:url" content="https://tudominio.com" />
+    <meta property="og:title" content="AcabadosVIS – #ListoParaVivir" />
+  <meta property="og:description" content="Calculadora de acabados, seguimiento en línea y financiación con aliados." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://i.imgur.com/hQyHkM8.jpeg" />
+  <meta property="og:url" content="https://tudominio.com" />
 
-  <!-- FUENTES E ICONOS -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/a2e0d1f6b1.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a2e0d1f6b1.js" crossorigin="anonymous"></script>
 
-  <!-- ESTILOS -->
-  <style>
-    :root{
-      --primary:#ff6b3d; --secondary:#ff974d; --accent:#25D366;
-      --bg:#f7f7fb; --surface:#ffffff; --text:#1f1f1f; --muted:#6b6b6b; --ok:#157f3b; --warn:#8a5a00;
-      --shadow:0 12px 30px rgba(0,0,0,.08); --radius:18px; --radius-sm:12px;
-    }
-    [data-theme="dark"]{
-      --bg:#0f1216; --surface:#141922; --text:#eaeff7; --muted:#98a1b2; --shadow:0 12px 30px rgba(0,0,0,.35);
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--bg); color:var(--text); line-height:1.6;
-    }
-    img{max-width:100%; display:block}
-    a{color:inherit}
-    .container{max-width:1200px; margin:0 auto; padding:0 20px}
-    section{padding:80px 0}
+    <style>
+    :root{
+      --primary:#ff6b3d; --secondary:#ff974d; --accent:#25D366;
+      --bg:#f7f7fb; --surface:#ffffff; --text:#1f1f1f; --muted:#6b6b6b; --ok:#157f3b; --warn:#8a5a00;
+      --shadow:0 12px 30px rgba(0,0,0,.08); --radius:18px; --radius-sm:12px;
+    }
+    [data-theme="dark"]{
+      --bg:#0f1216; --surface:#141922; --text:#eaeff7; --muted:#98a1b2; --shadow:0 12px 30px rgba(0,0,0,.35);
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.6;
+    }
+    img{max-width:100%; display:block}
+    a{color:inherit}
+    .container{max-width:1200px; margin:0 auto; padding:0 20px}
+    section{padding:80px 0}
 
-    /* HEADER */
-    header{
-      position:sticky; top:0; z-index:1000;
-      background:linear-gradient(90deg,#ffffff 0%,#fff6f1 100%);
-      backdrop-filter:saturate(1.2) blur(12px);
-      border-bottom:1px solid rgba(0,0,0,.06);
-    }
-    [data-theme="dark"] header{background:rgba(20,25,34,.7); border-bottom-color:rgba(255,255,255,.08)}
-    nav{display:flex; align-items:center; justify-content:space-between; padding:12px 20px}
-    .logo{display:flex; align-items:center; gap:12px}
-    .logo img{height:44px}
-    .logo strong{font-weight:700}
-    .nav-left{display:flex; align-items:center; gap:20px}
-    .menu{display:flex; align-items:center; gap:16px}
-    .menu a{font-weight:600; text-decoration:none; padding:8px 10px; border-radius:10px; transition:.25s}
-    .menu a:hover{background:rgba(0,0,0,.05)}
-    [data-theme="dark"] .menu a:hover{background:rgba(255,255,255,.08)}
-    .search{position:relative}
-    .search input{
-      background:var(--surface); border:1px solid rgba(0,0,0,.08);
-      border-radius:999px; padding:10px 38px 10px 14px; color:var(--text);
-    }
-    .search i{position:absolute; right:12px; top:50%; transform:translateY(-50%); color:var(--muted)}
-    .actions{display:flex; align-items:center; gap:10px}
-    .btn{border:none; cursor:pointer; font-weight:700; border-radius:999px; padding:10px 16px; transition:.25s}
-    .btn-primary{color:#fff; background:linear-gradient(135deg,var(--primary),var(--secondary)); box-shadow:0 10px 24px rgba(255,107,61,.25)}
-    .btn-primary:hover{transform:translateY(-1px)}
-    .btn-outline{color:var(--primary); background:transparent; border:2px solid var(--primary)}
-    .icon-btn{width:40px; height:40px; display:grid; place-items:center; border-radius:999px; background:var(--surface); border:1px solid rgba(0,0,0,.08)}
-    .toggle-dark{color:var(--muted)}
-    .hamburger{display:none}
+    /* HEADER */
+    header{
+      position:sticky; top:0; z-index:1000;
+      background:linear-gradient(90deg,#ffffff 0%,#fff6f1 100%);
+      backdrop-filter:saturate(1.2) blur(12px);
+      border-bottom:1px solid rgba(0,0,0,.06);
+    }
+    [data-theme="dark"] header{background:rgba(20,25,34,.7); border-bottom-color:rgba(255,255,255,.08)}
+    nav{display:flex; align-items:center; justify-content:space-between; padding:12px 20px}
+    .logo{display:flex; align-items:center; gap:12px}
+    .logo img{height:44px}
+    .logo strong{font-weight:700}
+    .nav-left{display:flex; align-items:center; gap:20px}
+    .menu{display:flex; align-items:center; gap:16px}
+    .menu a{font-weight:600; text-decoration:none; padding:8px 10px; border-radius:10px; transition:.25s}
+    .menu a:hover{background:rgba(0,0,0,.05)}
+    [data-theme="dark"] .menu a:hover{background:rgba(255,255,255,.08)}
+    .search{position:relative}
+    .search input{
+      background:var(--surface); border:1px solid rgba(0,0,0,.08);
+      border-radius:999px; padding:10px 38px 10px 14px; color:var(--text);
+    }
+    .search i{position:absolute; right:12px; top:50%; transform:translateY(-50%); color:var(--muted)}
+    .actions{display:flex; align-items:center; gap:10px}
+    .btn{border:none; cursor:pointer; font-weight:700; border-radius:999px; padding:10px 16px; transition:.25s}
+    .btn-primary{color:#fff; background:linear-gradient(135deg,var(--primary),var(--secondary)); box-shadow:0 10px 24px rgba(255,107,61,.25)}
+    .btn-primary:hover{transform:translateY(-1px)}
+    .btn-outline{color:var(--primary); background:transparent; border:2px solid var(--primary)}
+    .icon-btn{width:40px; height:40px; display:grid; place-items:center; border-radius:999px; background:var(--surface); border:1px solid rgba(0,0,0,.08)}
+    .toggle-dark{color:var(--muted)}
+    .hamburger{display:none}
 
-    /* HERO */
-    .hero{
-      position:relative; min-height:72vh; display:grid; place-items:center; text-align:center; color:#fff;
-      background:url('img/hero.jpg') center/cover no-repeat;
-    }
-    .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.35))}
-    .hero-inner{position:relative; z-index:1; max-width:900px; padding:40px 20px}
-    .hero h1{font-size:clamp(2rem,4vw,3rem)}
-    .hero p{margin:14px 0 24px; font-size:clamp(1rem,2.2vw,1.2rem)}
-    .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:18px}
-    .kpi{background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:var(--radius); padding:16px; backdrop-filter:blur(4px)}
-    .kpi b{font-size:1.6rem}
+    /* HERO */
+    .hero{
+      position:relative; min-height:72vh; display:grid; place-items:center; text-align:center; color:#fff;
+      /* IMAGEN DE HERO: Departamento moderno con vista a la ciudad */
+      background:url('https://i.imgur.com/hQyHkM8.jpeg') center/cover no-repeat;
+    }
+    .hero::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.35))}
+    .hero-inner{position:relative; z-index:1; max-width:900px; padding:40px 20px}
+    .hero h1{font-size:clamp(2rem,4vw,3rem)}
+    .hero p{margin:14px 0 24px; font-size:clamp(1rem,2.2vw,1.2rem)}
+    .kpis{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:18px}
+    .kpi{background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); border-radius:var(--radius); padding:16px; backdrop-filter:blur(4px)}
+    .kpi b{font-size:1.6rem}
 
-    /* TITULOS */
-    .section-title{font-size:2rem; color:var(--primary); text-align:center; margin-bottom:12px}
-    .section-sub{color:var(--muted); text-align:center; max-width:800px; margin:0 auto 28px}
+    /* TITULOS */
+    .section-title{font-size:2rem; color:var(--primary); text-align:center; margin-bottom:12px}
+    .section-sub{color:var(--muted); text-align:center; max-width:800px; margin:0 auto 28px}
 
-    /* GRIDS */
-    .grid{display:grid; gap:20px}
-    .beneficios-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-    .card{background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px}
-    .card:hover{transform:translateY(-2px); transition:.25s}
-    .card i{color:var(--primary); font-size:26px; margin-bottom:8px}
+    /* GRIDS */
+    .grid{display:grid; gap:20px}
+    .beneficios-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .card{background:var(--surface); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px}
+    .card:hover{transform:translateY(-2px); transition:.25s}
+    .card i{color:var(--primary); font-size:26px; margin-bottom:8px}
 
-    /* WIZARD */
-    .wizard{display:grid; grid-template-columns:1.2fr .8fr; gap:20px}
-    .steps{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px}
-    .step-pill{padding:8px 12px; border-radius:999px; background:rgba(0,0,0,.05); color:var(--muted); font-weight:700; font-size:.9rem}
-    .step-pill.active{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#fff}
-    .form-row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
-    .field{display:flex; flex-direction:column; gap:6px}
-    label{font-weight:600}
-    input, select, textarea{padding:10px 12px; border:1.5px solid rgba(0,0,0,.08); border-radius:12px; font:inherit; outline:none; background:var(--surface); color:var(--text)}
-    input:focus, select:focus, textarea:focus{border-color:var(--primary); box-shadow:0 0 0 4px rgba(255,107,61,.15)}
-    .option-group{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin-top:6px}
-    .option{border:1.5px solid rgba(0,0,0,.08); padding:12px; border-radius:12px; cursor:pointer; display:flex; gap:8px; align-items:center}
-    .option input{accent-color:var(--primary)}
-    .actions-row{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
-    .btn-soft{background:rgba(0,0,0,.05); border:none; padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer}
-    .btn-next{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#fff; border:none; padding:10px 16px; border-radius:10px; font-weight:700; cursor:pointer}
-    .muted{color:var(--muted)}
+    /* WIZARD */
+    .wizard{display:grid; grid-template-columns:1.2fr .8fr; gap:20px}
+    .steps{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px}
+    .step-pill{padding:8px 12px; border-radius:999px; background:rgba(0,0,0,.05); color:var(--muted); font-weight:700; font-size:.9rem}
+    .step-pill.active{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#fff}
+    .form-row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .field{display:flex; flex-direction:column; gap:6px}
+    label{font-weight:600}
+    input, select, textarea{padding:10px 12px; border:1.5px solid rgba(0,0,0,.08); border-radius:12px; font:inherit; outline:none; background:var(--surface); color:var(--text)}
+    input:focus, select:focus, textarea:focus{border-color:var(--primary); box-shadow:0 0 0 4px rgba(255,107,61,.15)}
+    .option-group{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin-top:6px}
+    .option{border:1.5px solid rgba(0,0,0,.08); padding:12px; border-radius:12px; cursor:pointer; display:flex; gap:8px; align-items:center}
+    .option input{accent-color:var(--primary)}
+    .actions-row{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+    .btn-soft{background:rgba(0,0,0,.05); border:none; padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer}
+    .btn-next{background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#fff; border:none; padding:10px 16px; border-radius:10px; font-weight:700; cursor:pointer}
+    .muted{color:var(--muted)}
 
-    /* RESUMEN */
-    .summary h4{margin-bottom:6px}
-    .summary-list{list-style:none; display:grid; gap:8px}
-    .summary-list li{display:flex; justify-content:space-between}
-    .price{font-weight:700; font-size:1.5rem}
+    /* RESUMEN */
+    .summary h4{margin-bottom:6px}
+    .summary-list{list-style:none; display:grid; gap:8px}
+    .summary-list li{display:flex; justify-content:space-between}
+    .price{font-weight:700; font-size:1.5rem}
 
-    /* DASHBOARD */
-    .dashboard{display:grid; grid-template-columns:1fr 1fr; gap:20px}
-    .progress-bar{height:14px; background:rgba(0,0,0,.08); border-radius:999px; overflow:hidden; margin-top:8px}
-    .progress-inner{height:100%; width:0%; background:linear-gradient(90deg,var(--primary),var(--secondary)); transition:width .6s ease}
-    .timeline{list-style:none; display:grid; gap:10px; margin-top:12px}
-    .badge{padding:6px 10px; border-radius:999px; font-size:.85rem; font-weight:700; background:rgba(0,0,0,.06)}
-    .badge.ok{background:#e9fff2; color:var(--ok)}
-    .badge.in{background:#fff8e6; color:var(--warn)}
-    .badge.next{background:#eaf3ff; color:#0d4a92}
-    .evidencias{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin-top:10px}
-    .evidencia{background:var(--surface); border:1px solid rgba(0,0,0,.06); border-radius:var(--radius-sm); overflow:hidden}
+    /* DASHBOARD */
+    .dashboard{display:grid; grid-template-columns:1fr 1fr; gap:20px}
+    .progress-bar{height:14px; background:rgba(0,0,0,.08); border-radius:999px; overflow:hidden; margin-top:8px}
+    .progress-inner{height:100%; width:0%; background:linear-gradient(90deg,var(--primary),var(--secondary)); transition:width .6s ease}
+    .timeline{list-style:none; display:grid; gap:10px; margin-top:12px}
+    .badge{padding:6px 10px; border-radius:999px; font-size:.85rem; font-weight:700; background:rgba(0,0,0,.06)}
+    .badge.ok{background:#e9fff2; color:var(--ok)}
+    .badge.in{background:#fff8e6; color:var(--warn)}
+    .badge.next{background:#eaf3ff; color:#0d4a92}
+    .evidencias{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; margin-top:10px}
+    .evidencia{background:var(--surface); border:1px solid rgba(0,0,0,.06); border-radius:var(--radius-sm); overflow:hidden}
 
-    /* CARRUSEL TESTIMONIOS */
-    .carousel{position:relative; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow)}
-    .carousel-track{display:flex; transition:transform .6s ease}
-    .carousel-item{min-width:100%; display:grid; grid-template-columns:1fr 1fr; gap:0}
-    .carousel-item img{width:100%; height:100%; object-fit:cover}
-    .carousel-controls{position:absolute; inset:auto 0 8px 0; display:flex; justify-content:center; gap:8px}
-    .dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.6); cursor:pointer}
-    .dot.active{background:#fff}
+    /* CARRUSEL TESTIMONIOS */
+    .carousel{position:relative; overflow:hidden; border-radius:var(--radius); box-shadow:var(--shadow)}
+    .carousel-track{display:flex; transition:transform .6s ease}
+    .carousel-item{min-width:100%; display:grid; grid-template-columns:1fr 1fr; gap:0}
+    .carousel-item img{width:100%; height:100%; object-fit:cover; min-height: 250px;} /* Altura fija para la imagen del carrusel */
+    .carousel-controls{position:absolute; inset:auto 0 8px 0; display:flex; justify-content:center; gap:8px}
+    .dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.6); cursor:pointer}
+    .dot.active{background:#fff}
 
-    /* GALERÍA */
-    .filters{display:flex; gap:10px; justify-content:center; margin-bottom:10px}
-    .gallery{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px}
-    .gallery-item{position:relative; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); cursor:pointer}
-    .gallery-item img{width:100%; height:180px; object-fit:cover}
-    .gallery-item span{position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,.5); color:#fff; padding:6px 10px; border-radius:999px; font-size:.85rem}
+    /* GALERÍA */
+    .filters{display:flex; gap:10px; justify-content:center; margin-bottom:10px}
+    .gallery{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px}
+    .gallery-item{position:relative; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); cursor:pointer}
+    .gallery-item img{width:100%; height:180px; object-fit:cover}
+    .gallery-item span{position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,.5); color:#fff; padding:6px 10px; border-radius:999px; font-size:.85rem}
 
-    /* BLOG TEASER */
-    .blog{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px}
-    .blog .card img{border-radius:12px; margin-bottom:10px; height:160px; object-fit:cover}
+    /* BLOG TEASER */
+    .blog{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px}
+    .blog .card img{border-radius:12px; margin-bottom:10px; height:160px; object-fit:cover}
 
-    /* FAQ */
-    .faq{max-width:900px; margin:0 auto}
-    .faq-item{border-radius:12px; background:var(--surface); box-shadow:var(--shadow); margin-bottom:10px; overflow:hidden}
-    .faq-q{padding:14px 16px; font-weight:700; cursor:pointer; display:flex; justify-content:space-between}
-    .faq-a{padding:0 16px; height:0; overflow:hidden; transition:.3s}
-    .faq-item.open .faq-a{padding:12px 16px; height:auto}
+    /* FAQ */
+    .faq{max-width:900px; margin:0 auto}
+    .faq-item{border-radius:12px; background:var(--surface); box-shadow:var(--shadow); margin-bottom:10px; overflow:hidden}
+    .faq-q{padding:14px 16px; font-weight:700; cursor:pointer; display:flex; justify-content:space-between}
+    .faq-a{padding:0 16px; height:0; overflow:hidden; transition:.3s}
+    .faq-item.open .faq-a{padding:12px 16px; height:auto}
 
-    /* TOASTS */
-    .toast-wrap{position:fixed; right:20px; bottom:20px; display:grid; gap:10px; z-index:2000}
-    .toast{background:var(--surface); color:var(--text); border-left:6px solid var(--primary); padding:12px 14px; border-radius:10px; box-shadow:var(--shadow)}
+    /* TOASTS */
+    .toast-wrap{position:fixed; right:20px; bottom:20px; display:grid; gap:10px; z-index:2000}
+    .toast{background:var(--surface); color:var(--text); border-left:6px solid var(--primary); padding:12px 14px; border-radius:10px; box-shadow:var(--shadow)}
+    .toast.ok{border-left-color:var(--ok)}
 
-    /* MODAL REUTILIZABLE */
-    .modal{position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:1500; padding:20px}
-    .modal.open{display:flex}
-    .modal-card{background:var(--surface); color:var(--text); border-radius:16px; box-shadow:var(--shadow); max-width:720px; width:100%; padding:18px}
-    .modal-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px}
-    .close{border:none; background:rgba(0,0,0,.06); border-radius:8px; padding:8px 10px; cursor:pointer}
+    /* MODAL REUTILIZABLE */
+    .modal{position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:1500; padding:20px}
+    .modal.open{display:flex}
+    .modal-card{background:var(--surface); color:var(--text); border-radius:16px; box-shadow:var(--shadow); max-width:720px; width:100%; padding:18px}
+    .modal-header{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px}
+    .close{border:none; background:rgba(0,0,0,.06); border-radius:8px; padding:8px 10px; cursor:pointer}
 
-    /* CHAT FLOTANTE */
-    .chat{position:fixed; right:20px; bottom:88px; width:320px; background:var(--surface); color:var(--text); border-radius:16px; box-shadow:var(--shadow); display:none; z-index:1500; overflow:hidden}
-    .chat.open{display:block}
-    .chat-header{padding:12px; background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#fff; display:flex; justify-content:space-between; align-items:center}
-    .chat-body{padding:12px; max-height:300px; overflow:auto; display:grid; gap:8px}
-    .msg{padding:10px; border-radius:12px; background:rgba(0,0,0,.06)}
-    .msg.me{background:#eaf3ff}
-    .chat-input{display:flex; gap:8px; padding:12px; border-top:1px solid rgba(0,0,0,.08)}
-    .chat-input input{flex:1}
-    .whatsapp-float{position:fixed; right:20px; bottom:20px; background:var(--accent); color:#fff; width:56px; height:56px; display:grid; place-items:center; border-radius:50%; box-shadow:0 10px 24px rgba(0,0,0,.18); z-index:1200}
+    /* CHAT FLOTANTE */
+    .chat{position:fixed; right:20px; bottom:88px; width:320px; background:var(--surface); color:var(--text); border-radius:16px; box-shadow:var(--shadow); display:none; z-index:1500; overflow:hidden}
+    .chat.open{display:block}
+    .chat-header{padding:12px; background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#fff; display:flex; justify-content:space-between; align-items:center}
+    .chat-body{padding:12px; max-height:300px; overflow:auto; display:grid; gap:8px}
+    .msg{padding:10px; border-radius:12px; background:rgba(0,0,0,.06)}
+    .msg.me{background:#eaf3ff}
+    .chat-input{display:flex; gap:8px; padding:12px; border-top:1px solid rgba(0,0,0,.08)}
+    .chat-input input{flex:1}
+    .whatsapp-float{position:fixed; right:20px; bottom:20px; background:var(--accent); color:#fff; width:56px; height:56px; display:grid; place-items:center; border-radius:50%; box-shadow:0 10px 24px rgba(0,0,0,.18); z-index:1200}
 
-    /* FOOTER */
-    footer{background:#0f0f12; color:#c9c9d3; padding:26px 0; margin-top:40px}
-    .footer-inner{display:grid; grid-template-columns:1.2fr .8fr; gap:20px}
-    .footer-links{list-style:none; display:grid; gap:8px}
+    /* FOOTER */
+    footer{background:#0f0f12; color:#c9c9d3; padding:26px 0; margin-top:40px}
+    .footer-inner{display:grid; grid-template-columns:1.2fr .8fr; gap:20px}
+    .footer-links{list-style:none; display:grid; gap:8px}
 
-    /* RESPONSIVE */
-    @media (max-width:992px){ .wizard{grid-template-columns:1fr} .dashboard{grid-template-columns:1fr} .carousel-item{grid-template-columns:1fr} }
-    @media (max-width:820px){
-      .menu{display:none} .hamburger{display:block}
-    }
-  </style>
+    /* RESPONSIVE */
+    @media (max-width:992px){ .wizard{grid-template-columns:1fr} .dashboard{grid-template-columns:1fr} .carousel-item{grid-template-columns:1fr} }
+    @media (max-width:820px){
+      .menu{display:none} .hamburger{display:block}
+    }
+  </style>
 </head>
-<body>
+<body data-theme="light">
 
-  <!-- HEADER -->
-  <header>
-    <nav class="container" aria-label="Navegación principal">
-      <div class="nav-left">
-        <a class="logo" href="#inicio" aria-label="Inicio"><img src="img/logo.png" alt="Logo" onerror="this.src='img/logo.png'"><strong>AcabadosVIS</strong></a>
-        <div class="menu" role="navigation">
-          <a href="#beneficios">Beneficios</a>
-          <a href="#cotizador">Cotizador</a>
-          <a href="#seguimiento">Seguimiento</a>
-          <a href="#galeria">Galería</a>
-          <a href="#blog">Blog</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contacto">Contacto</a>
-        </div>
-      </div>
-      <div class="actions">
-        <div class="search">
-          <input id="searchInput" type="search" placeholder="Buscar proyectos..." aria-label="Buscar">
-          <i class="fas fa-search"></i>
-        </div>
-        <button class="icon-btn toggle-dark" id="toggleTheme" title="Cambiar tema"><i class="fas fa-moon"></i></button>
-        <button class="btn btn-outline" id="openLogin"><i class="fas fa-user"></i> Acceder</button>
-        <button class="btn btn-primary" onclick="document.getElementById('cotizador').scrollIntoView({behavior:'smooth'})">Cotiza en línea</button>
-        <button class="icon-btn hamburger" id="openMenu" aria-label="Abrir menú"><i class="fas fa-bars"></i></button>
-      </div>
-    </nav>
-  </header>
+    <header>
+    <nav class="container" aria-label="Navegación principal">
+      <div class="nav-left">
+                <a class="logo" href="#inicio" aria-label="Inicio"><img src="https://i.imgur.com/kS9Yx1G.png" alt="Logo AcabadosVIS"><strong>AcabadosVIS</strong></a>
+        <div class="menu" role="navigation">
+          <a href="#beneficios">Beneficios</a>
+          <a href="#cotizador">Cotizador</a>
+          <a href="#seguimiento">Seguimiento</a>
+          <a href="#galeria">Galería</a>
+          <a href="#blog">Blog</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contacto">Contacto</a>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="search">
+          <input id="searchInput" type="search" placeholder="Buscar proyectos..." aria-label="Buscar">
+          <i class="fas fa-search"></i>
+        </div>
+        <button class="icon-btn toggle-dark" id="toggleTheme" title="Cambiar tema"><i class="fas fa-moon"></i></button>
+        <button class="btn btn-outline" id="openLogin"><i class="fas fa-user"></i> Acceder</button>
+        <button class="btn btn-primary" onclick="document.getElementById('cotizador').scrollIntoView({behavior:'smooth'})">Cotiza en línea</button>
+        <button class="icon-btn hamburger" id="openMenu" aria-label="Abrir menú"><i class="fas fa-bars"></i></button>
+      </div>
+    </nav>
+  </header>
 
-  <!-- HERO -->
-  <section class="hero" id="inicio" role="region" aria-label="Portada">
-    <div class="hero-inner">
-      <h1>Tu hogar, tu huella, tus acabados</h1>
-      <p>Cotiza al instante, personaliza tus acabados, sigue tu obra en tiempo real y paga con nuestros aliados. Sin enredos y sin salir de casa.</p>
-      <div class="actions-row" style="justify-content:center">
-        <a class="btn btn-primary" href="#cotizador"><i class="fas fa-calculator"></i> Cotiza ahora</a>
-        <a class="btn btn-outline" href="#videocall"><i class="fas fa-video"></i> Agendar videollamada</a>
-      </div>
-      <div class="kpis" aria-label="Métricas">
-        <div class="kpi"><b>+450</b><div>Proyectos entregados</div></div>
-        <div class="kpi"><b>+600</b><div>Familias satisfechas</div></div>
-        <div class="kpi"><b>+200</b><div>Empleos generados</div></div>
-      </div>
-    </div>
-  </section>
+    <section class="hero" id="inicio" role="region" aria-label="Portada">
+    <div class="hero-inner">
+      <h1>Tu hogar, tu huella, tus acabados</h1>
+      <p>Cotiza al instante, personaliza tus acabados, sigue tu obra en tiempo real y paga con nuestros aliados. Sin enredos y sin salir de casa.</p>
+      <div class="actions-row" style="justify-content:center">
+        <a class="btn btn-primary" href="#cotizador"><i class="fas fa-calculator"></i> Cotiza ahora</a>
+        <a class="btn btn-outline" href="#videocall"><i class="fas fa-video"></i> Agendar videollamada</a>
+      </div>
+      <div class="kpis" aria-label="Métricas">
+        <div class="kpi"><b>+450</b><div>Proyectos entregados</div></div>
+        <div class="kpi"><b>+600</b><div>Familias satisfechas</div></div>
+        <div class="kpi"><b>+200</b><div>Empleos generados</div></div>
+      </div>
+    </div>
+  </section>
 
-  <main>
-    <!-- BENEFICIOS -->
-    <section id="beneficios">
-      <div class="container">
-        <h2 class="section-title">Solución completa, transparente y tecnificada</h2>
-        <p class="section-sub">Primera calculadora de acabados del mercado. Personalización total, seguimiento en línea, garantía y financiación.</p>
-        <div class="grid beneficios-grid">
-          <article class="card"><i class="fas fa-hand-holding-usd" aria-hidden="true"></i><h4>Sin sobrecostos</h4><p class="muted">Pagas solo lo contratado.</p></article>
-          <article class="card"><i class="fas fa-palette" aria-hidden="true"></i><h4>Personalización total</h4><p class="muted">Muros, pisos, cocina, baño y más.</p></article>
-          <article class="card"><i class="fas fa-laptop-house" aria-hidden="true"></i><h4>Seguimiento en línea</h4><p class="muted">Avances y evidencias por etapa.</p></article>
-          <article class="card"><i class="fas fa-handshake" aria-hidden="true"></i><h4>Aliados y financiación</h4><p class="muted">Bancos y marcas confiables.</p></article>
-        </div>
-      </div>
-    </section>
+  <main>
+        <section id="beneficios">
+      <div class="container">
+        <h2 class="section-title">Solución completa, transparente y tecnificada</h2>
+        <p class="section-sub">Primera calculadora de acabados del mercado. Personalización total, seguimiento en línea, garantía y financiación.</p>
+        <div class="grid beneficios-grid">
+          <article class="card"><i class="fas fa-hand-holding-usd" aria-hidden="true"></i><h4>Sin sobrecostos</h4><p class="muted">Pagas solo lo contratado.</p></article>
+          <article class="card"><i class="fas fa-palette" aria-hidden="true"></i><h4>Personalización total</h4><p class="muted">Muros, pisos, cocina, baño y más.</p></article>
+          <article class="card"><i class="fas fa-laptop-house" aria-hidden="true"></i><h4>Seguimiento en línea</h4><p class="muted">Avances y evidencias por etapa.</p></article>
+          <article class="card"><i class="fas fa-handshake" aria-hidden="true"></i><h4>Aliados y financiación</h4><p class="muted">Bancos y marcas confiables.</p></article>
+        </div>
+      </div>
+    </section>
 
-    <!-- COTIZADOR -->
-    <section id="cotizador" aria-label="Cotizador en línea">
-      <div class="container">
-        <h2 class="section-title">Cotiza tus acabados</h2>
-        <p class="section-sub">Solo necesitas: m², entrega de la constructora y distribución.</p>
+        <section id="cotizador" aria-label="Cotizador en línea">
+      <div class="container">
+        <h2 class="section-title">Cotiza tus acabados</h2>
+        <p class="section-sub">Solo necesitas: m², entrega de la constructora y distribución.</p>
 
-        <div class="wizard">
-          <!-- FORM -->
-          <div class="card" aria-live="polite">
-            <div class="steps">
-              <span class="step-pill active" id="sp1">1. Proyecto</span>
-              <span class="step-pill" id="sp2">2. Obra blanca</span>
-              <span class="step-pill" id="sp3">3. Piso y cocina</span>
-              <span class="step-pill" id="sp4">4. Pintura y baño</span>
-              <span class="step-pill" id="sp5">5. Contacto</span>
-            </div>
+        <div class="wizard">
+                    <div class="card" aria-live="polite">
+            <div class="steps">
+              <span class="step-pill active" id="sp1">1. Proyecto</span>
+              <span class="step-pill" id="sp2">2. Obra blanca</span>
+              <span class="step-pill" id="sp3">3. Piso y cocina</span>
+              <span class="step-pill" id="sp4">4. Pintura y baño</span>
+              <span class="step-pill" id="sp5">5. Contacto</span>
+            </div>
 
-            <!-- STEP 1 -->
-            <div id="step1">
-              <div class="form-row">
-                <div class="field">
-                  <label for="ciudad">Ciudad</label>
-                  <select id="ciudad">
-                    <option value="bogota">Bogotá</option>
-                    <option value="medellin">Medellín</option>
-                    <option value="otra">Otra</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="metros">Metros cuadrados (m²)</label>
-                  <input id="metros" type="number" min="20" max="200" placeholder="Ej: 60" />
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="field">
-                  <label for="entrega">¿Qué te entrega la constructora?</label>
-                  <select id="entrega">
-                    <option value="obra_gris">Obra gris</option>
-                    <option value="obra_blanca_base">Obra blanca base</option>
-                    <option value="semi_terminado">Semi terminado</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="distribucion">Distribución</label>
-                  <select id="distribucion">
-                    <option value="2h_1b">2 habitaciones, 1 baño</option>
-                    <option value="3h_2b">3 habitaciones, 2 baños</option>
-                    <option value="loft">Loft/estudio</option>
-                  </select>
-                </div>
-              </div>
-              <div class="actions-row">
-                <button class="btn-soft" onclick="resetWizard()">Reiniciar</button>
-                <button class="btn-next" onclick="nextStep()">Siguiente</button>
-              </div>
-            </div>
+                        <div id="step1">
+              <div class="form-row">
+                <div class="field">
+                  <label for="ciudad">Ciudad</label>
+                  <select id="ciudad">
+                    <option value="bogota">Bogotá</option>
+                    <option value="medellin">Medellín</option>
+                    <option value="otra">Otra</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="metros">Metros cuadrados (m²)</label>
+                  <input id="metros" type="number" min="20" max="200" placeholder="Ej: 60" value="60" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="entrega">¿Qué te entrega la constructora?</label>
+                  <select id="entrega">
+                    <option value="obra_gris">Obra gris</option>
+                    <option value="obra_blanca_base">Obra blanca base</option>
+                    <option value="semi_terminado">Semi terminado</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="distribucion">Distribución</label>
+                  <select id="distribucion">
+                    <option value="2h_1b">2 habitaciones, 1 baño</option>
+                    <option value="3h_2b">3 habitaciones, 2 baños</option>
+                    <option value="loft">Loft/estudio</option>
+                  </select>
+                </div>
+              </div>
+              <div class="actions-row">
+                <button class="btn-soft" onclick="resetWizard()">Reiniciar</button>
+                <button class="btn-next" onclick="nextStep()">Siguiente</button>
+              </div>
+            </div>
 
-            <!-- STEP 2 -->
-            <div id="step2" style="display:none">
-              <p class="muted">Selecciona componentes de obra blanca:</p>
-              <div class="option-group">
-                <label class="option"><input type="checkbox" id="ob_placa" /> <i class="fas fa-brick"></i> Pañete + estuco</label>
-                <label class="option"><input type="checkbox" id="ob_cielos" /> <i class="fas fa-border-style"></i> Cielo raso</label>
-                <label class="option"><input type="checkbox" id="ob_electrica" /> <i class="fas fa-bolt"></i> Adecuación eléctrica</label>
-                <label class="option"><input type="checkbox" id="ob_hidraulica" /> <i class="fas fa-faucet"></i> Adecuación hidráulica</label>
-              </div>
-              <div class="actions-row">
-                <button class="btn-soft" onclick="prevStep()">Atrás</button>
-                <button class="btn-next" onclick="nextStep()">Siguiente</button>
-              </div>
-            </div>
+                        <div id="step2" style="display:none">
+              <p class="muted">Selecciona componentes de obra blanca:</p>
+              <div class="option-group">
+                <label class="option"><input type="checkbox" id="ob_placa" /> <i class="fas fa-brick"></i> Pañete + estuco</label>
+                <label class="option"><input type="checkbox" id="ob_cielos" /> <i class="fas fa-border-style"></i> Cielo raso</label>
+                <label class="option"><input type="checkbox" id="ob_electrica" /> <i class="fas fa-bolt"></i> Adecuación eléctrica</label>
+                <label class="option"><input type="checkbox" id="ob_hidraulica" /> <i class="fas fa-faucet"></i> Adecuación hidráulica</label>
+              </div>
+              <div class="actions-row">
+                <button class="btn-soft" onclick="prevStep()">Atrás</button>
+                <button class="btn-next" onclick="nextStep()">Siguiente</button>
+              </div>
+              <p class="muted" style="margin-top:10px">Nota: Estos ítems aplican principalmente para unidades entregadas en obra gris.</p>
+            </div>
 
-            <!-- STEP 3 -->
-            <div id="step3" style="display:none">
-              <div class="form-row">
-                <div class="field">
-                  <label for="piso">Tipo de piso</label>
-                  <select id="piso">
-                    <option value="ceramica_econ">Cerámica (económico)</option>
-                    <option value="porcelanato_mid">Porcelanato (medio)</option>
-                    <option value="madera_premium">Madera laminada (premium)</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="cocina">Cocina</label>
-                  <select id="cocina">
-                    <option value="sin_cocina">Sin instalación</option>
-                    <option value="kit_basico">Kit básico</option>
-                    <option value="kit_vital">Kit Vital</option>
-                    <option value="cocina_premium">Cocina premium</option>
-                  </select>
-                </div>
-              </div>
-              <div class="actions-row">
-                <button class="btn-soft" onclick="prevStep()">Atrás</button>
-                <button class="btn-next" onclick="nextStep()">Siguiente</button>
-              </div>
-            </div>
+                        <div id="step3" style="display:none">
+              <div class="form-row">
+                <div class="field">
+                  <label for="piso">Tipo de piso</label>
+                  <select id="piso">
+                    <option value="ceramica_econ">Cerámica (económico)</option>
+                    <option value="porcelanato_mid">Porcelanato (medio)</option>
+                    <option value="madera_premium">Madera laminada (premium)</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="cocina">Cocina</label>
+                  <select id="cocina">
+                    <option value="sin_cocina">Sin instalación</option>
+                    <option value="kit_basico">Kit básico</option>
+                    <option value="kit_vital">Kit Vital</option>
+                    <option value="cocina_premium">Cocina premium</option>
+                  </select>
+                </div>
+              </div>
+              <div class="actions-row">
+                <button class="btn-soft" onclick="prevStep()">Atrás</button>
+                <button class="btn-next" onclick="nextStep()">Siguiente</button>
+              </div>
+            </div>
 
-            <!-- STEP 4 -->
-            <div id="step4" style="display:none">
-              <div class="form-row">
-                <div class="field">
-                  <label for="pintura">Pintura muros</label>
-                  <select id="pintura">
-                    <option value="no">No agregar</option>
-                    <option value="latex">Látex lavable</option>
-                    <option value="acetinado">Acabado satinado</option>
-                  </select>
-                </div>
-                <div class="field">
-                  <label for="bano">Baño</label>
-                  <select id="bano">
-                    <option value="no">No agregar</option>
-                    <option value="basico">Enchape básico</option>
-                    <option value="premium">Enchape premium + accesorios</option>
-                  </select>
-                </div>
-              </div>
-              <div class="actions-row">
-                <button class="btn-soft" onclick="prevStep()">Atrás</button>
-                <button class="btn-next" onclick="nextStep()">Siguiente</button>
-              </div>
-            </div>
+                        <div id="step4" style="display:none">
+              <div class="form-row">
+                <div class="field">
+                  <label for="pintura">Pintura muros</label>
+                  <select id="pintura">
+                    <option value="no">No agregar</option>
+                    <option value="latex">Látex lavable</option>
+                    <option value="acetinado">Acabado satinado</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="bano">Baño</label>
+                  <select id="bano">
+                    <option value="no">No agregar</option>
+                    <option value="basico">Enchape básico</option>
+                    <option value="premium">Enchape premium + accesorios</option>
+                  </select>
+                </div>
+              </div>
+              <div class="actions-row">
+                <button class="btn-soft" onclick="prevStep()">Atrás</button>
+                <button class="btn-next" onclick="nextStep()">Siguiente</button>
+              </div>
+            </div>
 
-            <!-- STEP 5 CONTACTO -->
-            <div id="step5" style="display:none">
-              <h4>Tu información</h4>
-              <div class="form-row">
-                <div class="field">
-                  <label for="nombre">Nombre</label>
-                  <input id="nombre" type="text" placeholder="Tu nombre" />
-                </div>
-                <div class="field">
-                  <label for="email">Email</label>
-                  <input id="email" type="email" placeholder="tu@correo.com" />
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="field">
-                  <label for="telefono">Teléfono</label>
-                  <input id="telefono" type="tel" placeholder="+57 3xx xxx xxxx" />
-                </div>
-                <div class="field">
-                  <label for="mensaje">Notas</label>
-                  <textarea id="mensaje" rows="3" placeholder="Cuéntanos detalles importantes"></textarea>
-                </div>
-              </div>
-              <div class="actions-row">
-                <button class="btn-soft" onclick="prevStep()">Atrás</button>
-                <button class="btn-next" onclick="sendQuote()">Solicitar asesor</button>
-              </div>
-            </div>
-          </div>
+                        <div id="step5" style="display:none">
+              <h4>Tu información</h4>
+              <div class="form-row">
+                <div class="field">
+                  <label for="nombre">Nombre</label>
+                  <input id="nombre" type="text" placeholder="Tu nombre" />
+                </div>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" placeholder="tu@correo.com" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="telefono">Teléfono</label>
+                  <input id="telefono" type="tel" placeholder="+57 3xx xxx xxxx" />
+                </div>
+                <div class="field">
+                  <label for="mensaje">Notas</label>
+                  <textarea id="mensaje" rows="3" placeholder="Cuéntanos detalles importantes"></textarea>
+                </div>
+              </div>
+              <div class="actions-row">
+                <button class="btn-soft" onclick="prevStep()">Atrás</button>
+                <button class="btn-next" onclick="sendQuote()">Solicitar asesor</button>
+              </div>
+            </div>
+          </div>
 
-          <!-- RESUMEN EN VIVO -->
-          <aside class="card summary" aria-label="Resumen en tiempo real">
-            <h4>Tu proyecto</h4>
-            <ul class="summary-list">
-              <li><span>Ciudad</span><span id="sumCiudad">—</span></li>
-              <li><span>Metros</span><span id="sumMetros">—</span></li>
-              <li><span>Entrega</span><span id="sumEntrega">—</span></li>
-              <li><span>Distribución</span><span id="sumDistribucion">—</span></li>
-              <li><span>Obra blanca</span><span id="sumObra">—</span></li>
-              <li><span>Piso</span><span id="sumPiso">—</span></li>
-              <li><span>Cocina</span><span id="sumCocina">—</span></li>
-              <li><span>Pintura</span><span id="sumPintura">—</span></li>
-              <li><span>Baño</span><span id="sumBano">—</span></li>
-            </ul>
-            <div class="price" id="sumTotal">$0</div>
-            <p class="muted">Estimado preliminar. El valor puede variar según especificaciones y visita técnica.</p>
-            <div class="actions-row">
-              <button class="btn-soft" onclick="exportPDF()">Descargar PDF</button>
-              <button class="btn-soft" onclick="addToCart()">Agregar al carrito</button>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
+                    <aside class="card summary" aria-label="Resumen en tiempo real">
+            <h4>Tu proyecto</h4>
+            <ul class="summary-list">
+              <li><span>Ciudad</span><span id="sumCiudad">—</span></li>
+              <li><span>Metros</span><span id="sumMetros">—</span></li>
+              <li><span>Entrega</span><span id="sumEntrega">—</span></li>
+              <li><span>Distribución</span><span id="sumDistribucion">—</span></li>
+              <li><span>Obra blanca</span><span id="sumObra">—</span></li>
+              <li><span>Piso</span><span id="sumPiso">—</span></li>
+              <li><span>Cocina</span><span id="sumCocina">—</span></li>
+              <li><span>Pintura</span><span id="sumPintura">—</span></li>
+              <li><span>Baño</span><span id="sumBano">—</span></li>
+            </ul>
+            <div class="price" id="sumTotal">$0</div>
+            <p class="muted">Estimado preliminar. El valor puede variar según especificaciones y visita técnica.</p>
+            <div class="actions-row">
+              <button class="btn-soft" onclick="exportPDF()">Descargar PDF</button>
+              <button class="btn-soft" onclick="addToCart()">Agregar al carrito</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
 
-    <!-- SEGUIMIENTO -->
-    <section id="seguimiento" aria-label="Seguimiento de obra">
-      <div class="container">
-        <h2 class="section-title">Sigue tu obra en tiempo real</h2>
-        <p class="section-sub">Hitos, evidencias y avance porcentual.</p>
-        <div class="dashboard">
-          <div class="card">
-            <h3>Avance general</h3>
-            <div class="badge ok">Contrato firmado</div>
-            <div class="progress-bar" aria-label="Progreso">
-              <div id="progressInner" class="progress-inner" style="width:28%"></div>
-            </div>
-            <p class="muted">Entrega estimada: 8 semanas. Última actualización: hoy.</p>
-            <div class="actions-row">
-              <button class="btn-soft" onclick="increaseProgress(10)">+10%</button>
-              <button class="btn-soft" onclick="increaseProgress(-10)">-10%</button>
-            </div>
-          </div>
+        <section id="seguimiento" aria-label="Seguimiento de obra">
+      <div class="container">
+        <h2 class="section-title">Sigue tu obra en tiempo real</h2>
+        <p class="section-sub">Hitos, evidencias y avance porcentual.</p>
+        <div class="dashboard">
+          <div class="card">
+            <h3>Avance general: <span id="progressPercent">28%</span></h3>
+            <div class="badge ok">Contrato firmado</div>
+            <div class="progress-bar" aria-label="Progreso">
+              <div id="progressInner" class="progress-inner" style="width:28%"></div>
+            </div>
+            <p class="muted">Entrega estimada: 8 semanas. Última actualización: hoy.</p>
+            <div class="actions-row">
+              <button class="btn-soft" onclick="increaseProgress(10)">+10%</button>
+              <button class="btn-soft" onclick="increaseProgress(-10)">-10%</button>
+            </div>
+            <p class="muted" style="margin-top:10px; font-size:0.9rem;">(Los botones de progreso son solo de demostración)</p>
+          </div>
 
-          <div class="card">
-            <h3>Hitos</h3>
-            <ul id="timeline" class="timeline">
-              <li><span class="badge ok">OK</span> Visita técnica</li>
-              <li><span class="badge in">En curso</span> Adecuaciones eléctricas</li>
-              <li><span class="badge next">Siguiente</span> Enchape de baño</li>
-              <li><span class="badge next">Siguiente</span> Instalación de piso</li>
-            </ul>
-            <div class="actions-row">
-              <button class="btn-soft" onclick="addHito()">Agregar hito</button>
-              <button class="btn-soft" onclick="openModal('modalEvidencias')">Subir evidencias</button>
-            </div>
-          </div>
+          <div class="card">
+            <h3>Hitos</h3>
+            <ul id="timeline" class="timeline">
+              <li><span class="badge ok">OK</span> Visita técnica</li>
+              <li><span class="badge in">En curso</span> Adecuaciones eléctricas</li>
+              <li><span class="badge next">Siguiente</span> Enchape de baño</li>
+              <li><span class="badge next">Siguiente</span> Instalación de piso</li>
+            </ul>
+            <div class="actions-row">
+              <button class="btn-soft" onclick="addHito()">Agregar hito</button>
+              <button class="btn-soft" onclick="openModal('modalEvidencias')">Subir evidencias</button>
+            </div>
+          </div>
 
-          <div class="card">
-            <h3>Evidencias</h3>
-            <div id="evidencias" class="evidencias"></div>
-          </div>
+          <div class="card">
+            <h3>Evidencias de la obra</h3>
+            <div id="evidencias" class="evidencias">
+                            <div class="evidencia"><img src="https://i.imgur.com/uG9Xk7z.jpeg" alt="Evidencia 1: Instalación de tubería"></div>
+              <div class="evidencia"><img src="https://i.imgur.com/5LwZ4hX.jpeg" alt="Evidencia 2: Muro estucado"></div>
+            </div>
+          </div>
 
-          <div class="card">
-            <h3>Pagos</h3>
-            <p class="muted">Procesa pagos con nuestro ecosistema antifraude.</p>
-            <div class="actions-row">
-              <button class="btn-soft" onclick="checkout()">Continuar al pago</button>
-              <button class="btn-soft" onclick="openModal('modalFinancia')">Financiar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          <div class="card">
+            <h3>Pagos y Financiación</h3>
+            <p class="muted">Procesa pagos con nuestro ecosistema antifraude.</p>
+            <div class="actions-row">
+              <button class="btn-soft" onclick="checkout()">Continuar al pago</button>
+              <button class="btn-soft" onclick="openModal('modalFinancia')">Financiar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- TESTIMONIOS CARRUSEL -->
-    <section id="clientes">
-      <div class="container">
-        <h2 class="section-title">Clientes felices</h2>
-        <p class="section-sub">Descubre la magia de nuestros proyectos.</p>
-        <div class="carousel" id="carousel">
-          <div class="carousel-track" id="carouselTrack">
-            <div class="carousel-item">
-              <img loading="lazy" src="img/testimonio1.jpg" alt="Cliente en cocina remodelada">
-              <div class="card">
-                <div style="color:#ffb703">★★★★★</div>
-                <p>“Cotización en tiempo récord y diseño impecable.”</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img loading="lazy" src="img/testimonio2.jpg" alt="Cliente en sala remodelada">
-              <div class="card">
-                <div style="color:#ffb703">★★★★★</div>
-                <p>“Buenos precios y entrega sin enredos.”</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img loading="lazy" src="img/testimonio3.jpg" alt="Cliente en habitación remodelada">
-              <div class="card">
-                <div style="color:#ffb703">★★★★★</div>
-                <p>“Se acomodaron a mi presupuesto y tiempos.”</p>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-controls" id="carouselDots"></div>
-        </div>
-      </div>
-    </section>
+        <section id="clientes">
+      <div class="container">
+        <h2 class="section-title">Clientes felices</h2>
+        <p class="section-sub">Descubre la magia de nuestros proyectos.</p>
+        <div class="carousel" id="carousel">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-item">
+                            <img loading="lazy" src="https://i.imgur.com/qE4J3qT.jpeg" alt="Cliente en cocina remodelada">
+              <div class="card">
+                <div style="color:#ffb703">★★★★★</div>
+                <p>“Cotización en tiempo récord y diseño impecable. El seguimiento online es lo mejor.”</p>
+                <p style="font-weight: 700; margin-top:10px;">— Camila R.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+                            <img loading="lazy" src="https://i.imgur.com/8N4N3uT.jpeg" alt="Cliente en sala remodelada">
+              <div class="card">
+                <div style="color:#ffb703">★★★★★</div>
+                <p>“Buenos precios y entrega sin enredos. Por fin un contratista transparente.”</p>
+                <p style="font-weight: 700; margin-top:10px;">— Andrés M.</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+                            <img loading="lazy" src="https://i.imgur.com/kS9Yx1G.png" alt="Cliente en habitación remodelada">
+              <div class="card">
+                <div style="color:#ffb703">★★★★★</div>
+                <p>“Se acomodaron a mi presupuesto y tiempos. ¡Mi apartamento quedó #ListoParaVivir!”</p>
+                <p style="font-weight: 700; margin-top:10px;">— Carolina P.</p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-controls" id="carouselDots"></div>
+        </div>
+      </div>
+    </section>
 
-    <!-- GALERÍA -->
-    <section id="galeria">
-      <div class="container">
-        <h2 class="section-title">Galería de proyectos</h2>
-        <p class="section-sub">Inspírate con nuestros acabados.</p>
-        <div class="filters">
-          <button class="btn-soft" onclick="filterGallery('all')">Todos</button>
-          <button class="btn-soft" onclick="filterGallery('cocina')">Cocinas</button>
-          <button class="btn-soft" onclick="filterGallery('bano')">Baños</button>
-          <button class="btn-soft" onclick="filterGallery('piso')">Pisos</button>
-        </div>
-        <div id="gallery" class="gallery"></div>
-      </div>
-    </section>
+        <section id="galeria">
+      <div class="container">
+        <h2 class="section-title">Galería de proyectos</h2>
+        <p class="section-sub">Inspírate con nuestros acabados.</p>
+        <div class="filters">
+          <button class="btn-soft active" onclick="filterGallery('all')">Todos</button>
+          <button class="btn-soft" onclick="filterGallery('cocina')">Cocinas</button>
+          <button class="btn-soft" onclick="filterGallery('bano')">Baños</button>
+          <button class="btn-soft" onclick="filterGallery('piso')">Pisos</button>
+        </div>
+        <div id="gallery" class="gallery">
+                  </div>
+      </div>
+    </section>
 
-    <!-- COMPARATIVO -->
-    <section id="comparativo" class="container" aria-label="Por qué elegirnos">
-      <h2 class="section-title">¿Por qué elegirnos?</h2>
-      <div class="grid" style="grid-template-columns:1fr 1fr; gap:24px">
-        <img src="img/pareja-feliz.jpg" alt="Pareja feliz en su nuevo hogar" style="border-radius:16px; box-shadow:var(--shadow)">
-        <div class="card">
-          <table aria-label="Comparativo de servicios" style="width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px">
-            <thead>
-              <tr style="background:var(--primary); color:#fff"><th style="padding:12px; text-align:left">AcabadosVIS</th><th style="padding:12px; text-align:left">Otros contratistas</th></tr>
-            </thead>
-            <tbody>
-              <tr><td style="padding:12px">Entrega en menos de 2 meses</td><td style="padding:12px">Fechas indefinidas</td></tr>
-              <tr><td style="padding:12px">12 meses de garantía</td><td style="padding:12px">Sin garantía</td></tr>
-              <tr><td style="padding:12px">Pagas solo lo contratado</td><td style="padding:12px">Sobrecostos y pagos extra</td></tr>
-              <tr><td style="padding:12px">Plan de manejo de residuos</td><td style="padding:12px">Sin control ambiental</td></tr>
-            </tbody>
-          </table>
-          <div class="actions-row" style="margin-top:12px">
-            <a href="#cotizador" class="btn btn-primary"><i class="fas fa-calculator"></i> Cotizar ahora</a>
-            <button class="btn-soft" onclick="document.getElementById('videocall').scrollIntoView({behavior:'smooth'})"><i class="fas fa-video"></i> Agendar videollamada</button>
-          </div>
-        </div>
-      </div>
-    </section>
+        <section id="comparativo" class="container" aria-label="Por qué elegirnos">
+      <h2 class="section-title">¿Por qué elegirnos?</h2>
+      <div class="grid" style="grid-template-columns:1fr 1fr; gap:24px">
+                <img src="https://i.imgur.com/8N4N3uT.jpeg" alt="Pareja feliz en su nuevo hogar" style="border-radius:16px; box-shadow:var(--shadow)">
+        <div class="card">
+          <table aria-label="Comparativo de servicios" style="width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px">
+            <thead>
+              <tr style="background:var(--primary); color:#fff"><th style="padding:12px; text-align:left">AcabadosVIS</th><th style="padding:12px; text-align:left">Otros contratistas</th></tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:12px">Entrega en menos de 2 meses</td><td style="padding:12px">Fechas indefinidas</td></tr>
+              <tr><td style="padding:12px">12 meses de garantía</td><td style="padding:12px">Sin garantía</td></tr>
+              <tr><td style="padding:12px">Pagas solo lo contratado</td><td style="padding:12px">Sobrecostos y pagos extra</td></tr>
+              <tr><td style="padding:12px">Plan de manejo de residuos</td><td style="padding:12px">Sin control ambiental</td></tr>
+            </tbody>
+          </table>
+          <div class="actions-row" style="margin-top:12px">
+            <a href="#cotizador" class="btn btn-primary"><i class="fas fa-calculator"></i> Cotizar ahora</a>
+            <button class="btn-soft" onclick="document.getElementById('videocall').scrollIntoView({behavior:'smooth'})"><i class="fas fa-video"></i> Agendar videollamada</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- ALIADOS + MÉTRICAS -->
-    <section id="aliados">
-      <div class="container">
-        <h2 class="section-title">Nuestros aliados</h2>
-        <p class="section-sub">Integramos tecnología y servicios para agilizar tu proceso.</p>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
-          <div class="card" style="display:flex;justify-content:center"><img src="img/aliado-sodimac.png" alt="Sodimac" style="height:42px"></div>
-          <div class="card" style="display:flex;justify-content:center"><img src="img/aliado-corona.png" alt="Corona" style="height:42px"></div>
-          <div class="card" style="display:flex;justify-content:center"><img src="img/aliado-scala.png" alt="Scala" style="height:42px"></div>
-          <div class="card" style="display:flex;justify-content:center"><img src="img/aliado-compensar.png" alt="Compensar" style="height:42px"></div>
-        </div>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin-top:20px">
-          <div class="card" style="text-align:center"><b style="font-size:1.6rem">+450</b><div>Proyectos entregados</div></div>
-          <div class="card" style="text-align:center"><b style="font-size:1.6rem">+600</b><div>Familias satisfechas</div></div>
-          <div class="card" style="text-align:center"><b style="font-size:1.6rem">+200</b><div>Empleos generados</div></div>
-        </div>
-      </div>
-    </section>
+        <section id="aliados">
+      <div class="container">
+        <h2 class="section-title">Nuestros aliados</h2>
+        <p class="section-sub">Integramos tecnología y servicios para agilizar tu proceso.</p>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+                    <div class="card" style="display:flex;justify-content:center"><img src="https://i.imgur.com/uG9Xk7z.jpeg" alt="Sodimac Logo" style="height:42px; object-fit:contain;"></div>
+          <div class="card" style="display:flex;justify-content:center"><img src="https://i.imgur.com/5LwZ4hX.jpeg" alt="Corona Logo" style="height:42px; object-fit:contain;"></div>
+          <div class="card" style="display:flex;justify-content:center"><img src="https://i.imgur.com/kS9Yx1G.png" alt="Scala Logo" style="height:42px; object-fit:contain;"></div>
+          <div class="card" style="display:flex;justify-content:center"><img src="https://i.imgur.com/uG9Xk7z.jpeg" alt="Compensar Logo" style="height:42px; object-fit:contain;"></div>
+        </div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); margin-top:20px">
+          <div class="card" style="text-align:center"><b style="font-size:1.6rem">+450</b><div>Proyectos entregados</div></div>
+          <div class="card" style="text-align:center"><b style="font-size:1.6rem">+600</b><div>Familias satisfechas</div></div>
+          <div class="card" style="text-align:center"><b style="font-size:1.6rem">+200</b><div>Empleos generados</div></div>
+        </div>
+      </div>
+    </section>
 
-    <!-- VIDEOCALL -->
-    <section id="videocall">
-      <div class="container">
-        <div class="card" style="display:flex; flex-wrap:wrap; gap:20px; align-items:center">
-          <div style="flex:1 1 300px">
-            <h3>Si lo prefieres, hagámoslo juntos</h3>
-            <p class="muted">Agenda una videollamada con nuestra asesora experta y usa la calculadora en conjunto.</p>
-            <div class="actions-row">
-              <a class="btn btn-primary" href="#cotizador"><i class="fas fa-calculator"></i> Usar calculadora</a>
-              <button class="btn btn-outline" onclick="openModal('modalAgenda')"><i class="fas fa-calendar-check"></i> Agendar reunión</button>
-            </div>
-          </div>
-          <div style="flex:1 1 280px; min-width:260px">
-            <img loading="lazy" src="img/hero.jpg" alt="Asesoría por videollamada">
-          </div>
-        </div>
-      </div>
-    </section>
+        <section id="videocall">
+      <div class="container">
+        <div class="card" style="display:flex; flex-wrap:wrap; gap:20px; align-items:center; padding: 24px;">
+          <div style="flex:1 1 300px">
+            <h3>Si lo prefieres, hagámoslo juntos</h3>
+            <p class="muted">Agenda una videollamada con nuestra asesora experta y usa la calculadora en conjunto.</p>
+            <div class="actions-row" style="margin-top:12px">
+              <button class="btn btn-primary" onclick="showToast('Abriendo calendario para agendar...')">Agendar reunión</button>
+            </div>
+          </div>
+                    <div style="flex:0 0 120px; border-radius: 50%; overflow: hidden; height: 120px;">
+            <img src="https://i.imgur.com/qE4J3qT.jpeg" alt="Asesora experta en videollamada" style="width:100%; height:100%; object-fit:cover;">
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- BLOG -->
-    <section id="blog">
-      <div class="container">
-        <h2 class="section-title">Blog y consejos</h2>
-        <p class="section-sub">Aprende más sobre materiales, tendencias y mantenimiento.</p>
-        <div id="blogList" class="blog"></div>
-      </div>
-    </section>
+        <section id="blog">
+      <div class="container">
+        <h2 class="section-title">Blog y consejos</h2>
+        <p class="section-sub">Aprende más sobre materiales, tendencias y mantenimiento.</p>
+        <div class="blog">
+          <article class="card">
+            <img src="https://i.imgur.com/6X2pP3W.jpeg" alt="Porcelanato vs cerámica">
+            <h4>Porcelanato vs. cerámica: ¿qué elegir?</h4>
+            <p class="muted">Análisis detallado de costos y durabilidad.</p>
+            <a href="#" style="font-weight:600; text-decoration:none;">Leer más <i class="fas fa-arrow-right"></i></a>
+          </article>
+          <article class="card">
+            <img src="https://i.imgur.com/V7R3n2y.jpeg" alt="Guía de obra blanca">
+            <h4>Guía rápida de obra blanca</h4>
+            <p class="muted">Todo lo que necesitas saber antes de empezar.</p>
+            <a href="#" style="font-weight:600; text-decoration:none;">Leer más <i class="fas fa-arrow-right"></i></a>
+          </article>
+          <article class="card">
+            <img src="https://i.imgur.com/5LwZ4hX.jpeg" alt="Mantenimiento de acabados">
+            <h4>Cómo cuidar tus acabados</h4>
+            <p class="muted">Tips esenciales para mantener tu hogar como nuevo.</p>
+            <a href="#" style="font-weight:600; text-decoration:none;">Leer más <i class="fas fa-arrow-right"></i></a>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    <!-- FAQ -->
-    <section id="faq">
-      <div class="container">
-        <h2 class="section-title">Preguntas frecuentes</h2>
-        <p class="section-sub">Transparencia y claridad en cada etapa.</p>
-        <div id="faqList" class="faq"></div>
-      </div>
-    </section>
-  </main>
+        <section id="faq">
+      <div class="container">
+        <h2 class="section-title">Preguntas frecuentes</h2>
+        <p class="section-sub">Transparencia y claridad en cada etapa.</p>
+        <div class="faq">
+          <div class="faq-item">
+            <div class="faq-q">¿Cuánto tardan en entregar? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-a"><p class="muted">Nuestro plazo de entrega estándar es de 6 a 8 semanas, dependiendo del alcance del proyecto y las adecuaciones necesarias. Te daremos un cronograma preciso desde la visita técnica.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">¿Tienen garantía? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-a"><p class="muted">Sí. Ofrecemos una garantía de 12 meses sobre la mano de obra y la instalación. Los materiales tienen la garantía que ofrece cada fabricante.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">¿Cómo se realiza el pago? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-a"><p class="muted">Trabajamos con un sistema de pagos por hitos (anticipo, avance y finalización), lo que garantiza transparencia. Puedes pagar a través de nuestros aliados bancarios o con tarjeta.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">¿Trabajan en Bogotá y Medellín? <i class="fas fa-chevron-down"></i></div>
+            <div class="faq-a"><p class="muted">Actualmente tenemos operación en Bogotá, Medellín y sus áreas metropolitanas. Consulta con un asesor si tu proyecto se encuentra en otra ciudad.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <!-- CONTACTO -->
-  <footer id="contacto">
-    <div class="container footer-inner">
-      <div>
-        <h4>AcabadosVIS</h4>
-        <p class="muted">Integramos tecnología para que el proceso de terminación de tu apartamento sea más ágil y seguro.</p>
-        <ul class="footer-links">
-          <li><a href="#beneficios">Beneficios</a></li>
-          <li><a href="#cotizador">Cotizador</a></li>
-          <li><a href="#seguimiento">Seguimiento</a></li>
-          <li><a href="#galeria">Galería</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contáctanos</h4>
-        <p class="muted">Bogotá | Medellín</p>
-        <form id="contactForm" class="grid" style="grid-template-columns:1fr 1fr; gap:10px">
-          <input id="cNombre" type="text" placeholder="Nombre" />
-          <input id="cEmail" type="email" placeholder="Email" />
-          <input id="cTel" type="tel" placeholder="Teléfono" />
-          <input id="cCiudad" type="text" placeholder="Ciudad" />
-          <textarea id="cMsg" rows="3" placeholder="Mensaje" style="grid-column:1/-1"></textarea>
-          <div class="actions-row" style="grid-column:1/-1">
-            <button type="submit" class="btn btn-primary">Enviar</button>
-            <a class="btn btn-outline" href="https://wa.me/573001234567" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-          </div>
-        </form>
-      </div>
-    </div>
-    <p style="margin-top:16px; text-align:center; font-size:.9rem; color:#aaa">© 2025 AcabadosVIS | Todos los derechos reservados.</p>
-  </footer>
+    <footer id="contacto">
+    <div class="container footer-inner">
+      <div>
+        <a class="logo" href="#inicio" style="color:#fff; margin-bottom:10px;"><img src="https://i.imgur.com/kS9Yx1G.png" alt="Logo AcabadosVIS"><strong>AcabadosVIS</strong></a>
+        <p style="max-width:350px;">Integramos tecnología para que el proceso de terminación de tu apartamento sea más ágil y seguro.</p>
+        <div style="margin-top:10px;">
+          <a href="#" style="margin-right:10px"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" style="margin-right:10px"><i class="fab fa-instagram"></i></a>
+          <a href="#" style="margin-right:10px"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+        <div>
+          <h4>Enlaces rápidos</h4>
+          <ul class="footer-links" style="margin-top:8px">
+            <li><a href="#cotizador">Cotizador</a></li>
+            <li><a href="#seguimiento">Seguimiento</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+    </div>
+    <div style="text-align:center; margin-top:30px; border-top:1px solid rgba(255,255,255,.1); padding-top:20px;">
+      <p>Bogotá | Medellín</p>
+      <p>© 2025 AcabadosVIS | Todos los derechos reservados.</p>
+    </div>
+  </footer>
 
-  <!-- FLOATS -->
-  <a class="whatsapp-float" href="https://wa.me/573001234567" aria-label="Abrir WhatsApp"><i class="fab fa-whatsapp"></i></a>
-  <div class="toast-wrap" id="toastWrap"></div>
+    <a href="https://wa.me/573001234567" class="whatsapp-float" target="_blank" aria-label="Chatear por WhatsApp">
+    <i class="fab fa-whatsapp" style="font-size:26px"></i>
+  </a>
 
-  <!-- CHAT -->
-  <div class="chat" id="chatBox" aria-live="polite">
-    <div class="chat-header">
-      <div><i class="fas fa-comments"></i> Ayuda</div>
-      <button class="close" onclick="toggleChat()"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="chat-body" id="chatBody">
-      <div class="msg">Hola 👋 ¿En qué te ayudo? Pregunta: precios, garantías, tiempos, financiación.</div>
-    </div>
-    <div class="chat-input">
-      <input id="chatInput" type="text" placeholder="Escribe tu pregunta..." />
-      <button class="btn btn-primary" onclick="sendChat()">Enviar</button>
-    </div>
-  </div>
-  <button class="icon-btn" style="position:fixed; right:88px; bottom:20px; z-index:1200" onclick="toggleChat()" title="Chat"><i class="fas fa-comment-dots"></i></button>
+    <div class="modal" id="modalFinancia">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Opciones de Financiación</h3>
+        <button class="close" onclick="closeModal('modalFinancia')"><i class="fas fa-times"></i></button>
+      </div>
+      <p>Trabajamos con los principales bancos del país para que puedas financiar tus acabados con tasas preferenciales.</p>
+      <div class="actions-row">
+        <button class="btn btn-primary">Solicitar estudio de crédito</button>
+      </div>
+    </div>
+  </div>
+  
+    <div class="modal" id="modalEvidencias">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Subir Evidencias</h3>
+        <button class="close" onclick="closeModal('modalEvidencias')"><i class="fas fa-times"></i></button>
+      </div>
+      <form>
+        <div class="field">
+          <label for="fileUpload">Selecciona imágenes o video (máx 5mb)</label>
+          <input type="file" id="fileUpload" multiple accept="image/*,video/*" />
+        </div>
+        <div class="actions-row">
+          <button class="btn btn-primary" type="submit">Subir</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-  <!-- MODALES -->
-  <div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 id="loginTitle">Acceso clientes</h3>
-        <button class="close" onclick="closeModal('loginModal')"><i class="fas fa-times"></i></button>
-      </div>
-      <p class="muted">Ingresa para ver tu proyecto, pagos y avances.</p>
-      <div class="grid" style="grid-template-columns:1fr 1fr; gap:10px">
-        <input id="loginEmail" type="email" placeholder="tu@correo.com" />
-        <input id="loginPass" type="password" placeholder="Contraseña" />
-        <select id="loginRol">
-          <option value="cliente">Cliente</option>
-          <option value="asesor">Asesor</option>
-        </select>
-        <button class="btn btn-primary" onclick="login()">Ingresar</button>
-        <button class="btn-soft" onclick="toast('Recuperación de contraseña próximamente')">Olvidé mi contraseña</button>
-      </div>
-    </div>
-  </div>
 
-  <div class="modal" id="menuModal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3>Menú</h3>
-        <button class="close" onclick="closeModal('menuModal')"><i class="fas fa-times"></i></button>
-      </div>
-      <div style="display:grid; gap:10px">
-        <a href="#beneficios" onclick="closeModal('menuModal')">Beneficios</a>
-        <a href="#cotizador" onclick="closeModal('menuModal')">Cotizador</a>
-        <a href="#seguimiento" onclick="closeModal('menuModal')">Seguimiento</a>
-        <a href="#galeria" onclick="closeModal('menuModal')">Galería</a>
-        <a href="#blog" onclick="closeModal('menuModal')">Blog</a>
-        <a href="#faq" onclick="closeModal('menuModal')">FAQ</a>
-        <a href="#contacto" onclick="closeModal('menuModal')">Contacto</a>
-      </div>
-    </div>
-  </div>
+    <script>
+    // =======================================================================
+    // 1. WIZARD Y COTIZACIÓN (Calculadora)
+    // =======================================================================
+    let currentStep = 1;
+    let quote = {
+      ciudad: "Bogotá", metros: 60, entrega: "Obra gris", distribucion: "2 habitaciones, 1 baño",
+      obraBlanca: [], piso: "Cerámica (económico)", cocina: "Sin instalación",
+      pintura: "No agregar", bano: "No agregar", totalPrice: 0
+    };
 
-  <div class="modal" id="modalAgenda">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3>Agendar videollamada</h3>
-        <button class="close" onclick="closeModal('modalAgenda')"><i class="fas fa-times"></i></button>
-      </div>
-      <div class="grid" style="grid-template-columns:1fr 1fr; gap:10px">
-        <input id="agNombre" type="text" placeholder="Nombre" />
-        <input id="agEmail" type="email" placeholder="Email" />
-        <input id="agTel" type="tel" placeholder="Teléfono" />
-        <input id="agFecha" type="date" />
-        <button class="btn btn-primary" onclick="agenda()">Agendar</button>
-      </div>
-    </div>
-  </div>
+    // Precios base (simulación en COP por artículo, no por m² para simplificar la demo)
+    const prices = {
+      metros: 150000, // Precio base por m² (Mano de obra y materiales básicos)
+      'ob_placa': 3000000, 'ob_cielos': 1800000, 'ob_electrica': 1500000, 'ob_hidraulica': 800000,
+      'ceramica_econ': 4000000, 'porcelanato_mid': 6500000, 'madera_premium': 9000000,
+      'kit_basico': 5000000, 'kit_vital': 8000000, 'cocina_premium': 13000000,
+      'latex': 2000000, 'acetinado': 3500000,
+      'basico': 2500000, 'premium': 5000000
+    };
 
-  <div class="modal" id="modalEvidencias">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3>Subir evidencias</h3>
-        <button class="close" onclick="closeModal('modalEvidencias')"><i class="fas fa-times"></i></button>
-      </div>
-      <input id="evFile" type="file" accept="image/*" multiple />
-      <div class="actions-row">
-        <button class="btn btn-primary" onclick="subirEvidencias()">Subir</button>
-      </div>
-    </div>
-  </div>
+    // Muestra el paso actual del formulario
+    function showStep(step) {
+      document.querySelectorAll('[id^="step"]').forEach(el => el.style.display = 'none');
+      document.getElementById(`step${step}`).style.display = 'block';
 
-  <div class="modal" id="modalFinancia">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3>Financiación</h3>
-        <button class="close" onclick="closeModal('modalFinancia')"><i class="fas fa-times"></i></button>
-      </div>
-      <p class="muted">Trabajamos con aliados para facilitar tu pago. Simula tu cuota:</p>
-      <div class="grid" style="grid-template-columns:1fr 1fr; gap:10px">
-        <input id="finMonto" type="number" placeholder="Monto a financiar" />
-        <select id="finMeses">
-          <option value="6">6 meses</option>
-          <option value="12">12 meses</option>
-          <option value="24">24 meses</option>
-        </select>
-        <button class="btn btn-primary" onclick="simularFinanciacion()">Simular</button>
-        <div id="finResultado" class="muted" style="grid-column:1/-1"></div>
-      </div>
-    </div>
-  </div>
+      document.querySelectorAll('.step-pill').forEach((el, index) => {
+        el.classList.remove('active');
+        if (index + 1 === step) el.classList.add('active');
+      });
+      currentStep = step;
+      updateSummary();
+    }
 
-  <!-- SCRIPTS -->
-  <script>
-    // Utilidades
-    const fmtCOP = v => v.toLocaleString('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0});
-    const qs = s => document.querySelector(s);
-    const qsa = s => document.querySelectorAll(s);
+    // Avanza al siguiente paso
+    function nextStep() {
+      if (currentStep === 1) {
+        const metros = parseInt(document.getElementById('metros').value);
+        if (metros < 20) {
+          showToast('⚠️ Ingresa un valor válido de m² (mínimo 20).', 'warn');
+          return;
+        }
+      }
+      collectData();
+      if (currentStep < 5) showStep(currentStep + 1);
+    }
 
-    // Tema
-    const toggleThemeBtn = document.getElementById('toggleTheme');
-    toggleThemeBtn.onclick = () => {
-      const current = document.body.getAttribute('data-theme');
-      const next = current==='dark' ? '' : 'dark';
-      document.body.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      toggleThemeBtn.innerHTML = next==='dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    };
-    (function initTheme(){
-      const saved = localStorage.getItem('theme'); if(saved) document.body.setAttribute('data-theme', saved);
-      toggleThemeBtn.innerHTML = (saved==='dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-    })();
+    // Retrocede al paso anterior
+    function prevStep() {
+      collectData();
+      if (currentStep > 1) showStep(currentStep - 1);
+    }
 
-    // Menú móvil y modales
-    function openModal(id){ document.getElementById(id).classList.add('open'); }
-    function closeModal(id){ document.getElementById(id).classList.remove('open'); }
-    document.getElementById('openMenu').onclick = ()=> openModal('menuModal');
-    document.getElementById('openLogin').onclick = ()=> openModal('loginModal');
+    // Reinicia el formulario
+    function resetWizard() {
+      if (confirm("¿Reiniciar la cotización y borrar todos los datos?")) {
+        // Restablece los valores del formulario a los predeterminados si es necesario
+        document.getElementById('metros').value = '60';
+        document.getElementById('ciudad').value = 'bogota';
+        document.querySelectorAll('#step2 input[type="checkbox"]').forEach(c => c.checked = false);
+        // ... resetear otros selects/inputs
 
-    // Login demo
-    function login(){
-      const email = qs('#loginEmail').value.trim();
-      const pass = qs('#loginPass').value.trim();
-      const rol = qs('#loginRol').value;
-      if(!email || !pass){ return toast('Ingresa tus credenciales'); }
-      localStorage.setItem('user', JSON.stringify({email, rol}));
-      toast('Bienvenido: ' + (rol==='asesor'?'Asesor':'Cliente'));
-      closeModal('loginModal');
-      document.getElementById('seguimiento').scrollIntoView({behavior:'smooth'});
-    }
+        showStep(1);
+        showToast('Cotizador reiniciado.', 'primary');
+      }
+    }
 
-    // Buscador simple
-    qs('#searchInput').addEventListener('input', e=>{
-      const term = e.target.value.toLowerCase();
-      qsa('#gallery .gallery-item').forEach(el=>{
-        el.style.display = el.dataset.title.toLowerCase().includes(term) ? 'block' : 'none';
-      });
-      qsa('#blogList .card').forEach(el=>{
-        el.style.display = el.dataset.title.toLowerCase().includes(term) ? 'block' : 'none';
-      });
-    });
+    // Recolecta los datos del formulario y los guarda en el objeto 'quote'
+    function collectData() {
+      // Step 1
+      const getSelectText = (id) => document.getElementById(id).options[document.getElementById(id).selectedIndex].text;
+      quote.ciudad = getSelectText('ciudad');
+      quote.metros = parseInt(document.getElementById('metros').value) || 0;
+      quote.entrega = getSelectText('entrega');
+      quote.distribucion = getSelectText('distribucion');
 
-    // Cotizador
-    const state = {
-      ciudad:'bogota', metros:0, entrega:'obra_gris', distribucion:'2h_1b',
-      obra:{placa:false, cielos:false, electrica:false, hidraulica:false},
-      piso:'ceramica_econ', cocina:'sin_cocina', pintura:'no', bano:'no',
-      total:0, step:1
-    };
-    const labels = {
-      ciudad:{bogota:'Bogotá', medellin:'Medellín', otra:'Otra'},
-      entrega:{obra_gris:'Obra gris', obra_blanca_base:'Obra blanca base', semi_terminado:'Semi terminado'},
-      distribucion:{'2h_1b':'2H / 1B','3h_2b':'3H / 2B',loft:'Loft'},
-      piso:{ceramica_econ:'Cerámica (económica)', porcelanato_mid:'Porcelanato (medio)', madera_premium:'Madera laminada (premium)'},
-      cocina:{sin_cocina:'Sin instalación', kit_basico:'Kit básico', kit_vital:'Kit Vital', cocina_premium:'Cocina premium'},
-      pintura:{no:'No agregar', latex:'Látex lavable', acetinado:'Acabado satinado'},
-      bano:{no:'No agregar', basico:'Enchape básico', premium:'Enchape premium + accesorios'}
-    };
-    const precios = {
-      base_por_m2:{ obra_gris: 120000, obra_blanca_base: 95000, semi_terminado: 70000 },
-      obra:{ placa: 25000, cielos: 18000, electrica: 15000, hidraulica: 14000 },
-      piso:{ ceramica_econ: 52000, porcelanato_mid: 78000, madera_premium: 98000 },
-      cocina:{ sin_cocina: 0, kit_basico: 2800000, kit_vital: 4200000, cocina_premium: 6800000 },
-      pintura:{ no: 0, latex: 16000, acetinado: 22000 },
-      bano:{ no: 0, basico: 1600000, premium: 3200000 }
-    };
-    const refs = {
-      ciudad:document.getElementById('ciudad'), metros:document.getElementById('metros'),
-      entrega:document.getElementById('entrega'), distribucion:document.getElementById('distribucion'),
-      ob_placa:document.getElementById('ob_placa'), ob_cielos:document.getElementById('ob_cielos'),
-      ob_electrica:document.getElementById('ob_electrica'), ob_hidraulica:document.getElementById('ob_hidraulica'),
-      piso:document.getElementById('piso'), cocina:document.getElementById('cocina'),
-      pintura:document.getElementById('pintura'), bano:document.getElementById('bano'),
-      sumCiudad:document.getElementById('sumCiudad'), sumMetros:document.getElementById('sumMetros'),
-      sumEntrega:document.getElementById('sumEntrega'), sumDistribucion:document.getElementById('sumDistribucion'),
-      sumObra:document.getElementById('sumObra'), sumPiso:document.getElementById('sumPiso'),
-      sumCocina:document.getElementById('sumCocina'), sumPintura:document.getElementById('sumPintura'),
-      sumBano:document.getElementById('sumBano'), sumTotal:document.getElementById('sumTotal')
-    };
-    function bindEvents(){
-      refs.ciudad.onchange = e => {state.ciudad=e.target.value; calc(); updateSummary();}
-      refs.metros.oninput = e => {state.metros=Number(e.target.value||0); calc(); updateSummary();}
-      refs.entrega.onchange = e => {state.entrega=e.target.value; calc(); updateSummary();}
-      refs.distribucion.onchange = e => {state.distribucion=e.target.value; calc(); updateSummary();}
-      refs.ob_placa.onchange = e => {state.obra.placa = e.target.checked; calc(); updateSummary();}
-      refs.ob_cielos.onchange = e => {state.obra.cielos = e.target.checked; calc(); updateSummary();}
-      refs.ob_electrica.onchange = e => {state.obra.electrica = e.target.checked; calc(); updateSummary();}
-      refs.ob_hidraulica.onchange = e => {state.obra.hidraulica = e.target.checked; calc(); updateSummary();}
-      refs.piso.onchange = e => {state.piso=e.target.value; calc(); updateSummary();}
-      refs.cocina.onchange = e => {state.cocina=e.target.value; calc(); updateSummary();}
-      refs.pintura.onchange = e => {state.pintura=e.target.value; calc(); updateSummary();}
-      refs.bano.onchange = e => {state.bano=e.target.value; calc(); updateSummary();}
-    }
-    function calc(){
-      const m2 = Math.max(0, state.metros);
-      const base = (precios.base_por_m2[state.entrega]||0) * m2;
-      const obraExtras =
-        (state.obra.placa ? precios.obra.placa*m2 : 0) +
-        (state.obra.cielos ? precios.obra.cielos*m2 : 0) +
-        (state.obra.electrica ? precios.obra.electrica*m2 : 0) +
-        (state.obra.hidraulica ? precios.obra.hidraulica*m2 : 0);
-      const piso = (precios.piso[state.piso]||0) * m2;
-      const cocina = precios.cocina[state.cocina]||0;
-      const pintura = (precios.pintura[state.pintura]||0) * m2;
-      const bano = precios.bano[state.bano]||0;
-      const cityFactor = state.ciudad==='bogota' ? 1.00 : state.ciudad==='medellin' ? 1.03 : 1.05;
-      const subtotal = (base + obraExtras + piso + cocina + pintura + bano) * cityFactor;
-      const admin = subtotal * 0.03;
-      state.total = Math.round(subtotal + admin);
-      refs.sumTotal.textContent = fmtCOP(state.total);
-    }
-    function updateSummary(){
-      refs.sumCiudad.textContent = labels.ciudad[state.ciudad];
-      refs.sumMetros.textContent = state.metros ? state.metros + ' m²' : '—';
-      refs.sumEntrega.textContent = labels.entrega[state.entrega];
-      refs.sumDistribucion.textContent = labels.distribucion[state.distribucion];
-      const obras = [];
-      if(state.obra.placa) obras.push('Pañete+estuco');
-      if(state.obra.cielos) obras.push('Cielo raso');
-      if(state.obra.electrica) obras.push('Adecuación eléctrica');
-      if(state.obra.hidraulica) obras.push('Adecuación hidráulica');
-      refs.sumObra.textContent = obras.length ? obras.join(', ') : '—';
-      refs.sumPiso.textContent = labels.piso[state.piso];
-      refs.sumCocina.textContent = labels.cocina[state.cocina];
-      refs.sumPintura.textContent = labels.pintura[state.pintura];
-      refs.sumBano.textContent = labels.bano[state.bano];
-    }
-    function renderSteps(){
-      ['sp1','sp2','sp3','sp4','sp5'].forEach((id,i)=>{
-        const pill=document.getElementById(id);
-        if(i+1===state.step) pill.classList.add('active'); else pill.classList.remove('active');
-      });
-      ['step1','step2','step3','step4','step5'].forEach((id,i)=>{
-        const panel=document.getElementById(id);
-        panel.style.display = (i+1===state.step) ? 'block':'none';
-      });
-    }
-    function nextStep(){
-      if(state.step===1){
-        if(!state.metros || state.metros<20) return toast('Ingresa los m² (mínimo 20)');
-      }
-      if(state.step===5) return sendQuote();
-      state.step = Math.min(5, state.step+1); renderSteps();
-      window.scrollTo({top: document.getElementById('cotizador').offsetTop - 80, behavior:'smooth'});
-    }
-    function prevStep(){ state.step = Math.max(1, state.step-1); renderSteps(); }
-    function resetWizard(){
-      Object.assign(state,{ciudad:'bogota', metros:0, entrega:'obra_gris', distribucion:'2h_1b', obra:{placa:false,cielos:false,electrica:false,hidraulica:false}, piso:'ceramica_econ', cocina:'sin_cocina', pintura:'no', bano:'no', total:0, step:1});
-      refs.ciudad.value=state.ciudad; refs.metros.value=''; refs.entrega.value=state.entrega; refs.distribucion.value=state.distribucion;
-      refs.ob_placa.checked=false; refs.ob_cielos.checked=false; refs.ob_electrica.checked=false; refs.ob_hidraulica.checked=false;
-      refs.piso.value=state.piso; refs.cocina.value=state.cocina; refs.pintura.value=state.pintura; refs.bano.value=state.bano;
-      updateSummary(); calc(); renderSteps(); toast('Cotizador reiniciado');
-    }
-    function sendQuote(){
-      const nombre = qs('#nombre').value.trim();
-      const email = qs('#email').value.trim();
-      const tel = qs('#telefono').value.trim();
-      if(!nombre || !email || !tel){ return toast('Completa tus datos de contacto'); }
-      const payload = {
-        contacto:{nombre,email,tel, notas:qs('#mensaje').value.trim()},
-        proyecto:{
-          ciudad:state.ciudad, metros:state.metros, entrega:state.entrega, distribucion:state.distribucion,
-          obra:state.obra, piso:state.piso, cocina:state.cocina, pintura:state.pintura, bano:state.bano, total:state.total
-        }
-      };
-      localStorage.setItem('lastQuote', JSON.stringify(payload));
-      toast('Solicitud enviada. Un asesor te contactará.');
-    }
-    function exportPDF(){
-      const win = window.open('', 'PRINT', 'height=600,width=800');
-      win.document.write('<html><head><title>Cotización</title></head><body>');
-      win.document.write('<h2>Cotización AcabadosVIS</h2>');
-      win.document.write('<pre>'+ JSON.stringify(state, null, 2) +'</pre>');
-      win.document.write('</body></html>');
-      win.document.close(); win.focus(); win.print(); win.close();
-    }
-    function addToCart(){
-      const cart = JSON.parse(localStorage.getItem('cart')||'[]');
-      cart.push({fecha:Date.now(), total:state.total, detalle:JSON.parse(JSON.stringify(state))});
-      localStorage.setItem('cart', JSON.stringify(cart));
-      toast('Agregado al carrito');
-    }
-    function checkout(){
-      const cart = JSON.parse(localStorage.getItem('cart')||'[]');
-      if(cart.length===0) return toast('Tu carrito está vacío');
-      const total = cart.reduce((a,c)=>a+c.total,0);
-      toast('Procesando pago por '+fmtCOP(total));
-    }
+      // Step 2 (Obra blanca)
+      quote.obraBlanca = [];
+      document.querySelectorAll('#step2 input[type="checkbox"]').forEach(checkbox => {
+        if (checkbox.checked) {
+          const label = checkbox.parentElement.textContent.trim().split(' ').slice(1).join(' ');
+          quote.obraBlanca.push({ id: checkbox.id, name: label, price: prices[checkbox.id] });
+        }
+      });
 
-    // Seguimiento
-    const progressInner = document.getElementById('progressInner');
-    function increaseProgress(delta){
-      const current = parseInt(progressInner.style.width.replace('%',''))||0;
-      const next = Math.max(0, Math.min(100, current+delta));
-      progressInner.style.width = next + '%';
-      toast('Avance: '+next+'%');
-    }
-    function addHito(){
-      const texto = prompt('Describe el hito:');
-      if(!texto) return;
-      const li = document.createElement('li');
-      li.innerHTML = `<span class="badge in">En curso</span> ${texto}`;
-      document.getElementById('timeline').appendChild(li);
-      toast('Hito agregado');
-    }
-    function subirEvidencias(){
-      const files = document.getElementById('evFile').files;
-      if(!files || files.length===0) return toast('Selecciona imágenes');
-      const cont = document.getElementById('evidencias');
-      [...files].forEach(f=>{
-        const url = URL.createObjectURL(f);
-        const div = document.createElement('div');
-        div.className='evidencia';
-        div.innerHTML = `<img src="${url}" alt="Evidencia">`;
-        cont.appendChild(div);
-      });
-      closeModal('modalEvidencias'); toast('Evidencias subidas');
-    }
+      // Step 3 & 4
+      quote.piso = getSelectText('piso');
+      quote.cocina = getSelectText('cocina');
+      quote.pintura = getSelectText('pintura');
+      quote.bano = getSelectText('bano');
+    }
 
-    // Financiación
-    function simularFinanciacion(){
-      const monto = Number(qs('#finMonto').value||0);
-      const meses = Number(qs('#finMeses').value||6);
-      if(monto<=0) return toast('Ingresa monto');
-      const tasa = 0.019; // 1.9% mensual referencia
-      const cuota = Math.round(monto * (tasa * Math.pow(1+tasa, meses)) / (Math.pow(1+tasa, meses)-1));
-      qs('#finResultado').textContent = 'Cuota estimada: ' + fmtCOP(cuota) + ' / mes';
-    }
+    // Calcula el total de la cotización
+    function calculateTotal() {
+      let total = 0;
+      // 1. Cálculo base por m²
+      total += quote.metros * prices.metros;
 
-    // Videocall
-    function agenda(){
-      const n=qs('#agNombre').value.trim(), e=qs('#agEmail').value.trim(), t=qs('#agTel').value.trim(), f=qs('#agFecha').value;
-      if(!n || !e || !t || !f) return toast('Completa todos los campos');
-      toast('Reunión agendada para ' + f);
-      closeModal('modalAgenda');
-    }
+      // 2. Cálculo por ítems de Obra Blanca
+      quote.obraBlanca.forEach(item => { total += item.price; });
 
-    // Toasts
-    function toast(msg){
-      const wrap = document.getElementById('toastWrap');
-      const t = document.createElement('div'); t.className='toast'; t.textContent = msg;
-      wrap.appendChild(t); setTimeout(()=> { t.style.opacity='0'; t.style.transition='.6s'; }, 2000);
-      setTimeout(()=> wrap.removeChild(t), 2800);
-    }
+      // 3. Cálculo por acabados seleccionados
+      const selectedOptions = ['piso', 'cocina', 'pintura', 'bano'];
+      selectedOptions.forEach(id => {
+        const value = document.getElementById(id).value;
+        if (prices[value]) total += prices[value];
+      });
 
-    // Chat
-    function toggleChat(){ document.getElementById('chatBox').classList.toggle('open'); }
-    function sendChat(){
-      const input = document.getElementById('chatInput'); const txt = input.value.trim(); if(!txt) return;
-      const body = document.getElementById('chatBody');
-      const me = document.createElement('div'); me.className='msg me'; me.textContent = txt; body.appendChild(me);
-      input.value='';
-      setTimeout(()=> {
-        const bot = document.createElement('div'); bot.className='msg'; bot.textContent = chatAnswer(txt);
-        body.appendChild(bot); body.scrollTop = body.scrollHeight;
-      }, 400);
-    }
-    function chatAnswer(q){
-      q = q.toLowerCase();
-      if(q.includes('precio') || q.includes('cuesta')) return 'Usa la calculadora en Cotizador. Ingresa m², entrega y acabados.';
-      if(q.includes('garant')) return 'Ofrecemos 12 meses de garantía por contrato.';
-      if(q.includes('tiempo') || q.includes('entrega')) return 'Entregamos en menos de 8 semanas según alcance.';
-      if(q.includes('financia') || q.includes('pago')) return 'Trabajamos con aliados. Puedes simular tu cuota en Financiación.';
-      return '¿Quieres que un asesor te contacte? Deja tu email/whatsapp y te escribimos.';
-    }
+      // Ajuste por Obra Gris (mayor dificultad)
+      if (document.getElementById('entrega').value === 'obra_gris') {
+        total *= 1.15; // +15% de complejidad
+      }
 
-    // Carrusel testimonios
-    (function initCarousel(){
-      const track = document.getElementById('carouselTrack');
-      const dots = document.getElementById('carouselDots');
-      const items = track.children; let idx=0;
-      dots.innerHTML='';
-      for(let i=0;i<items.length;i++){
-        const d = document.createElement('div'); d.className='dot'+(i===0?' active':'');
-        d.onclick = ()=> { idx=i; update(); };
-        dots.appendChild(d);
-      }
-      function update(){
-        track.style.transform = `translateX(-${idx*100}%)`;
-        [...dots.children].forEach((el,i)=> el.classList.toggle('active', i===idx));
-      }
-      setInterval(()=> { idx=(idx+1)%items.length; update(); }, 4000);
-    })();
+      // Redondea a la unidad de mil más cercana
+      quote.totalPrice = Math.round(total / 1000) * 1000;
+    }
 
-    // Galería
-    const galleryData = [
-      {title:'Cocina madera', cat:'cocina', img:'img/galeria1.jpg'},
-      {title:'Closets y organización', cat:'piso', img:'img/galeria2.jpg'},
-      {title:'Dormitorio listo', cat:'piso', img:'img/galeria3.jpg'},
-      {title:'Baño premium', cat:'bano', img:'img/galeria4.jpg'}
-    ];
-    function renderGallery(data=galleryData){
-      const g = document.getElementById('gallery'); g.innerHTML='';
-      data.forEach(item=>{
-        const el = document.createElement('div'); el.className='gallery-item'; el.dataset.title=item.title;
-        el.innerHTML = `<img loading="lazy" src="${item.img}" alt="${item.title}" onerror="this.src='img/galeria1.jpg'"><span>${item.title}</span>`;
-        el.onclick = ()=> openImage(item.img, item.title);
-        g.appendChild(el);
-      });
-    }
-    function filterGallery(cat){ if(cat==='all') return renderGallery(); renderGallery(galleryData.filter(x=>x.cat===cat)); }
-    function openImage(src,title){
-      const id='modalImage'; let m=document.getElementById(id);
-      if(!m){ m=document.createElement('div'); m.className='modal'; m.id=id; document.body.appendChild(m); }
-      m.innerHTML = `<div class="modal-card"><div class="modal-header"><h3>${title}</h3><button class="close" onclick="closeModal('modalImage')"><i class="fas fa-times"></i></button></div><img src="${src}" alt="${title}"></div>`;
-      m.classList.add('open');
-    }
+    // Actualiza el panel de resumen
+    function updateSummary() {
+      collectData();
+      calculateTotal();
 
-    // Blog
-    const blogData = [
-      {title:'Porcelanato vs. cerámica: ¿qué elegir?', img:'img/galeria2.jpg'},
-      {title:'Guía rápida de obra blanca', img:'img/galeria3.jpg'},
-      {title:'Cómo cuidar tus acabados', img:'img/galeria4.jpg'}
-    ];
-    function renderBlog(){
-      const b = document.getElementById('blogList'); b.innerHTML='';
-      blogData.forEach(post=>{
-        const el = document.createElement('article'); el.className='card'; el.dataset.title = post.title;
-        el.innerHTML = `<img loading="lazy" src="${post.img}" alt="${post.title}"><h4>${post.title}</h4><p class="muted">Leer más próximamente...</p>`;
-        b.appendChild(el);
-      });
-    }
+      document.getElementById('sumCiudad').textContent = quote.ciudad;
+      document.getElementById('sumMetros').textContent = quote.metros > 0 ? `${quote.metros} m²` : '—';
+      document.getElementById('sumEntrega').textContent = quote.entrega;
+      document.getElementById('sumDistribucion').textContent = quote.distribucion;
 
-    // FAQ
-    const faqData = [
-      {q:'¿Cuánto tardan en entregar?', a:'Según alcance, entre 6 y 8 semanas. Se pacta por contrato.'},
-      {q:'¿Tienen garantía?', a:'Sí, 12 meses por contrato, con evidencias de cumplimiento por etapa.'},
-      {q:'¿Cómo se realiza el pago?', a:'Con aliados y pasarela segura. Puedes financiar y simular cuotas.'},
-      {q:'¿Trabajan en Bogotá y Medellín?', a:'Sí, con logística propia. Otras ciudades según disponibilidad.'},
-    ];
-    function renderFAQ(){
-      const f = document.getElementById('faqList'); f.innerHTML='';
-      faqData.forEach(item=>{
-        const el = document.createElement('div'); el.className='faq-item';
-        el.innerHTML = `<div class="faq-q">${item.q} <i class="fas fa-chevron-down"></i></div><div class="faq-a">${item.a}</div>`;
-        el.querySelector('.faq-q').onclick = ()=> el.classList.toggle('open');
-        f.appendChild(el);
-      });
-    }
+      document.getElementById('sumObra').textContent = quote.obraBlanca.length > 0
+        ? quote.obraBlanca.map(i => i.name.split(' ')[0]).join(', ')
+        : '—';
 
-    // Contacto
-    document.getElementById('contactForm').addEventListener('submit', e=>{
-      e.preventDefault();
-      const nombre = qs('#cNombre').value.trim(), email = qs('#cEmail').value.trim(), tel = qs('#cTel').value.trim(), ciudad = qs('#cCiudad').value.trim(), msg = qs('#cMsg').value.trim();
-      if(!nombre || !email || !msg) return toast('Completa nombre, email y mensaje');
-      const payload = {nombre,email,tel,ciudad,msg};
-      localStorage.setItem('contactLast', JSON.stringify(payload));
-      toast('Mensaje enviado, te contactaremos pronto');
-      e.target.reset();
-    });
+      document.getElementById('sumPiso').textContent = quote.piso.includes('econ') ? 'Cerámica Econ.' : quote.piso.split(' ')[0];
+      document.getElementById('sumCocina').textContent = quote.cocina.includes('sin') ? '—' : quote.cocina.split(' ')[0];
+      document.getElementById('sumPintura').textContent = quote.pintura.includes('No') ? '—' : quote.pintura.split(' ')[0];
+      document.getElementById('sumBano').textContent = quote.bano.includes('No') ? '—' : quote.bano.split(' ')[0];
 
-    // Init
-    function init(){
-      bindEvents(); updateSummary(); calc(); renderSteps();
-      renderGallery(); renderBlog(); renderFAQ();
-    }
-    init();
-  </script>
+      // Formatea el precio a moneda local (COP - Colombia)
+      document.getElementById('sumTotal').textContent = new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(quote.totalPrice);
+    }
+
+    // Función de simulación de envío
+    function sendQuote() {
+      // Validaciones de contacto
+      const nombre = document.getElementById('nombre').value;
+      const email = document.getElementById('email').value;
+
+      if (nombre.length < 3 || !email.includes('@')) {
+        showToast('⚠️ Por favor, completa tu nombre y un email válido.', 'warn');
+        return;
+      }
+      showToast('🎉 ¡Cotización enviada! Pronto te contactaremos.', 'ok');
+      // Aquí iría la llamada real a la API para guardar los datos
+    }
+
+    // =======================================================================
+    // 2. INTERACCIONES GENERALES (Toast, Modals, FAQ, Theme)
+    // =======================================================================
+
+    // TOAST (Alerta temporal)
+    function showToast(message, type = 'primary') {
+      let toastWrap = document.getElementById('toastWrap');
+      if (!toastWrap) {
+        toastWrap = document.createElement('div');
+        toastWrap.id = 'toastWrap';
+        toastWrap.className = 'toast-wrap';
+        document.body.appendChild(toastWrap);
+      }
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.textContent = message;
+      toastWrap.appendChild(toast);
+      setTimeout(() => { toast.remove(); }, 3000);
+    }
+    window.showToast = showToast; // Hacerla global para usar en onclick
+
+    // MODALES
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+    window.exportPDF = () => showToast('📄 Descargando PDF (simulado)...', 'primary');
+    window.addToCart = () => showToast('🛒 Ítems agregados al carrito (simulado).', 'primary');
+    window.addHito = () => showToast('Hito agregado (simulado).', 'ok');
+    window.checkout = () => showToast('Procesando pago (simulado)...', 'primary');
+
+    // DARK MODE
+    document.getElementById('toggleTheme').addEventListener('click', () => {
+      const currentTheme = document.body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      // Cambiar icono
+      document.querySelector('#toggleTheme i').className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
+
+    // FAQ ACORDEÓN
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const parent = q.parentElement;
+        parent.classList.toggle('open');
+        // Cierra otros al abrir uno (comportamiento de acordeón)
+        document.querySelectorAll('.faq-item').forEach(item => {
+          if (item !== parent) item.classList.remove('open');
+        });
+      });
+    });
+
+    // =======================================================================
+    // 3. CARRUSEL Y GALERÍA
+    // =======================================================================
+    
+    // CARRUSEL (Testimonios)
+    const track = document.getElementById('carouselTrack');
+    const dotsContainer = document.getElementById('carouselDots');
+    const items = document.querySelectorAll('.carousel-item');
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      const itemWidth = items[0].clientWidth;
+      track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+      
+      // Actualizar puntos
+      document.querySelectorAll('.dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      updateCarousel();
+    }
+
+    // Generar puntos de control
+    items.forEach((_, index) => {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.addEventListener('click', () => goToSlide(index));
+      dotsContainer.appendChild(dot);
+    });
+
+    // Auto-avance (opcional)
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % items.length;
+      updateCarousel();
+    }, 5000);
+
+    window.addEventListener('resize', updateCarousel); // Recalcular al cambiar tamaño
+
+    // GALERÍA (Simulación de datos)
+    const galleryData = [
+      { tag: 'cocina', title: 'Cocina Modular Moderna', img: 'https://i.imgur.com/uG9Xk7z.jpeg' },
+      { tag: 'bano', title: 'Baño Principal Lujo', img: 'https://i.imgur.com/6X2pP3W.jpeg' },
+      { tag: 'piso', title: 'Piso Laminado Cálido', img: 'https://i.imgur.com/V7R3n2y.jpeg' },
+      { tag: 'cocina', title: 'Mesón Cuarzo Blanco', img: 'https://i.imgur.com/5LwZ4hX.jpeg' },
+      { tag: 'bano', title: 'Enchape Baño Básico', img: 'https://i.imgur.com/qE4J3qT.jpeg' },
+      { tag: 'piso', title: 'Porcelanato Gris', img: 'https://i.imgur.com/8N4N3uT.jpeg' }
+    ];
+
+    function renderGallery(filter = 'all') {
+      const galleryElement = document.getElementById('gallery');
+      galleryElement.innerHTML = ''; // Limpiar
+
+      const filtered = filter === 'all' ? galleryData : galleryData.filter(item => item.tag === filter);
+
+      filtered.forEach(item => {
+        const html = `<div class="gallery-item" data-tag="${item.tag}">
+          <img loading="lazy" src="${item.img}" alt="${item.title}">
+          <span>${item.title}</span>
+        </div>`;
+        galleryElement.insertAdjacentHTML('beforeend', html);
+      });
+      
+      // Actualizar botones de filtro
+      document.querySelectorAll('.filters .btn-soft').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().includes(filter) || (filter === 'all' && btn.textContent === 'Todos')) {
+          btn.classList.add('active');
+        }
+      });
+    }
+    window.filterGallery = renderGallery; // Hacerla global
+
+    // SIMULACIÓN DE PROGRESO
+    let currentProgress = 28;
+    window.increaseProgress = (amount) => {
+      currentProgress = Math.min(100, Math.max(0, currentProgress + amount));
+      document.getElementById('progressInner').style.width = `${currentProgress}%`;
+      document.getElementById('progressPercent').textContent = `${currentProgress}%`;
+      showToast(`Avance ajustado a ${currentProgress}%`, 'primary');
+    };
+
+    // =======================================================================
+    // 4. INICIALIZACIÓN
+    // =======================================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Inicializar Cotizador
+      showStep(1); 
+      document.querySelectorAll('#cotizador select, #cotizador input[type="number"], #cotizador input[type="checkbox"]').forEach(input => {
+        input.addEventListener('change', updateSummary);
+        input.addEventListener('keyup', updateSummary);
+      });
+
+      // 2. Inicializar Carrusel
+      updateCarousel();
+
+      // 3. Inicializar Galería
+      renderGallery('all');
+
+      // 4. Inicializar Dark Mode si está guardado
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.body.setAttribute('data-theme', savedTheme);
+      document.querySelector('#toggleTheme i').className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      
+      // 5. Forzar la actualización inicial del resumen con los valores por defecto
+      updateSummary();
+    });
+  </script>
+
 </body>
 </html>
 
