@@ -258,14 +258,15 @@ footer{margin-top:20px;text-align:center;color:rgba(234,246,240,0.6);font-size:1
           <div style="margin-top:12px">
             <button class="btn-ghost small" id="backup-btn"><i class="fa-solid fa-cloud-arrow-up"></i> Exportar / Importar</button>
           </div>
-        </div>
 
-        <div style="margin-top:12px" class="muted">Wayuunaiki App PRO • Demo local · CorreQ</div>
+          <div style="margin-top:12px" class="muted">Wayuunaiki App PRO • Demo local · CorreQ</div>
+          <div style="margin-top:8px" id="leaderboard" class="muted"></div>
+        </div>
       </aside>
 
       <!-- CONTENIDO -->
       <main>
-        <!-- DASHBOARD (contenido resumido para mantener ejemplo) -->
+        <!-- DASHBOARD -->
         <section id="view-dashboard" class="card" aria-label="Dashboard">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <div>
@@ -302,7 +303,134 @@ footer{margin-top:20px;text-align:center;color:rgba(234,246,240,0.6);font-size:1
           </div>
         </section>
 
-        <!-- resto de vistas (omitidas en este fragmento para brevedad) -->
+        <!-- LECCIONES -->
+        <section id="view-lessons" class="card" aria-label="Lecciones" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+            <div>
+              <h2>Lecciones</h2>
+              <p class="muted">Explora por niveles o busca una lección.</p>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input id="search-lessons" placeholder="Buscar lecciones..." style="width:220px" />
+              <select id="filter-level" class="small"></select>
+            </div>
+          </div>
+
+          <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap">
+            <div style="width:340px">
+              <div class="card">
+                <h3 class="muted">Niveles</h3>
+                <div id="levels-list" style="margin-top:8px"></div>
+              </div>
+            </div>
+
+            <div style="flex:1">
+              <div id="lesson-area" class="card" hidden>
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <h3 id="lesson-title">Título</h3>
+                    <div class="muted" id="lesson-desc">Descripción</div>
+                  </div>
+                  <div style="display:flex;gap:8px;align-items:center">
+                    <div class="muted">Progreso:</div>
+                    <div id="lesson-progress" style="font-weight:900">0%</div>
+                    <button id="fav-lesson" class="btn small"><i class="fa-regular fa-star"></i> Favorito</button>
+                    <button id="close-lesson" class="btn small">Cerrar</button>
+                  </div>
+                </div>
+                <div id="exercise-area" style="margin-top:12px"></div>
+              </div>
+
+              <div class="card" style="margin-top:12px">
+                <h3 class="muted">Sugeridas</h3>
+                <div id="suggestions" style="margin-top:8px" class="muted">Selecciona un nivel para ver lecciones</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- DICCIONARIO -->
+        <section id="view-dictionary" class="card" aria-label="Diccionario" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+            <div>
+              <h2>Diccionario</h2>
+              <p class="muted">Busca palabras y escucha su pronunciación.</p>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <input id="dict-search" placeholder="Buscar palabra..." style="width:240px" />
+              <div class="muted kv" id="dict-count">0</div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px" class="card">
+            <div id="dict-list"></div>
+          </div>
+        </section>
+
+        <!-- PERFIL -->
+        <section id="view-profile" class="card" aria-label="Perfil" style="display:none">
+          <h2>Perfil</h2>
+          <p class="muted">Ajusta tu perfil y reinicia progreso si lo deseas.</p>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+            <div style="flex:1;min-width:260px" class="card">
+              <h3 class="muted">Editar perfil</h3>
+              <input id="profile-name" placeholder="Nombre de usuario" />
+              <input id="profile-initials" placeholder="Iniciales (ej: AB)" />
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button id="save-profile" class="btn btn-primary">Guardar</button>
+                <button id="reset-progress" class="btn btn-ghost">Restablecer progreso</button>
+              </div>
+            </div>
+
+            <div style="flex:1;min-width:260px" class="card">
+              <h3 class="muted">Logros</h3>
+              <div id="achievements" class="muted" style="margin-top:8px">No hay logros aún</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ADMIN -->
+        <section id="view-admin" class="card" aria-label="Admin" style="display:none">
+          <h2>Admin</h2>
+          <p class="muted">Crear niveles, lecciones y palabras (requiere admin).</p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+            <div class="card">
+              <h3 class="muted">Crear nivel</h3>
+              <input id="new-level-name" placeholder="Nombre nivel" />
+              <input id="new-level-desc" placeholder="Descripción breve" />
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button id="create-level" class="btn btn-primary">Crear nivel</button>
+                <button id="seed-demo" class="btn btn-ghost">Cargar demo PRO</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 class="muted">Crear lección</h3>
+              <select id="sel-level"></select>
+              <input id="new-lesson-title" placeholder="Título lección" />
+              <input id="new-lesson-body" placeholder="Contenido / descripción" />
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button id="create-lesson" class="btn btn-primary">Crear lección</button>
+                <button id="clear-data" class="btn btn-ghost">Eliminar datos locales</button>
+              </div>
+            </div>
+
+            <div class="card" style="grid-column:1 / -1">
+              <h3 class="muted">Agregar palabra (diccionario)</h3>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <input id="dict-es" placeholder="Español" style="flex:1;min-width:160px" />
+                <input id="dict-wy" placeholder="Wayuunaiki" style="flex:1;min-width:160px" />
+                <input id="dict-audio" placeholder="URL o base64 audio (opcional)" style="flex:1;min-width:160px" />
+                <div id="audio-drop" style="border:1px dashed rgba(255,255,255,0.04);padding:10px;border-radius:8px;width:100%;text-align:center;margin-top:6px">Arrastra un archivo de audio aquí</div>
+                <div style="display:flex;gap:8px;margin-top:8px">
+                  <button id="create-word" class="btn btn-primary">Agregar palabra</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
 
@@ -558,7 +686,7 @@ footer{margin-top:20px;text-align:center;color:rgba(234,246,240,0.6);font-size:1
     $('#progbar').style.width = Math.min(100, Math.round((u.xp%100))) + '%';
     $('#xptext').textContent = `XP: ${u.xp} · Nivel ${u.level}`;
     $('#streak').textContent = u.streak || 0;
-    $('#dash-level').textContent = u.level; $('#dash-xp').textContent = u.xp; $('#dash-completed').textContent = (u.completed||[]).length;
+    $('#dash-level').textContent = u.level; $('#dash-xp').textContent = u.xp; $('#dash-completed')?.textContent = (u.completed||[]).length;
     $('#xp-big').textContent = `${u.xp} XP`;
     renderLeaderboard();
   }
@@ -774,6 +902,7 @@ footer{margin-top:20px;text-align:center;color:rgba(234,246,240,0.6);font-size:1
   }
 
   function updateLessonProgress(){
+    if (!state.currentLesson) return;
     const u = data.users[state.currentUser] || { completed:[] };
     const total = data.exercises.filter(e=>e.lessonId===state.currentLesson.id).length;
     const doneExIds = (data.results[state.currentUser]||[]).filter(r=> data.exercises.find(e=>e.id===r.exerciseId && e.lessonId===state.currentLesson.id && r.correct)).map(r=>r.exerciseId);
