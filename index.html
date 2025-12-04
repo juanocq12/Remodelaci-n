@@ -558,14 +558,19 @@
       }
     }
 
+    // <-- CHANGE: announceTurn now includes the type of queue (general/preferencial) in the spoken phrase -->
     function announceTurn(label, queue) {
-      const phrase = `Atención, ${label}`;
+      // Determine human-friendly queue type
+      const typeLabel = (queue === 'preferencial' || queue === 'preferential' || queue === 'prefer') ? 'preferencial' : 'general';
+      // Phrase now includes the type: "Atención, turno preferencial P-001" or "Atención, turno general G-001"
+      const phrase = `Atención, turno ${typeLabel} ${label}`;
       beepThenSpeak(phrase);
       const el = queue === 'general' ? elems.displayGeneral : elems.displayPrefer;
       try {
         el.animate([{ boxShadow: '0 0 0 0 rgba(15,111,255,0.0)' }, { boxShadow: '0 0 0 14px rgba(15,111,255,0.06)' }], { duration: 700 });
       } catch (e) {}
     }
+    // <-- end change -->
 
     // auto repeat
     function scheduleAutoRepeat(queue) {
