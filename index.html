@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Turnero — IPS Interconsultas (Sincronizado)</title>
 
+  <!--
+    INSTRUCCIONES RÁPIDAS (lee antes de usar)
+    1) Para sincronización en tiempo real entre varias máquinas necesitas Firebase Realtime Database.
+       - Crea un proyecto en https://console.firebase.google.com/
+       - Ve a "Realtime Database" -> Crear base de datos -> modo de prueba (temporal).
+       - Copia el objeto de configuración del proyecto (lo encuentras en Project settings -> Your apps -> Firebase SDK snippet -> Config).
+       - Pega ese objeto JSON en el cuadro "Usar Firebase (Realtime DB)" dentro de la app y pulsa "Conectar".
+       - (Temporalmente para pruebas) en Realtime Database -> Rules pon:
+         {
+           "rules": {
+             ".read": true,
+             ".write": true
+           }
+         }
+         NO uses reglas abiertas en producción; pide si quieres reglas seguras.
+    2) Alternativa local: si no pegas configuración la app funciona en localStorage (solo tú verás los cambios).
+    3) Puedes pegar la config una sola vez y la app la recordará en localStorage.
+    4) El campo "Usar logo de carpeta" carga la imagen por defecto "Logo-Interconsultas-01b-500px.png.png" desde la misma carpeta si existe.
+  -->
+
   <style>
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
@@ -14,104 +34,66 @@
     background: linear-gradient(125deg, #0e223a 0%, #1681c1 70%, #24c4e4 100%);
     color:#fff;
     -webkit-font-smoothing:antialiased;
-    padding:24px;
+    padding:20px;
   }
-
-  .wrap{ max-width:1100px; margin:24px auto; }
-
+  .wrap{ max-width:1100px; margin:18px auto; }
   .card {
     background: rgba(255,255,255,0.06);
     border-radius:12px;
-    padding:18px;
+    padding:16px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.45);
     border: 1px solid rgba(6,182,212,0.06);
   }
-
-  .header {
-    display:flex;justify-content:space-between;align-items:center; gap:12px;
-    margin-bottom:12px;
-  }
+  .header { display:flex;justify-content:space-between;align-items:center; gap:12px; margin-bottom:12px; }
   .brand { display:flex; gap:12px; align-items:center; }
   .brand h1 { color:#cfeefd; font-size:1.05rem; margin-bottom:4px; }
   .brand p { color:#a9d9ef; font-size:0.85rem; margin:0; }
-  .small { font-size:0.85rem; color:#9fc7e2; }
-
   .logo{height:44px;margin-right:8px;border-radius:6px;object-fit:contain;background:transparent;padding:4px}
-
+  .small { font-size:0.85rem; color:#9fc7e2; }
   .main{ display:flex; gap:18px; align-items:flex-start; }
-
-  .controls-inline {
-    display:flex; gap:12px; align-items:center; flex-wrap:wrap; background: transparent;
-  }
+  .controls-inline { display:flex; gap:12px; align-items:center; flex-wrap:wrap; background: transparent; }
   .controls-inline label{ font-size:0.9rem; color:#e6f7ff; display:flex; flex-direction:column; }
   .controls-inline input[type="text"], .controls-inline select, .controls-inline input[type="range"]{
     padding:8px 10px;border-radius:8px;border:none;background:#0d274d;color:#fff;min-width:90px;margin-top:6px;
   }
-
-  .boards{
-    display:grid;
-    grid-template-columns: 1fr 420px;
-    gap:18px;
-    width:100%;
-  }
-
+  .boards{ display:grid; grid-template-columns: 1fr 420px; gap:18px; width:100%; }
   .board{
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:12px;
-    padding:16px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
-    border: 1px solid rgba(6,182,212,0.04);
-    display:flex; flex-direction:column; gap:12px;
+    border-radius:12px; padding:14px; box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+    border: 1px solid rgba(6,182,212,0.04); display:flex; flex-direction:column; gap:12px;
   }
-
-  .board-header{ display:flex; justify-content:space-between; align-items:center; }
   .board-header h2{ color:#cfeefd; margin:0; font-size:1.15rem; }
   .board-sub{ color:#a9d9ef; font-size:0.88rem; }
-
   .display{
     display:flex; align-items:center; justify-content:center; font-weight:700;
     font-size:2.8rem; padding:18px; border-radius:10px; color:#052233;
     background: linear-gradient(90deg,#06b6d4,#2563eb); min-height:84px;
   }
   .display.small{ font-size:2rem; padding:12px; }
-
   .board-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
   .board-small{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
-
   .btn{ padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer;border:none; }
   .btn.primary{ background: linear-gradient(90deg,#06b6d4,#2563eb); color:#052233; }
   .btn.secondary{ background: rgba(255,255,255,0.06); color:#a9d9ef; border:1px solid rgba(255,255,255,0.04); }
   .btn.call{ background:#0c7c59; color:#fff; }
   .btn.ghost{ background:transparent; color:#a8d9ef; border:1px solid rgba(255,255,255,0.06); }
   .btn.danger{ background:#ef4444; color:#fff; }
-
   .history h3{ margin:4px 0; color:#a9d9ef; font-size:0.95rem; }
   .history-list{ margin:8px 0 0; padding-left:18px; max-height:220px; overflow:auto; color:#e7fbff; }
-
   .module-select{ display:flex; gap:8px; align-items:center; justify-content:center; }
   .module-select select{ padding:8px 10px;border-radius:8px;border:none;background:#0d274d;color:#fff; }
-
-  .drawer{ position:fixed; right:18px; top:18px; width:320px; max-width:92vw; height:calc(100vh - 36px);
+  .drawer{ position:fixed; right:18px; top:18px; width:360px; max-width:92vw; height:calc(100vh - 36px);
     background: rgba(2,30,50,0.98); border-radius:12px; padding:12px; box-shadow: 0 30px 80px rgba(0,0,0,0.6);
     transform:translateY(-20px) scale(.98); opacity:0; pointer-events:none; transition:all .22s ease; color:#dff6ff;
   }
   .drawer[aria-hidden="false"]{ transform:none; opacity:1; pointer-events:auto; }
-  .drawer-header{ display:flex; justify-content:space-between; align-items:center; padding-bottom:6px; border-bottom:1px dashed rgba(255,255,255,0.03); }
-  .drawer-body label{ font-size:0.95rem; color:#cfeefd; display:flex; flex-direction:column; }
-
   .modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); opacity:0; pointer-events:none; transition:opacity .18s; }
   .modal[aria-hidden="false"]{ opacity:1; pointer-events:auto; }
   .modal-card{ background: rgba(2,30,50,0.98); padding:18px; border-radius:12px; min-width:280px; max-width:92vw; box-shadow: 0 30px 80px rgba(0,0,0,0.6); color:#dff6ff; }
-
-  @media (max-width:980px){
-    .boards{ grid-template-columns:1fr; }
-    .wrap { padding: 12px; }
-  }
-
-  /* small status indicator */
-  .status {
-    display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.04);color:#a9d9ef;font-size:0.85rem;
-  }
+  @media (max-width:980px){ .boards{ grid-template-columns:1fr; } .wrap { padding: 12px; } }
+  .status { display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.04);color:#a9d9ef;font-size:0.85rem; }
+  .note { font-size:0.85rem;color:#fed7a2;margin-top:8px }
+  textarea#firebase-config{ width:100%; min-height:96px; padding:8px; border-radius:8px; border:none; background:#07243a; color:#cfeefd; resize:vertical }
   </style>
 </head>
 <body>
@@ -231,7 +213,7 @@
           </section>
         </div>
 
-        <div style="width:320px;display:flex;flex-direction:column;gap:12px">
+        <div style="width:360px;display:flex;flex-direction:column;gap:12px">
           <div class="card" style="padding:12px;">
             <div style="display:flex;justify-content:space-between;align-items:center">
               <div style="color:#cfeefd">
@@ -291,24 +273,22 @@
         <button id="reset-settings" class="btn ghost">Restaurar</button>
       </div>
 
-      <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.04);margin:8px 0" />
+      <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.04);margin:10px 0" />
 
       <div style="font-size:0.9rem;color:#a9d9ef">
         <div style="margin-bottom:6px">Sincronización en tiempo real</div>
-        <label style="display:block;color:#cfeefd">Usar Firebase (Realtime DB)</label>
-        <textarea id="firebase-config" placeholder='Pega aquí tu config de Firebase (objeto JSON) opcionalmente' style="width:100%;min-height:80px;padding:8px;border-radius:8px;border:none;background:#07243a;color:#cfeefd"></textarea>
+        <label style="display:block;color:#cfeefd">Pega aquí la config de Firebase (objeto JSON)</label>
+        <textarea id="firebase-config" placeholder='Ej: { "apiKey": "...", "authDomain": "...", "databaseURL": "https://<tu-db>.firebaseio.com", "projectId": "...", "storageBucket": "...", "messagingSenderId": "...", "appId": "..." }'></textarea>
         <div style="display:flex;gap:8px;margin-top:8px">
           <button id="connect-firebase" class="btn primary">Conectar</button>
           <button id="disconnect-firebase" class="btn ghost">Desconectar</button>
         </div>
-        <div style="margin-top:8px;color:#fed7a2;font-size:0.85rem">
-          Nota: Si no configuras Firebase, la app funciona solo local (localStorage). Para compartir los turnos entre máquinas, crea un proyecto Firebase y pega aquí la config.
-        </div>
+        <div class="note">Nota: si no configuras Firebase la app guarda en local (localStorage).</div>
       </div>
     </div>
   </aside>
 
-  <!-- Modal -->
+  <!-- Modal confirm -->
   <div id="modal" class="modal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" style="text-align:left">
       <p id="modal-message" style="color:#dff6ff"></p>
@@ -319,45 +299,20 @@
     </div>
   </div>
 
-  <!-- Firebase compatibility SDK (v8 compat) -->
+  <!-- Firebase Web SDK (v8 compat) -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
   <script>
   (function () {
-    // CLIENT ID used to avoid applying our own remote updates unnecessarily
+    // Unique client id to avoid re-applying our own writes when DB echoes them back
     const CLIENT_ID = 'client-' + Math.random().toString(36).slice(2,9);
-
-    // localStorage key for backup
     const LOCAL_KEY = 'turnero_ips_uniform_v1';
 
-    // Firebase references (set when connected)
-    let firebaseApp = null;
-    let dbRef = null;
-    let connectedToFirebase = false;
-
-    // UI helpers
+    // DOM helper
     const $ = id => document.getElementById(id);
-    const syncStatus = $('sync-status');
 
-    // Default state
-    const DEFAULT = {
-      general: { counter: 0, history: [], lastModule: '1' },
-      preferencial: { counter: 0, history: [], lastModule: '1' },
-      settings: {
-        prefix_general: 'G',
-        prefix_prefer: 'P',
-        pad: 3,
-        announceOnAdvance: true,
-        voiceIndex: 0,
-        volume: 1,
-        playBeep: true,
-        autoRepeatInterval: 0
-      },
-      meta: { lastUpdate: 0, lastClient: null } // meta for conflict resolution
-    };
-
-    // Elements used by script
+    // Elements
     const elems = {
       displayGeneral: $('display-general'),
       displayPrefer: $('display-preferencial'),
@@ -388,72 +343,108 @@
       firebaseConfigArea: $('firebase-config'),
       connectFirebaseBtn: $('connect-firebase'),
       disconnectFirebaseBtn: $('disconnect-firebase'),
+      syncStatus: $('sync-status'),
+      appLogo: $('app-logo')
     };
 
-    // runtime state (kept in memory and synced)
-    let state = loadLocalState();
+    // Runtime
+    let firebaseApp = null;
+    let dbRef = null;
+    let connectedToFirebase = false;
     let voices = [];
     let autoRepeatTimers = {};
 
-    // --- Firebase helpers ---
-    // User: to enable realtime sync, create Firebase Realtime Database and paste config object here.
-    // Example config (replace with your own):
-    // {
-    //   "apiKey": "...",
-    //   "authDomain": "...",
-    //   "databaseURL": "https://<your-db>.firebaseio.com",
-    //   "projectId": "...",
-    //   "storageBucket": "...",
-    //   "messagingSenderId": "...",
-    //   "appId": "..."
-    // }
-    function connectFirebase(config) {
+    // Default state
+    const DEFAULT = {
+      general: { counter: 0, history: [], lastModule: '1' },
+      preferencial: { counter: 0, history: [], lastModule: '1' },
+      settings: {
+        prefix_general: 'G',
+        prefix_prefer: 'P',
+        pad: 3,
+        announceOnAdvance: true,
+        voiceIndex: 0,
+        volume: 1,
+        playBeep: true,
+        autoRepeatInterval: 0
+      },
+      meta: { lastUpdate: 0, lastClient: null }
+    };
+
+    // Load local state or default
+    function loadLocalState() {
       try {
-        if (!config || !config.databaseURL) {
-          alert('La configuración de Firebase debe contener al menos databaseURL. Pega el objeto JSON completo.');
+        const raw = localStorage.getItem(LOCAL_KEY);
+        if (!raw) return JSON.parse(JSON.stringify(DEFAULT));
+        const parsed = JSON.parse(raw);
+        const merged = JSON.parse(JSON.stringify(DEFAULT));
+        Object.assign(merged.settings, parsed.settings || {});
+        merged.general = Object.assign(merged.general, parsed.general || {});
+        merged.preferencial = Object.assign(merged.preferencial, parsed.preferencial || {});
+        merged.meta = Object.assign(merged.meta || {}, parsed.meta || {});
+        merged.general.lastModule = (parsed.general && parsed.general.lastModule) ? parsed.general.lastModule : merged.general.lastModule;
+        merged.preferencial.lastModule = (parsed.preferencial && parsed.preferencial.lastModule) ? parsed.preferencial.lastModule : merged.preferencial.lastModule;
+        return merged;
+      } catch (e) {
+        console.warn('Error cargando local state', e);
+        return JSON.parse(JSON.stringify(DEFAULT));
+      }
+    }
+
+    let state = loadLocalState();
+
+    // --- Firebase connection and sync ---
+    function connectFirebase(cfg) {
+      try {
+        if (!cfg || !cfg.databaseURL) {
+          alert('La configuración de Firebase debe contener al menos databaseURL.');
           return;
         }
-        // initialize app
+        // initialize (delete previous app if any)
         if (firebase.apps && firebase.apps.length) {
+          // try to delete existing default app to re-init with new config
           firebase.app().delete().catch(()=>{}).finally(() => {
-            firebaseApp = firebase.initializeApp(config);
+            firebaseApp = firebase.initializeApp(cfg);
             setupDbRef();
           });
         } else {
-          firebaseApp = firebase.initializeApp(config);
+          firebaseApp = firebase.initializeApp(cfg);
           setupDbRef();
         }
       } catch (err) {
         console.error('Error conectando a Firebase', err);
-        alert('Error inicializando Firebase: ' + err.message);
+        alert('Error inicializando Firebase: ' + (err && err.message ? err.message : err));
       }
     }
 
     function setupDbRef() {
       try {
         dbRef = firebase.database().ref('turnero_shared_state_v1');
-        // listen for remote changes
         dbRef.on('value', snapshot => {
           const remote = snapshot.val();
           if (!remote) {
-            // if DB empty, push our local state (first writer wins)
+            // db empty, push local as baseline
             saveRemoteState();
             updateSyncStatus(true, 'Sincronizado (inicial)');
             return;
           }
-          // remote should contain: { state: {...}, meta: { lastUpdate, lastClient } }
           if (shouldApplyRemote(remote)) {
             applyRemote(remote);
             updateSyncStatus(true, 'Sincronizado (recibido)');
+          } else {
+            // it's probably our own write; ignore
           }
+        }, err => {
+          console.error('DB listen error', err);
+          updateSyncStatus(false, 'Error DB');
         });
         connectedToFirebase = true;
-        updateSyncStatus(true, 'Conectado (esperando cambios)');
-        // push current local state to DB so everyone starts from same baseline
+        updateSyncStatus(true, 'Conectado');
+        // push current local state so everyone shares baseline
         saveRemoteState();
       } catch (e) {
         console.error('setupDbRef error', e);
-        alert('No se pudo escuchar la base de datos. Revisa la configuración y reglas.');
+        alert('No se pudo establecer listener en la DB. Revisa la config y reglas.');
       }
     }
 
@@ -462,7 +453,7 @@
         dbRef.off();
         dbRef = null;
       }
-      try { if (firebase && firebase.app) { /* do not delete app to avoid race */ } } catch (e) {}
+      try { if (firebase && firebase.app) { /* keep app instance */ } } catch (e) {}
       connectedToFirebase = false;
       updateSyncStatus(false, 'Desconectado (local)');
     }
@@ -471,10 +462,8 @@
       if (!remote.meta) return true;
       const remoteTS = remote.meta.lastUpdate || 0;
       const localTS = state.meta.lastUpdate || 0;
-      // apply remote if it's newer and wasn't written by this client (avoid re-applying our own write)
       if (remote.meta.lastClient === CLIENT_ID && remoteTS === localTS) {
-        // it's our own write echoed back; ignore
-        return false;
+        return false; // ignore our own echoed write
       }
       return remoteTS > localTS;
     }
@@ -482,14 +471,12 @@
     function applyRemote(remote) {
       try {
         const rstate = remote.state || {};
-        // Merge rstate into local state (replace full queues & settings)
         state.general = rstate.general || DEFAULT.general;
         state.preferencial = rstate.preferencial || DEFAULT.preferencial;
         state.settings = rstate.settings || state.settings || DEFAULT.settings;
         state.meta = remote.meta || { lastUpdate: Date.now(), lastClient: null };
-        // Update UI
         renderAll();
-        saveLocalState(); // keep a local copy
+        saveLocalState();
       } catch (e) {
         console.error('applyRemote error', e);
       }
@@ -503,7 +490,6 @@
         settings: state.settings
       }, meta: { lastUpdate: Date.now(), lastClient: CLIENT_ID } };
       dbRef.set(payload).then(()=> {
-        // local meta update
         state.meta = payload.meta;
         saveLocalState();
         updateSyncStatus(true, 'Sincronizado (enviado)');
@@ -513,32 +499,9 @@
       });
     }
 
-    // --- Local storage fallback ---
-    function saveLocalState() {
-      try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state)); } catch(e){ console.warn(e); }
-    }
-    function loadLocalState() {
-      try {
-        const raw = localStorage.getItem(LOCAL_KEY);
-        if (!raw) return JSON.parse(JSON.stringify(DEFAULT));
-        const parsed = JSON.parse(raw);
-        // Merge with defaults to ensure fields exist
-        const merged = JSON.parse(JSON.stringify(DEFAULT));
-        Object.assign(merged.settings, parsed.settings || {});
-        merged.general = Object.assign(merged.general, parsed.general || {});
-        merged.preferencial = Object.assign(merged.preferencial, parsed.preferencial || {});
-        merged.meta = Object.assign(merged.meta || {}, parsed.meta || {});
-        // preserve lastModule
-        merged.general.lastModule = (parsed.general && parsed.general.lastModule) ? parsed.general.lastModule : merged.general.lastModule;
-        merged.preferencial.lastModule = (parsed.preferencial && parsed.preferencial.lastModule) ? parsed.preferencial.lastModule : merged.preferencial.lastModule;
-        return merged;
-      } catch (e) {
-        console.warn('Error cargando local state', e);
-        return JSON.parse(JSON.stringify(DEFAULT));
-      }
-    }
+    function saveLocalState() { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state)); } catch(e){ console.warn(e); } }
 
-    // --- UI rendering & logic (same as before, but calls saveRemoteState after changes) ---
+    // --- UI render & helpers ---
     function formatNumber(prefix, num) {
       const pad = Number(state.settings.pad) || 3;
       return `${prefix}-${String(num).padStart(pad, '0')}`;
@@ -554,10 +517,8 @@
       elems.playBeep.checked = !!state.settings.playBeep;
       elems.autoRepeatInterval.value = state.settings.autoRepeatInterval || 0;
       elems.voiceSelect.value = state.settings.voiceIndex ?? 0;
-
       elems.moduleSelectGeneral.value = state.general.lastModule || '1';
       elems.moduleSelectPrefer.value = state.preferencial.lastModule || '1';
-
       updateDisplay('general');
       updateDisplay('preferencial');
       renderHistory('general');
@@ -588,26 +549,7 @@
       if (state[queue].history.length > 200) state[queue].history.shift();
     }
 
-    function getSelectedModule(queue) {
-      try {
-        if (queue === 'general') return elems.moduleSelectGeneral.value;
-        if (queue === 'preferencial') return elems.moduleSelectPrefer.value;
-      } catch (e) {}
-      return '1';
-    }
-
-    function announceTurn(label, queue, module) {
-      const typeLabel = (queue === 'preferencial') ? 'preferencial' : 'general';
-      const moduleText = module ? `, al módulo ${module}` : '';
-      const phrase = `Atención, turno ${typeLabel} ${label}${moduleText}`;
-      beepThenSpeak(phrase);
-      const el = queue === 'general' ? elems.displayGeneral : elems.displayPrefer;
-      try {
-        el.animate([{ boxShadow: '0 0 0 0 rgba(2,182,212,0.0)' }, { boxShadow: '0 0 0 14px rgba(6,182,212,0.06)' }], { duration: 700 });
-      } catch (e) {}
-    }
-
-    // audio & tts
+    // audio & TTS
     function speak(text) {
       if (!('speechSynthesis' in window)) return;
       try {
@@ -620,7 +562,7 @@
         ut.rate = 1;
         ut.pitch = 1;
         speechSynthesis.speak(ut);
-      } catch (e) { console.warn(e); }
+      } catch (e) { console.warn('TTS fallo', e); }
     }
 
     function beepThenSpeak(text) {
@@ -642,7 +584,26 @@
       } catch (e) { speak(text); }
     }
 
-    // actions (advance/retreat etc) — after each local change we write to DB (if connected) and localStorage
+    function announceTurn(label, queue, module) {
+      const typeLabel = (queue === 'preferencial') ? 'preferencial' : 'general';
+      const moduleText = module ? `, al módulo ${module}` : '';
+      const phrase = `Atención, turno ${typeLabel} ${label}${moduleText}`;
+      beepThenSpeak(phrase);
+      const el = queue === 'general' ? elems.displayGeneral : elems.displayPrefer;
+      try {
+        el.animate([{ boxShadow: '0 0 0 0 rgba(2,182,212,0.0)' }, { boxShadow: '0 0 0 14px rgba(6,182,212,0.06)' }], { duration: 700 });
+      } catch (e) {}
+    }
+
+    // actions (synchronized)
+    function getSelectedModule(queue) {
+      try {
+        if (queue === 'general') return elems.moduleSelectGeneral.value;
+        if (queue === 'preferencial') return elems.moduleSelectPrefer.value;
+      } catch (e) {}
+      return '1';
+    }
+
     function advance(queue, announce = true) {
       state[queue].counter = (Number(state[queue].counter) || 0) + 1;
       const prefix = queue === 'general' ? state.settings.prefix_general : state.settings.prefix_prefer;
@@ -650,7 +611,6 @@
       const module = getSelectedModule(queue);
       state[queue].lastModule = module;
       pushHistory(queue, label, module);
-      // update meta and timestamps
       state.meta.lastUpdate = Date.now();
       state.meta.lastClient = CLIENT_ID;
       updateDisplay(queue); renderHistory(queue); saveLocalState();
@@ -708,7 +668,7 @@
       if (autoRepeatTimers[queue]) { clearInterval(autoRepeatTimers[queue]); delete autoRepeatTimers[queue]; }
     }
 
-    // modal confirm (returns Promise)
+    // modal confirm
     function confirmModal(message) {
       return new Promise(resolve => {
         elems.modalMessage.textContent = message;
@@ -726,7 +686,7 @@
       });
     }
 
-    // event delegation for boards
+    // board events
     document.querySelectorAll('.board').forEach(board => {
       board.addEventListener('click', async (ev) => {
         const btn = ev.target.closest('button');
@@ -800,7 +760,7 @@
     elems.voiceSelect.addEventListener('change', () => { state.settings.voiceIndex = Number(elems.voiceSelect.value) || 0; saveLocalState(); if (connectedToFirebase) saveRemoteState(); });
     elems.voiceVolume.addEventListener('change', () => { state.settings.volume = Number(elems.voiceVolume.value) || 1; saveLocalState(); if (connectedToFirebase) saveRemoteState(); });
 
-    // disconnect/connect firebase buttons
+    // firebase connect/disconnect buttons
     elems.connectFirebaseBtn.addEventListener('click', () => {
       const txt = elems.firebaseConfigArea.value.trim();
       if (!txt) return alert('Pega aquí el objeto JSON de configuración de Firebase (incluye databaseURL).');
@@ -822,7 +782,7 @@
       if (key === 'p' && e.shiftKey) { retreat('preferencial'); }
     });
 
-    // TTS voice population
+    // populate voices
     function populateVoices() {
       voices = speechSynthesis.getVoices() || [];
       elems.voiceSelect.innerHTML = '';
@@ -848,22 +808,31 @@
 
     // sync status UI
     function updateSyncStatus(connected, text) {
+      elems.syncStatus.textContent = text || (connected ? 'Conectado' : 'Offline (local)');
       if (connected) {
-        syncStatus.textContent = text || 'Conectado (sincronizado)';
-        syncStatus.style.background = 'rgba(0,0,0,0.06)';
-        syncStatus.style.color = '#dff6ff';
+        elems.syncStatus.style.background = 'rgba(255,255,255,0.02)';
+        elems.syncStatus.style.color = '#dff6ff';
       } else {
-        syncStatus.textContent = text || 'Offline (local)';
-        syncStatus.style.background = 'rgba(0,0,0,0.02)';
-        syncStatus.style.color = '#fed7a2';
+        elems.syncStatus.style.background = 'rgba(0,0,0,0.02)';
+        elems.syncStatus.style.color = '#fed7a2';
       }
     }
+
+    // try to load logo from same folder; if not found, keep empty src
+    (function tryLoadFolderLogo(){
+      const img = elems.appLogo;
+      // Default filename used by you earlier
+      const filename = 'Logo-Interconsultas-01b-500px.png.png';
+      fetch(filename, { method: 'HEAD' }).then(res => {
+        if (res.ok) img.src = filename;
+      }).catch(()=>{ /* ignore */ });
+    })();
 
     // initial render
     renderAll();
     updateSyncStatus(false, 'Offline (local)');
 
-    // Expose simple API for debug
+    // Expose minimal API for debugging
     window.turnero = {
       state,
       connectFirebase: (cfg) => connectFirebase(cfg),
@@ -871,8 +840,6 @@
       advance: (q='general') => advance(q),
       retreat: (q='general') => retreat(q)
     };
-
-    // End IIFE
   })();
   </script>
 </body>
