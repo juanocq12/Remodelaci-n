@@ -4,28 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Turnero — IPS Interconsultas (Sincronizado)</title>
-
-  <!--
-    INSTRUCCIONES RÁPIDAS (lee antes de usar)
-    1) Para sincronización en tiempo real entre varias máquinas necesitas Firebase Realtime Database.
-       - Crea un proyecto en https://console.firebase.google.com/
-       - Ve a "Realtime Database" -> Crear base de datos -> modo de prueba (temporal).
-       - Copia el objeto de configuración del proyecto (lo encuentras en Project settings -> Your apps -> Firebase SDK snippet -> Config).
-       - Pega ese objeto JSON en el cuadro "Usar Firebase (Realtime DB)" dentro de la app y pulsa "Conectar".
-       - (Temporalmente para pruebas) en Realtime Database -> Rules pon:
-         {
-           "rules": {
-             ".read": true,
-             ".write": true
-           }
-         }
-         NO uses reglas abiertas en producción; pide si quieres reglas seguras.
-    2) Alternativa local: si no pegas configuración la app funciona en localStorage (solo tú verás los cambios).
-    3) Puedes pegar la config una sola vez y la app la recordará en localStorage.
-    4) El campo "Usar logo de carpeta" carga la imagen por defecto "Logo-Interconsultas-01b-500px.png.png" desde la misma carpeta si existe.
-  -->
-
+  <meta name="robots" content="noindex">
   <style>
+  /* Interfaz adoptada (colores/logo) */
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
@@ -37,13 +18,7 @@
     padding:20px;
   }
   .wrap{ max-width:1100px; margin:18px auto; }
-  .card {
-    background: rgba(255,255,255,0.06);
-    border-radius:12px;
-    padding:16px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
-    border: 1px solid rgba(6,182,212,0.06);
-  }
+  .card { background: rgba(255,255,255,0.06); border-radius:12px; padding:16px; box-shadow: 0 8px 30px rgba(0,0,0,0.45); border: 1px solid rgba(6,182,212,0.06); }
   .header { display:flex;justify-content:space-between;align-items:center; gap:12px; margin-bottom:12px; }
   .brand { display:flex; gap:12px; align-items:center; }
   .brand h1 { color:#cfeefd; font-size:1.05rem; margin-bottom:4px; }
@@ -53,22 +28,12 @@
   .main{ display:flex; gap:18px; align-items:flex-start; }
   .controls-inline { display:flex; gap:12px; align-items:center; flex-wrap:wrap; background: transparent; }
   .controls-inline label{ font-size:0.9rem; color:#e6f7ff; display:flex; flex-direction:column; }
-  .controls-inline input[type="text"], .controls-inline select, .controls-inline input[type="range"]{
-    padding:8px 10px;border-radius:8px;border:none;background:#0d274d;color:#fff;min-width:90px;margin-top:6px;
-  }
-  .boards{ display:grid; grid-template-columns: 1fr 420px; gap:18px; width:100%; }
-  .board{
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border-radius:12px; padding:14px; box-shadow: 0 8px 30px rgba(0,0,0,0.45);
-    border: 1px solid rgba(6,182,212,0.04); display:flex; flex-direction:column; gap:12px;
-  }
+  .controls-inline input[type="text"], .controls-inline select, .controls-inline input[type="range"]{ padding:8px 10px;border-radius:8px;border:none;background:#0d274d;color:#fff;min-width:90px;margin-top:6px; }
+  .boards{ display:grid; grid-template-columns: 1fr 360px; gap:18px; width:100%; }
+  .board{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:14px; box-shadow: 0 8px 30px rgba(0,0,0,0.45); border: 1px solid rgba(6,182,212,0.04); display:flex; flex-direction:column; gap:12px; }
   .board-header h2{ color:#cfeefd; margin:0; font-size:1.15rem; }
   .board-sub{ color:#a9d9ef; font-size:0.88rem; }
-  .display{
-    display:flex; align-items:center; justify-content:center; font-weight:700;
-    font-size:2.8rem; padding:18px; border-radius:10px; color:#052233;
-    background: linear-gradient(90deg,#06b6d4,#2563eb); min-height:84px;
-  }
+  .display{ display:flex; align-items:center; justify-content:center; font-weight:700; font-size:2.8rem; padding:18px; border-radius:10px; color:#052233; background: linear-gradient(90deg,#06b6d4,#2563eb); min-height:84px; }
   .display.small{ font-size:2rem; padding:12px; }
   .board-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
   .board-small{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
@@ -82,10 +47,7 @@
   .history-list{ margin:8px 0 0; padding-left:18px; max-height:220px; overflow:auto; color:#e7fbff; }
   .module-select{ display:flex; gap:8px; align-items:center; justify-content:center; }
   .module-select select{ padding:8px 10px;border-radius:8px;border:none;background:#0d274d;color:#fff; }
-  .drawer{ position:fixed; right:18px; top:18px; width:360px; max-width:92vw; height:calc(100vh - 36px);
-    background: rgba(2,30,50,0.98); border-radius:12px; padding:12px; box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-    transform:translateY(-20px) scale(.98); opacity:0; pointer-events:none; transition:all .22s ease; color:#dff6ff;
-  }
+  .drawer{ position:fixed; right:18px; top:18px; width:360px; max-width:92vw; height:calc(100vh - 36px); background: rgba(2,30,50,0.98); border-radius:12px; padding:12px; box-shadow: 0 30px 80px rgba(0,0,0,0.6); transform:translateY(-20px) scale(.98); opacity:0; pointer-events:none; transition:all .22s ease; color:#dff6ff; }
   .drawer[aria-hidden="false"]{ transform:none; opacity:1; pointer-events:auto; }
   .modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); opacity:0; pointer-events:none; transition:opacity .18s; }
   .modal[aria-hidden="false"]{ opacity:1; pointer-events:auto; }
@@ -283,7 +245,7 @@
           <button id="connect-firebase" class="btn primary">Conectar</button>
           <button id="disconnect-firebase" class="btn ghost">Desconectar</button>
         </div>
-        <div class="note">Nota: si no configuras Firebase la app guarda en local (localStorage).</div>
+        <div class="note">Nota: si no configuras Firebase la app guarda en local (localStorage). Si pones `firebase-config.json` en la raíz del repo (GitHub Pages), la app se conectará automáticamente al cargar.</div>
       </div>
     </div>
   </aside>
@@ -305,7 +267,7 @@
 
   <script>
   (function () {
-    // Unique client id to avoid re-applying our own writes when DB echoes them back
+    // Unique client id for avoiding re-applying our own remote writes
     const CLIENT_ID = 'client-' + Math.random().toString(36).slice(2,9);
     const LOCAL_KEY = 'turnero_ips_uniform_v1';
 
@@ -393,6 +355,18 @@
 
     let state = loadLocalState();
 
+    // Try to auto-load firebase-config.json from same origin (so you can commit it to GitHub root)
+    (function tryAutoLoadFirebaseConfig(){
+      fetch('/firebase-config.json').then(r => {
+        if (!r.ok) throw new Error('no config file');
+        return r.json();
+      }).then(cfg => {
+        // apply to textarea and auto-connect
+        elems.firebaseConfigArea.value = JSON.stringify(cfg, null, 2);
+        connectFirebase(cfg);
+      }).catch(()=>{/* no config found — user can paste config in UI */});
+    })();
+
     // --- Firebase connection and sync ---
     function connectFirebase(cfg) {
       try {
@@ -400,17 +374,12 @@
           alert('La configuración de Firebase debe contener al menos databaseURL.');
           return;
         }
-        // initialize (delete previous app if any)
+        // init app (re-init if already existed)
         if (firebase.apps && firebase.apps.length) {
-          // try to delete existing default app to re-init with new config
-          firebase.app().delete().catch(()=>{}).finally(() => {
-            firebaseApp = firebase.initializeApp(cfg);
-            setupDbRef();
-          });
-        } else {
-          firebaseApp = firebase.initializeApp(cfg);
-          setupDbRef();
+          try { firebase.app().delete(); } catch(e){ /* ignore */ }
         }
+        firebaseApp = firebase.initializeApp(cfg);
+        setupDbRef();
       } catch (err) {
         console.error('Error conectando a Firebase', err);
         alert('Error inicializando Firebase: ' + (err && err.message ? err.message : err));
@@ -423,7 +392,6 @@
         dbRef.on('value', snapshot => {
           const remote = snapshot.val();
           if (!remote) {
-            // db empty, push local as baseline
             saveRemoteState();
             updateSyncStatus(true, 'Sincronizado (inicial)');
             return;
@@ -431,8 +399,6 @@
           if (shouldApplyRemote(remote)) {
             applyRemote(remote);
             updateSyncStatus(true, 'Sincronizado (recibido)');
-          } else {
-            // it's probably our own write; ignore
           }
         }, err => {
           console.error('DB listen error', err);
@@ -440,7 +406,6 @@
         });
         connectedToFirebase = true;
         updateSyncStatus(true, 'Conectado');
-        // push current local state so everyone shares baseline
         saveRemoteState();
       } catch (e) {
         console.error('setupDbRef error', e);
@@ -449,10 +414,7 @@
     }
 
     function disconnectFirebase() {
-      if (dbRef) {
-        dbRef.off();
-        dbRef = null;
-      }
+      if (dbRef) { dbRef.off(); dbRef = null; }
       try { if (firebase && firebase.app) { /* keep app instance */ } } catch (e) {}
       connectedToFirebase = false;
       updateSyncStatus(false, 'Desconectado (local)');
@@ -462,9 +424,7 @@
       if (!remote.meta) return true;
       const remoteTS = remote.meta.lastUpdate || 0;
       const localTS = state.meta.lastUpdate || 0;
-      if (remote.meta.lastClient === CLIENT_ID && remoteTS === localTS) {
-        return false; // ignore our own echoed write
-      }
+      if (remote.meta.lastClient === CLIENT_ID && remoteTS === localTS) return false;
       return remoteTS > localTS;
     }
 
@@ -760,7 +720,7 @@
     elems.voiceSelect.addEventListener('change', () => { state.settings.voiceIndex = Number(elems.voiceSelect.value) || 0; saveLocalState(); if (connectedToFirebase) saveRemoteState(); });
     elems.voiceVolume.addEventListener('change', () => { state.settings.volume = Number(elems.voiceVolume.value) || 1; saveLocalState(); if (connectedToFirebase) saveRemoteState(); });
 
-    // firebase connect/disconnect buttons
+    // firebase connect/disconnect
     elems.connectFirebaseBtn.addEventListener('click', () => {
       const txt = elems.firebaseConfigArea.value.trim();
       if (!txt) return alert('Pega aquí el objeto JSON de configuración de Firebase (incluye databaseURL).');
@@ -768,9 +728,7 @@
       try { cfg = JSON.parse(txt); } catch (e) { alert('JSON inválido. Corrige la configuración.'); return; }
       connectFirebase(cfg);
     });
-    elems.disconnectFirebaseBtn.addEventListener('click', () => {
-      disconnectFirebase();
-    });
+    elems.disconnectFirebaseBtn.addEventListener('click', () => disconnectFirebase());
 
     // keyboard shortcuts
     document.addEventListener('keydown', (e) => {
@@ -806,40 +764,24 @@
       speechSynthesis.onvoiceschanged = populateVoices;
     }
 
-    // sync status UI
-    function updateSyncStatus(connected, text) {
-      elems.syncStatus.textContent = text || (connected ? 'Conectado' : 'Offline (local)');
-      if (connected) {
-        elems.syncStatus.style.background = 'rgba(255,255,255,0.02)';
-        elems.syncStatus.style.color = '#dff6ff';
-      } else {
-        elems.syncStatus.style.background = 'rgba(0,0,0,0.02)';
-        elems.syncStatus.style.color = '#fed7a2';
-      }
-    }
-
-    // try to load logo from same folder; if not found, keep empty src
+    // try to load logo from same folder; if not present it's ok
     (function tryLoadFolderLogo(){
       const img = elems.appLogo;
-      // Default filename used by you earlier
       const filename = 'Logo-Interconsultas-01b-500px.png.png';
-      fetch(filename, { method: 'HEAD' }).then(res => {
-        if (res.ok) img.src = filename;
-      }).catch(()=>{ /* ignore */ });
+      fetch(filename, { method: 'HEAD' }).then(res => { if (res.ok) img.src = filename; }).catch(()=>{});
     })();
 
-    // initial render
+    // initial render & UI
     renderAll();
     updateSyncStatus(false, 'Offline (local)');
 
-    // Expose minimal API for debugging
-    window.turnero = {
-      state,
-      connectFirebase: (cfg) => connectFirebase(cfg),
-      disconnectFirebase: () => disconnectFirebase(),
-      advance: (q='general') => advance(q),
-      retreat: (q='general') => retreat(q)
-    };
+    function updateSyncStatus(connected, text) {
+      elems.syncStatus.textContent = text || (connected ? 'Conectado' : 'Offline (local)');
+      elems.syncStatus.style.color = connected ? '#dff6ff' : '#fed7a2';
+    }
+
+    // Expose API for debug
+    window.turnero = { state, connectFirebase, disconnectFirebase, advance: (q='general') => advance(q), retreat: (q='general') => retreat(q) };
   })();
   </script>
 </body>
