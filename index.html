@@ -29,7 +29,6 @@
     color:#eaf8ff;
     -webkit-font-smoothing:antialiased;
     padding:28px;
-    -webkit-font-smoothing:antialiased;
   }
   .wrap{ max-width:1200px; margin:18px auto; padding:12px; }
   .card { background: var(--card-bg); border-radius:var(--radius); padding:16px; box-shadow: var(--shadow); border: 1px solid var(--glass-border); }
@@ -91,7 +90,7 @@
     <div class="card">
       <div class="header">
         <div class="brand">
-          <img id="app-logo" class="logo" src="/Logo-Interconsultas-01b-500px.png.png" alt="IPS Interconsultas">
+          <img id="app-logo" class="logo" src="Logo-Interconsultas-01b-500px.png.png" alt="IPS Interconsultas" aria-hidden="false">
           <div>
             <h1>IPS Interconsultas</h1>
             <p>Turnero — General y Preferencial</p>
@@ -306,6 +305,56 @@
       </div>
     </div>
   </div>
+
+  <!-- Logo fallback loader (intenta rutas comunes: relative, ./, /, /<possible-repo>/, raw opcional) -->
+  <script>
+  (function(){
+    const img = document.getElementById('app-logo');
+    if (!img) return;
+    const filename = 'Logo-Interconsultas-01b-500px.png.png';
+    const tried = new Set();
+    const candidates = [
+      filename,
+      './' + filename,
+      '/' + filename
+    ];
+
+    try {
+      const parts = location.pathname.split('/').filter(Boolean);
+      if (parts.length > 0) {
+        const possibleRepo = parts[0];
+        candidates.push('/' + possibleRepo + '/' + filename);
+      }
+    } catch(e){}
+
+    // If you want to enable a raw.githubusercontent fallback, uncomment and set owner/repo/branch:
+    // candidates.push('https://raw.githubusercontent.com/OWNER/REPO/BRANCH/' + filename);
+
+    function tryNext() {
+      if (!candidates.length) {
+        img.style.display = 'none';
+        console.warn('Logo no encontrado en rutas probadas:', Array.from(tried));
+        return;
+      }
+      const c = candidates.shift();
+      if (tried.has(c)) return tryNext();
+      tried.add(c);
+      img.src = c;
+    }
+
+    img.addEventListener('error', function onErr() {
+      img.removeEventListener('error', onErr);
+      tryNext();
+    });
+    img.addEventListener('load', function onLoad() {
+      img.style.display = '';
+      img.removeEventListener('load', onLoad);
+    });
+
+    // Start attempts if initial src fails or is empty
+    if (!img.complete || img.naturalWidth === 0) tryNext();
+  })();
+  </script>
 
   <!-- Firebase Web SDK (v8 compat) -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -605,7 +654,6 @@
       beepThenSpeak(phrase);
       const el = queue === 'general' ? elems.displayGeneral : elems.displayPrefer;
       try {
-        // add pulse class
         el.classList.remove('pulse');
         void el.offsetWidth;
         el.classList.add('pulse');
