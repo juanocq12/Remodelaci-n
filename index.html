@@ -63,7 +63,7 @@
     <div class="card">
       <div class="header">
         <div class="brand">
-          <img id="app-logo" class="logo" src="Logo-Interconsultas-01b-500px.png.png" alt="IPS Interconsultas">
+          <img id="app-logo" class="logo" src="/Logo-Interconsultas-01b-500px.png.png" alt="IPS Interconsultas">
           <div>
             <h1>IPS Interconsultas</h1>
             <p>Turnero — General y Preferencial</p>
@@ -763,13 +763,6 @@
       populateVoices();
       speechSynthesis.onvoiceschanged = populateVoices;
     }
-
-    // try to load logo from same folder; if not present it's ok
-    (function tryLoadFolderLogo(){
-      const img = elems.appLogo;
-      const filename = 'Logo-Interconsultas-01b-500px.png.png';
-      fetch(filename, { method: 'HEAD' }).then(res => { if (res.ok) img.src = filename; }).catch(()=>{});
-    })();
 
     // initial render & UI
     renderAll();
