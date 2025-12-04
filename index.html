@@ -112,6 +112,18 @@
   .history h3{ margin:4px 0; color:#a9d9ef; font-size:0.95rem; }
   .history-list{ margin:8px 0 0; padding-left:18px; max-height:220px; overflow:auto; color:#e7fbff; }
 
+  /* Module selector style */
+  .module-select{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    justify-content:center;
+  }
+  .module-select select{
+    padding:8px 10px;border-radius:8px;border:none;background:#0d274d;color:#fff;
+  }
+  .module-label{ color:#cfeefd; font-weight:700; font-size:0.95rem; }
+
   /* Drawer & modal (keeps original behavior but matches colors) */
   .drawer{
     position:fixed; right:18px; top:18px; width:320px; max-width:92vw; height:calc(100vh - 36px);
@@ -186,6 +198,15 @@
 
               <div class="display" id="display-general" aria-live="polite">G-000</div>
 
+              <div class="module-select" style="margin-bottom:6px">
+                <div class="module-label">Módulo:</div>
+                <select id="module-select-general" aria-label="Seleccionar módulo General">
+                  <option value="1">Módulo 1</option>
+                  <option value="2">Módulo 2</option>
+                  <option value="3">Módulo 3</option>
+                </select>
+              </div>
+
               <div class="board-actions">
                 <button class="btn secondary prev" data-action="prev" title="Retroceder">◀ Retroceder</button>
                 <button class="btn primary next" data-action="next" title="Siguiente">▶ Siguiente</button>
@@ -212,6 +233,15 @@
               </div>
 
               <div class="display small" id="display-preferencial" aria-live="polite">P-000</div>
+
+              <div class="module-select" style="margin-bottom:6px">
+                <div class="module-label">Módulo:</div>
+                <select id="module-select-preferencial" aria-label="Seleccionar módulo Preferencial">
+                  <option value="1">Módulo 1</option>
+                  <option value="2">Módulo 2</option>
+                  <option value="3">Módulo 3</option>
+                </select>
+              </div>
 
               <div class="board-actions">
                 <button class="btn secondary prev" data-action="prev" title="Retroceder">◀ Retroceder</button>
@@ -307,12 +337,12 @@
   </div>
 
   <script>
-  // Turnero adapted — keeps functionality, uses the interface/colors/logo you provided
+  // Turnero adaptado con selección de módulo por llamada
   (function () {
     const STORAGE_KEY = 'turnero_ips_uniform_v1';
     const DEFAULT = {
-      general: { counter: 0, history: [] },
-      preferencial: { counter: 0, history: [] },
+      general: { counter: 0, history: [], lastModule: '1' },
+      preferencial: { counter: 0, history: [], lastModule: '1' },
       settings: {
         prefix_general: 'G',
         prefix_prefer: 'P',
@@ -353,7 +383,9 @@
       modalCancel: $('modal-cancel'),
       modalConfirm: $('modal-confirm'),
       quickNextGen: $('quick-next-gen'),
-      quickNextPref: $('quick-next-pref')
+      quickNextPref: $('quick-next-pref'),
+      moduleSelectGeneral: $('module-select-general'),
+      moduleSelectPrefer: $('module-select-preferencial')
     };
 
     let state = loadState();
@@ -400,6 +432,9 @@
         merged.ui = Object.assign(merged.ui, parsed.ui || {});
         merged.general.history = (parsed.general && parsed.general.history) ? parsed.general.history : merged.general.history;
         merged.preferencial.history = (parsed.preferencial && parsed.preferencial.history) ? parsed.preferencial.history : merged.preferencial.history;
+        // preserve lastModule if present
+        merged.general.lastModule = (parsed.general && parsed.general.lastModule) ? parsed.general.lastModule : merged.general.lastModule;
+        merged.preferencial.lastModule = (parsed.preferencial && parsed.preferencial.lastModule) ? parsed.preferencial.lastModule : merged.preferencial.lastModule;
         return merged;
       } catch (e) {
         console.warn('Error cargando estado, usando default.', e);
@@ -422,6 +457,10 @@
       elems.playBeep.checked = !!state.settings.playBeep;
       elems.autoRepeatInterval.value = state.settings.autoRepeatInterval || 0;
       elems.voiceSelect.value = state.settings.voiceIndex ?? 0;
+
+      // set module selects to lastModule saved
+      elems.moduleSelectGeneral.value = state.general.lastModule || '1';
+      elems.moduleSelectPrefer.value = state.preferencial.lastModule || '1';
 
       updateDisplay('general');
       updateDisplay('preferencial');
@@ -446,19 +485,24 @@
       });
     }
 
-    function pushHistory(queue, label) {
+    function pushHistory(queue, label, module) {
+      const entry = module ? `${label} (Módulo ${module})` : label;
       state[queue].history = state[queue].history || [];
-      state[queue].history.push(label);
+      state[queue].history.push(entry);
       if (state[queue].history.length > 200) state[queue].history.shift();
     }
 
+    // Advance and include module selection
     function advance(queue, announce = true) {
       state[queue].counter = (Number(state[queue].counter) || 0) + 1;
       const prefix = queue === 'general' ? state.settings.prefix_general : state.settings.prefix_prefer;
       const label = formatNumber(prefix, state[queue].counter);
-      pushHistory(queue, label);
+      const module = getSelectedModule(queue);
+      // store lastModule for auto-repeat and future calls
+      state[queue].lastModule = module;
+      pushHistory(queue, label, module);
       updateDisplay(queue); renderHistory(queue); saveState();
-      if (announce && state.settings.announceOnAdvance) announceTurn(label, queue);
+      if (announce && state.settings.announceOnAdvance) announceTurn(label, queue, module);
       scheduleAutoRepeat(queue);
     }
 
@@ -535,10 +579,11 @@
       }
     }
 
-    // announce includes queue type (uses Spanish terms)
-    function announceTurn(label, queue) {
+    // announce includes queue type and module (uses Spanish terms)
+    function announceTurn(label, queue, module) {
       const typeLabel = (queue === 'preferencial') ? 'preferencial' : 'general';
-      const phrase = `Atención, turno ${typeLabel} ${label}`;
+      const moduleText = module ? `, al módulo ${module}` : '';
+      const phrase = `Atención, turno ${typeLabel} ${label}${moduleText}`;
       beepThenSpeak(phrase);
       const el = queue === 'general' ? elems.displayGeneral : elems.displayPrefer;
       try {
@@ -546,7 +591,7 @@
       } catch (e) {}
     }
 
-    // auto repeat
+    // auto repeat uses stored lastModule
     function scheduleAutoRepeat(queue) {
       cancelAutoRepeat(queue);
       const interval = Number(state.settings.autoRepeatInterval) || 0;
@@ -554,16 +599,26 @@
       autoRepeatTimers[queue] = setInterval(() => {
         const prefix = queue === 'general' ? state.settings.prefix_general : state.settings.prefix_prefer;
         const label = formatNumber(prefix, state[queue].counter || 0);
+        const module = state[queue].lastModule || getSelectedModule(queue) || '1';
         if (label) {
-          pushHistory(queue, label);
+          pushHistory(queue, label, module);
           renderHistory(queue);
           saveState();
-          announceTurn(label, queue);
+          announceTurn(label, queue, module);
         }
       }, interval * 1000);
     }
     function cancelAutoRepeat(queue) {
       if (autoRepeatTimers[queue]) { clearInterval(autoRepeatTimers[queue]); delete autoRepeatTimers[queue]; }
+    }
+
+    // Helper to get selected module for a queue
+    function getSelectedModule(queue) {
+      try {
+        if (queue === 'general') return elems.moduleSelectGeneral.value;
+        if (queue === 'preferencial') return elems.moduleSelectPrefer.value;
+      } catch (e) {}
+      return '1';
     }
 
     // board event delegation
@@ -584,17 +639,20 @@
         if (action === 'call') {
           const prefix = queue === 'general' ? state.settings.prefix_general : state.settings.prefix_prefer;
           const label = formatNumber(prefix, state[queue].counter || 0);
+          const module = getSelectedModule(queue);
           if (label) {
-            pushHistory(queue, label);
+            // store lastModule
+            state[queue].lastModule = module;
+            pushHistory(queue, label, module);
             renderHistory(queue);
             saveState();
-            announceTurn(label, queue);
+            announceTurn(label, queue, module);
           }
         }
       });
     });
 
-    // quick buttons
+    // quick buttons use module selected in their respective board
     elems.quickNextGen.addEventListener('click', () => advance('general', true));
     elems.quickNextPref.addEventListener('click', () => advance('preferencial', true));
 
@@ -633,8 +691,6 @@
     elems.voiceSelect.addEventListener('change', () => { state.settings.voiceIndex = Number(elems.voiceSelect.value) || 0; saveState(); });
     elems.voiceVolume.addEventListener('change', () => { state.settings.volume = Number(elems.voiceVolume.value) || 1; saveState(); });
 
-    // clear/confirm behaviors for resetting whole state
-    // (we reuse modal confirm used above)
     // keyboard shortcuts
     document.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
