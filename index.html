@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Turnero — IPS Interconsultas</title>
+  <title>Turnero — IPS Interconsultas (Sincronizado)</title>
 
   <style>
   *{box-sizing:border-box;margin:0;padding:0}
@@ -19,7 +19,6 @@
 
   .wrap{ max-width:1100px; margin:24px auto; }
 
-  /* Card (from your form) */
   .card {
     background: rgba(255,255,255,0.06);
     border-radius:12px;
@@ -28,7 +27,6 @@
     border: 1px solid rgba(6,182,212,0.06);
   }
 
-  /* Brand/header (from your form) */
   .header {
     display:flex;justify-content:space-between;align-items:center; gap:12px;
     margin-bottom:12px;
@@ -38,23 +36,12 @@
   .brand p { color:#a9d9ef; font-size:0.85rem; margin:0; }
   .small { font-size:0.85rem; color:#9fc7e2; }
 
-  /* Turnero layout adapted to card */
-  .topbar{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px; }
-  .top-actions { display:flex; gap:12px; align-items:center; }
-  .kbd-help{ font-size:0.85rem; color:#a9d9ef; }
+  .logo{height:44px;margin-right:8px;border-radius:6px;object-fit:contain;background:transparent;padding:4px}
 
-  .main{
-    display:flex;
-    gap:18px;
-    align-items:flex-start;
-  }
+  .main{ display:flex; gap:18px; align-items:flex-start; }
 
   .controls-inline {
-    display:flex;
-    gap:12px;
-    align-items:center;
-    flex-wrap:wrap;
-    background: transparent;
+    display:flex; gap:12px; align-items:center; flex-wrap:wrap; background: transparent;
   }
   .controls-inline label{ font-size:0.9rem; color:#e6f7ff; display:flex; flex-direction:column; }
   .controls-inline input[type="text"], .controls-inline select, .controls-inline input[type="range"]{
@@ -74,9 +61,7 @@
     padding:16px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.45);
     border: 1px solid rgba(6,182,212,0.04);
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+    display:flex; flex-direction:column; gap:12px;
   }
 
   .board-header{ display:flex; justify-content:space-between; align-items:center; }
@@ -84,25 +69,16 @@
   .board-sub{ color:#a9d9ef; font-size:0.88rem; }
 
   .display{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:700;
-    font-size:2.8rem;
-    padding:18px;
-    border-radius:10px;
-    color:#052233;
-    background: linear-gradient(90deg,#06b6d4,#2563eb);
-    min-height:84px;
+    display:flex; align-items:center; justify-content:center; font-weight:700;
+    font-size:2.8rem; padding:18px; border-radius:10px; color:#052233;
+    background: linear-gradient(90deg,#06b6d4,#2563eb); min-height:84px;
   }
   .display.small{ font-size:2rem; padding:12px; }
 
   .board-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
   .board-small{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
 
-  .btn{
-    padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer;border:none;
-  }
+  .btn{ padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer;border:none; }
   .btn.primary{ background: linear-gradient(90deg,#06b6d4,#2563eb); color:#052233; }
   .btn.secondary{ background: rgba(255,255,255,0.06); color:#a9d9ef; border:1px solid rgba(255,255,255,0.04); }
   .btn.call{ background:#0c7c59; color:#fff; }
@@ -112,24 +88,12 @@
   .history h3{ margin:4px 0; color:#a9d9ef; font-size:0.95rem; }
   .history-list{ margin:8px 0 0; padding-left:18px; max-height:220px; overflow:auto; color:#e7fbff; }
 
-  /* Module selector style */
-  .module-select{
-    display:flex;
-    gap:8px;
-    align-items:center;
-    justify-content:center;
-  }
-  .module-select select{
-    padding:8px 10px;border-radius:8px;border:none;background:#0d274d;color:#fff;
-  }
-  .module-label{ color:#cfeefd; font-weight:700; font-size:0.95rem; }
+  .module-select{ display:flex; gap:8px; align-items:center; justify-content:center; }
+  .module-select select{ padding:8px 10px;border-radius:8px;border:none;background:#0d274d;color:#fff; }
 
-  /* Drawer & modal (keeps original behavior but matches colors) */
-  .drawer{
-    position:fixed; right:18px; top:18px; width:320px; max-width:92vw; height:calc(100vh - 36px);
+  .drawer{ position:fixed; right:18px; top:18px; width:320px; max-width:92vw; height:calc(100vh - 36px);
     background: rgba(2,30,50,0.98); border-radius:12px; padding:12px; box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-    transform:translateY(-20px) scale(.98); opacity:0; pointer-events:none; transition:all .22s ease;
-    color:#dff6ff;
+    transform:translateY(-20px) scale(.98); opacity:0; pointer-events:none; transition:all .22s ease; color:#dff6ff;
   }
   .drawer[aria-hidden="false"]{ transform:none; opacity:1; pointer-events:auto; }
   .drawer-header{ display:flex; justify-content:space-between; align-items:center; padding-bottom:6px; border-bottom:1px dashed rgba(255,255,255,0.03); }
@@ -138,12 +102,15 @@
   .modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); opacity:0; pointer-events:none; transition:opacity .18s; }
   .modal[aria-hidden="false"]{ opacity:1; pointer-events:auto; }
   .modal-card{ background: rgba(2,30,50,0.98); padding:18px; border-radius:12px; min-width:280px; max-width:92vw; box-shadow: 0 30px 80px rgba(0,0,0,0.6); color:#dff6ff; }
-  .modal-actions .btn.ghost{ background:transparent; color:#a9d9ef; border:1px solid rgba(255,255,255,0.06); }
 
-  /* Responsive */
   @media (max-width:980px){
     .boards{ grid-template-columns:1fr; }
     .wrap { padding: 12px; }
+  }
+
+  /* small status indicator */
+  .status {
+    display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.04);color:#a9d9ef;font-size:0.85rem;
   }
   </style>
 </head>
@@ -152,19 +119,21 @@
     <div class="card">
       <div class="header">
         <div class="brand">
-          <!-- logo from your file (use same filename you provided) -->
-          <img src="Logo-Interconsultas-01b-500px.png.png" alt="logo" style="height:44px;margin-right:8px;border-radius:6px">
+          <img id="app-logo" class="logo" src="Logo-Interconsultas-01b-500px.png.png" alt="IPS Interconsultas">
           <div>
             <h1>IPS Interconsultas</h1>
             <p>Turnero — General y Preferencial</p>
           </div>
         </div>
+
         <div style="text-align:right">
           <div class="small">Versión local · Turnero</div>
+          <div style="margin-top:8px">
+            <span id="sync-status" class="status">Offline (local)</span>
+          </div>
         </div>
       </div>
 
-      <!-- Turnero main content (keeps original structure/IDs for JS) -->
       <div class="main">
         <div style="flex:1">
           <div class="controls-inline" style="margin-bottom:12px">
@@ -262,7 +231,6 @@
           </section>
         </div>
 
-        <!-- Right column: settings drawer trigger + tiny info (keeps previous functionality) -->
         <div style="width:320px;display:flex;flex-direction:column;gap:12px">
           <div class="card" style="padding:12px;">
             <div style="display:flex;justify-content:space-between;align-items:center">
@@ -296,7 +264,7 @@
     </div>
   </div>
 
-  <!-- Settings drawer (hidden by default) -->
+  <!-- Settings drawer -->
   <aside id="settings-drawer" class="drawer" aria-hidden="true">
     <header class="drawer-header">
       <h3 style="color:#06b6d4;margin:0">Ajustes avanzados</h3>
@@ -322,10 +290,25 @@
         <button id="save-settings" class="btn primary">Guardar</button>
         <button id="reset-settings" class="btn ghost">Restaurar</button>
       </div>
+
+      <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.04);margin:8px 0" />
+
+      <div style="font-size:0.9rem;color:#a9d9ef">
+        <div style="margin-bottom:6px">Sincronización en tiempo real</div>
+        <label style="display:block;color:#cfeefd">Usar Firebase (Realtime DB)</label>
+        <textarea id="firebase-config" placeholder='Pega aquí tu config de Firebase (objeto JSON) opcionalmente' style="width:100%;min-height:80px;padding:8px;border-radius:8px;border:none;background:#07243a;color:#cfeefd"></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button id="connect-firebase" class="btn primary">Conectar</button>
+          <button id="disconnect-firebase" class="btn ghost">Desconectar</button>
+        </div>
+        <div style="margin-top:8px;color:#fed7a2;font-size:0.85rem">
+          Nota: Si no configuras Firebase, la app funciona solo local (localStorage). Para compartir los turnos entre máquinas, crea un proyecto Firebase y pega aquí la config.
+        </div>
+      </div>
     </div>
   </aside>
 
-  <!-- Modal confirm (re-usable) -->
+  <!-- Modal -->
   <div id="modal" class="modal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" style="text-align:left">
       <p id="modal-message" style="color:#dff6ff"></p>
@@ -336,10 +319,28 @@
     </div>
   </div>
 
+  <!-- Firebase compatibility SDK (v8 compat) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
   <script>
-  // Turnero adaptado con selección de módulo por llamada
   (function () {
-    const STORAGE_KEY = 'turnero_ips_uniform_v1';
+    // CLIENT ID used to avoid applying our own remote updates unnecessarily
+    const CLIENT_ID = 'client-' + Math.random().toString(36).slice(2,9);
+
+    // localStorage key for backup
+    const LOCAL_KEY = 'turnero_ips_uniform_v1';
+
+    // Firebase references (set when connected)
+    let firebaseApp = null;
+    let dbRef = null;
+    let connectedToFirebase = false;
+
+    // UI helpers
+    const $ = id => document.getElementById(id);
+    const syncStatus = $('sync-status');
+
+    // Default state
     const DEFAULT = {
       general: { counter: 0, history: [], lastModule: '1' },
       preferencial: { counter: 0, history: [], lastModule: '1' },
@@ -353,10 +354,8 @@
         playBeep: true,
         autoRepeatInterval: 0
       },
-      ui: {}
+      meta: { lastUpdate: 0, lastClient: null } // meta for conflict resolution
     };
-
-    const $ = id => document.getElementById(id);
 
     // Elements used by script
     const elems = {
@@ -385,63 +384,161 @@
       quickNextGen: $('quick-next-gen'),
       quickNextPref: $('quick-next-pref'),
       moduleSelectGeneral: $('module-select-general'),
-      moduleSelectPrefer: $('module-select-preferencial')
+      moduleSelectPrefer: $('module-select-preferencial'),
+      firebaseConfigArea: $('firebase-config'),
+      connectFirebaseBtn: $('connect-firebase'),
+      disconnectFirebaseBtn: $('disconnect-firebase'),
     };
 
-    let state = loadState();
+    // runtime state (kept in memory and synced)
+    let state = loadLocalState();
     let voices = [];
     let autoRepeatTimers = {};
 
-    // populate voices for TTS
-    function populateVoices() {
-      voices = speechSynthesis.getVoices() || [];
-      elems.voiceSelect.innerHTML = '';
-      if (voices.length === 0) {
-        const opt = document.createElement('option');
-        opt.textContent = 'TTS no disponible';
-        elems.voiceSelect.appendChild(opt);
-        elems.voiceSelect.disabled = true;
-        return;
+    // --- Firebase helpers ---
+    // User: to enable realtime sync, create Firebase Realtime Database and paste config object here.
+    // Example config (replace with your own):
+    // {
+    //   "apiKey": "...",
+    //   "authDomain": "...",
+    //   "databaseURL": "https://<your-db>.firebaseio.com",
+    //   "projectId": "...",
+    //   "storageBucket": "...",
+    //   "messagingSenderId": "...",
+    //   "appId": "..."
+    // }
+    function connectFirebase(config) {
+      try {
+        if (!config || !config.databaseURL) {
+          alert('La configuración de Firebase debe contener al menos databaseURL. Pega el objeto JSON completo.');
+          return;
+        }
+        // initialize app
+        if (firebase.apps && firebase.apps.length) {
+          firebase.app().delete().catch(()=>{}).finally(() => {
+            firebaseApp = firebase.initializeApp(config);
+            setupDbRef();
+          });
+        } else {
+          firebaseApp = firebase.initializeApp(config);
+          setupDbRef();
+        }
+      } catch (err) {
+        console.error('Error conectando a Firebase', err);
+        alert('Error inicializando Firebase: ' + err.message);
       }
-      voices.forEach((v, i) => {
-        const opt = document.createElement('option');
-        opt.value = i;
-        opt.textContent = `${v.name} — ${v.lang}${v.default ? ' (pred.)' : ''}`;
-        elems.voiceSelect.appendChild(opt);
-      });
-      elems.voiceSelect.value = state.settings.voiceIndex ?? 0;
-    }
-    if ('speechSynthesis' in window) {
-      populateVoices();
-      speechSynthesis.onvoiceschanged = populateVoices;
-    } else {
-      elems.voiceSelect.innerHTML = '<option>TTS no disponible</option>';
-      elems.voiceSelect.disabled = true;
     }
 
-    function saveState() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { console.warn(e); } }
-    function loadState() {
+    function setupDbRef() {
       try {
-        const raw = localStorage.getItem(STORAGE_KEY);
+        dbRef = firebase.database().ref('turnero_shared_state_v1');
+        // listen for remote changes
+        dbRef.on('value', snapshot => {
+          const remote = snapshot.val();
+          if (!remote) {
+            // if DB empty, push our local state (first writer wins)
+            saveRemoteState();
+            updateSyncStatus(true, 'Sincronizado (inicial)');
+            return;
+          }
+          // remote should contain: { state: {...}, meta: { lastUpdate, lastClient } }
+          if (shouldApplyRemote(remote)) {
+            applyRemote(remote);
+            updateSyncStatus(true, 'Sincronizado (recibido)');
+          }
+        });
+        connectedToFirebase = true;
+        updateSyncStatus(true, 'Conectado (esperando cambios)');
+        // push current local state to DB so everyone starts from same baseline
+        saveRemoteState();
+      } catch (e) {
+        console.error('setupDbRef error', e);
+        alert('No se pudo escuchar la base de datos. Revisa la configuración y reglas.');
+      }
+    }
+
+    function disconnectFirebase() {
+      if (dbRef) {
+        dbRef.off();
+        dbRef = null;
+      }
+      try { if (firebase && firebase.app) { /* do not delete app to avoid race */ } } catch (e) {}
+      connectedToFirebase = false;
+      updateSyncStatus(false, 'Desconectado (local)');
+    }
+
+    function shouldApplyRemote(remote) {
+      if (!remote.meta) return true;
+      const remoteTS = remote.meta.lastUpdate || 0;
+      const localTS = state.meta.lastUpdate || 0;
+      // apply remote if it's newer and wasn't written by this client (avoid re-applying our own write)
+      if (remote.meta.lastClient === CLIENT_ID && remoteTS === localTS) {
+        // it's our own write echoed back; ignore
+        return false;
+      }
+      return remoteTS > localTS;
+    }
+
+    function applyRemote(remote) {
+      try {
+        const rstate = remote.state || {};
+        // Merge rstate into local state (replace full queues & settings)
+        state.general = rstate.general || DEFAULT.general;
+        state.preferencial = rstate.preferencial || DEFAULT.preferencial;
+        state.settings = rstate.settings || state.settings || DEFAULT.settings;
+        state.meta = remote.meta || { lastUpdate: Date.now(), lastClient: null };
+        // Update UI
+        renderAll();
+        saveLocalState(); // keep a local copy
+      } catch (e) {
+        console.error('applyRemote error', e);
+      }
+    }
+
+    function saveRemoteState() {
+      if (!dbRef) return;
+      const payload = { state: {
+        general: state.general,
+        preferencial: state.preferencial,
+        settings: state.settings
+      }, meta: { lastUpdate: Date.now(), lastClient: CLIENT_ID } };
+      dbRef.set(payload).then(()=> {
+        // local meta update
+        state.meta = payload.meta;
+        saveLocalState();
+        updateSyncStatus(true, 'Sincronizado (enviado)');
+      }).catch(err => {
+        console.error('Error escribiendo en DB', err);
+        updateSyncStatus(false, 'Error al sincronizar');
+      });
+    }
+
+    // --- Local storage fallback ---
+    function saveLocalState() {
+      try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state)); } catch(e){ console.warn(e); }
+    }
+    function loadLocalState() {
+      try {
+        const raw = localStorage.getItem(LOCAL_KEY);
         if (!raw) return JSON.parse(JSON.stringify(DEFAULT));
         const parsed = JSON.parse(raw);
+        // Merge with defaults to ensure fields exist
         const merged = JSON.parse(JSON.stringify(DEFAULT));
         Object.assign(merged.settings, parsed.settings || {});
         merged.general = Object.assign(merged.general, parsed.general || {});
         merged.preferencial = Object.assign(merged.preferencial, parsed.preferencial || {});
-        merged.ui = Object.assign(merged.ui, parsed.ui || {});
-        merged.general.history = (parsed.general && parsed.general.history) ? parsed.general.history : merged.general.history;
-        merged.preferencial.history = (parsed.preferencial && parsed.preferencial.history) ? parsed.preferencial.history : merged.preferencial.history;
-        // preserve lastModule if present
+        merged.meta = Object.assign(merged.meta || {}, parsed.meta || {});
+        // preserve lastModule
         merged.general.lastModule = (parsed.general && parsed.general.lastModule) ? parsed.general.lastModule : merged.general.lastModule;
         merged.preferencial.lastModule = (parsed.preferencial && parsed.preferencial.lastModule) ? parsed.preferencial.lastModule : merged.preferencial.lastModule;
         return merged;
       } catch (e) {
-        console.warn('Error cargando estado, usando default.', e);
+        console.warn('Error cargando local state', e);
         return JSON.parse(JSON.stringify(DEFAULT));
       }
     }
 
+    // --- UI rendering & logic (same as before, but calls saveRemoteState after changes) ---
     function formatNumber(prefix, num) {
       const pad = Number(state.settings.pad) || 3;
       return `${prefix}-${String(num).padStart(pad, '0')}`;
@@ -458,7 +555,6 @@
       elems.autoRepeatInterval.value = state.settings.autoRepeatInterval || 0;
       elems.voiceSelect.value = state.settings.voiceIndex ?? 0;
 
-      // set module selects to lastModule saved
       elems.moduleSelectGeneral.value = state.general.lastModule || '1';
       elems.moduleSelectPrefer.value = state.preferencial.lastModule || '1';
 
@@ -466,7 +562,7 @@
       updateDisplay('preferencial');
       renderHistory('general');
       renderHistory('preferencial');
-      saveState();
+      saveLocalState();
     }
 
     function updateDisplay(queue) {
@@ -492,55 +588,26 @@
       if (state[queue].history.length > 200) state[queue].history.shift();
     }
 
-    // Advance and include module selection
-    function advance(queue, announce = true) {
-      state[queue].counter = (Number(state[queue].counter) || 0) + 1;
-      const prefix = queue === 'general' ? state.settings.prefix_general : state.settings.prefix_prefer;
-      const label = formatNumber(prefix, state[queue].counter);
-      const module = getSelectedModule(queue);
-      // store lastModule for auto-repeat and future calls
-      state[queue].lastModule = module;
-      pushHistory(queue, label, module);
-      updateDisplay(queue); renderHistory(queue); saveState();
-      if (announce && state.settings.announceOnAdvance) announceTurn(label, queue, module);
-      scheduleAutoRepeat(queue);
+    function getSelectedModule(queue) {
+      try {
+        if (queue === 'general') return elems.moduleSelectGeneral.value;
+        if (queue === 'preferencial') return elems.moduleSelectPrefer.value;
+      } catch (e) {}
+      return '1';
     }
 
-    function retreat(queue) {
-      state[queue].counter = Math.max(0, (Number(state[queue].counter) || 0) - 1);
-      updateDisplay(queue); saveState();
-      cancelAutoRepeat(queue);
+    function announceTurn(label, queue, module) {
+      const typeLabel = (queue === 'preferencial') ? 'preferencial' : 'general';
+      const moduleText = module ? `, al módulo ${module}` : '';
+      const phrase = `Atención, turno ${typeLabel} ${label}${moduleText}`;
+      beepThenSpeak(phrase);
+      const el = queue === 'general' ? elems.displayGeneral : elems.displayPrefer;
+      try {
+        el.animate([{ boxShadow: '0 0 0 0 rgba(2,182,212,0.0)' }, { boxShadow: '0 0 0 14px rgba(6,182,212,0.06)' }], { duration: 700 });
+      } catch (e) {}
     }
 
-    function resetCounter(queue) {
-      state[queue].counter = 0; updateDisplay(queue); saveState();
-      cancelAutoRepeat(queue);
-    }
-
-    function clearHistory(queue) {
-      state[queue].history = []; renderHistory(queue); saveState();
-      cancelAutoRepeat(queue);
-    }
-
-    // modal confirm
-    function confirmModal(message) {
-      return new Promise(resolve => {
-        elems.modalMessage.textContent = message;
-        elems.modal.setAttribute('aria-hidden', 'false');
-        function onCancel() { cleanup(false); }
-        function onConfirm() { cleanup(true); }
-        function cleanup(val) {
-          elems.modal.setAttribute('aria-hidden', 'true');
-          elems.modalCancel.removeEventListener('click', onCancel);
-          elems.modalConfirm.removeEventListener('click', onConfirm);
-          resolve(val);
-        }
-        elems.modalCancel.addEventListener('click', onCancel);
-        elems.modalConfirm.addEventListener('click', onConfirm);
-      });
-    }
-
-    // TTS + beep
+    // audio & tts
     function speak(text) {
       if (!('speechSynthesis' in window)) return;
       try {
@@ -553,9 +620,7 @@
         ut.rate = 1;
         ut.pitch = 1;
         speechSynthesis.speak(ut);
-      } catch (e) {
-        console.warn('TTS fallo', e);
-      }
+      } catch (e) { console.warn(e); }
     }
 
     function beepThenSpeak(text) {
@@ -574,24 +639,53 @@
         g.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.18);
         o.stop(ctx.currentTime + 0.2);
         setTimeout(() => speak(text), 280);
-      } catch (e) {
-        speak(text);
-      }
+      } catch (e) { speak(text); }
     }
 
-    // announce includes queue type and module (uses Spanish terms)
-    function announceTurn(label, queue, module) {
-      const typeLabel = (queue === 'preferencial') ? 'preferencial' : 'general';
-      const moduleText = module ? `, al módulo ${module}` : '';
-      const phrase = `Atención, turno ${typeLabel} ${label}${moduleText}`;
-      beepThenSpeak(phrase);
-      const el = queue === 'general' ? elems.displayGeneral : elems.displayPrefer;
-      try {
-        el.animate([{ boxShadow: '0 0 0 0 rgba(2,182,212,0.0)' }, { boxShadow: '0 0 0 14px rgba(6,182,212,0.06)' }], { duration: 700 });
-      } catch (e) {}
+    // actions (advance/retreat etc) — after each local change we write to DB (if connected) and localStorage
+    function advance(queue, announce = true) {
+      state[queue].counter = (Number(state[queue].counter) || 0) + 1;
+      const prefix = queue === 'general' ? state.settings.prefix_general : state.settings.prefix_prefer;
+      const label = formatNumber(prefix, state[queue].counter);
+      const module = getSelectedModule(queue);
+      state[queue].lastModule = module;
+      pushHistory(queue, label, module);
+      // update meta and timestamps
+      state.meta.lastUpdate = Date.now();
+      state.meta.lastClient = CLIENT_ID;
+      updateDisplay(queue); renderHistory(queue); saveLocalState();
+      if (connectedToFirebase) saveRemoteState();
+      if (announce && state.settings.announceOnAdvance) announceTurn(label, queue, module);
+      scheduleAutoRepeat(queue);
     }
 
-    // auto repeat uses stored lastModule
+    function retreat(queue) {
+      state[queue].counter = Math.max(0, (Number(state[queue].counter) || 0) - 1);
+      state.meta.lastUpdate = Date.now();
+      state.meta.lastClient = CLIENT_ID;
+      updateDisplay(queue); saveLocalState();
+      if (connectedToFirebase) saveRemoteState();
+      cancelAutoRepeat(queue);
+    }
+
+    function resetCounter(queue) {
+      state[queue].counter = 0;
+      state.meta.lastUpdate = Date.now();
+      state.meta.lastClient = CLIENT_ID;
+      updateDisplay(queue); saveLocalState();
+      if (connectedToFirebase) saveRemoteState();
+      cancelAutoRepeat(queue);
+    }
+
+    function clearHistory(queue) {
+      state[queue].history = [];
+      state.meta.lastUpdate = Date.now();
+      state.meta.lastClient = CLIENT_ID;
+      renderHistory(queue); saveLocalState();
+      if (connectedToFirebase) saveRemoteState();
+      cancelAutoRepeat(queue);
+    }
+
     function scheduleAutoRepeat(queue) {
       cancelAutoRepeat(queue);
       const interval = Number(state.settings.autoRepeatInterval) || 0;
@@ -602,8 +696,10 @@
         const module = state[queue].lastModule || getSelectedModule(queue) || '1';
         if (label) {
           pushHistory(queue, label, module);
-          renderHistory(queue);
-          saveState();
+          state.meta.lastUpdate = Date.now();
+          state.meta.lastClient = CLIENT_ID;
+          renderHistory(queue); saveLocalState();
+          if (connectedToFirebase) saveRemoteState();
           announceTurn(label, queue, module);
         }
       }, interval * 1000);
@@ -612,16 +708,25 @@
       if (autoRepeatTimers[queue]) { clearInterval(autoRepeatTimers[queue]); delete autoRepeatTimers[queue]; }
     }
 
-    // Helper to get selected module for a queue
-    function getSelectedModule(queue) {
-      try {
-        if (queue === 'general') return elems.moduleSelectGeneral.value;
-        if (queue === 'preferencial') return elems.moduleSelectPrefer.value;
-      } catch (e) {}
-      return '1';
+    // modal confirm (returns Promise)
+    function confirmModal(message) {
+      return new Promise(resolve => {
+        elems.modalMessage.textContent = message;
+        elems.modal.setAttribute('aria-hidden', 'false');
+        function onCancel() { cleanup(false); }
+        function onConfirm() { cleanup(true); }
+        function cleanup(val) {
+          elems.modal.setAttribute('aria-hidden', 'true');
+          elems.modalCancel.removeEventListener('click', onCancel);
+          elems.modalConfirm.removeEventListener('click', onConfirm);
+          resolve(val);
+        }
+        elems.modalCancel.addEventListener('click', onCancel);
+        elems.modalConfirm.addEventListener('click', onConfirm);
+      });
     }
 
-    // board event delegation
+    // event delegation for boards
     document.querySelectorAll('.board').forEach(board => {
       board.addEventListener('click', async (ev) => {
         const btn = ev.target.closest('button');
@@ -641,18 +746,20 @@
           const label = formatNumber(prefix, state[queue].counter || 0);
           const module = getSelectedModule(queue);
           if (label) {
-            // store lastModule
             state[queue].lastModule = module;
             pushHistory(queue, label, module);
+            state.meta.lastUpdate = Date.now();
+            state.meta.lastClient = CLIENT_ID;
             renderHistory(queue);
-            saveState();
+            saveLocalState();
+            if (connectedToFirebase) saveRemoteState();
             announceTurn(label, queue, module);
           }
         }
       });
     });
 
-    // quick buttons use module selected in their respective board
+    // quick buttons
     elems.quickNextGen.addEventListener('click', () => advance('general', true));
     elems.quickNextPref.addEventListener('click', () => advance('preferencial', true));
 
@@ -674,8 +781,11 @@
       state.settings.announceOnAdvance = !!elems.announceOnAdvance.checked;
       state.settings.autoRepeatInterval = Number(elems.autoRepeatInterval.value) || 0;
       elems.volumeValue.textContent = Number(state.settings.volume).toFixed(1);
+      state.meta.lastUpdate = Date.now();
+      state.meta.lastClient = CLIENT_ID;
       updateDisplay('general'); updateDisplay('preferencial'); renderHistory('general'); renderHistory('preferencial');
-      saveState();
+      saveLocalState();
+      if (connectedToFirebase) saveRemoteState();
       elems.settingsDrawer.setAttribute('aria-hidden', 'true');
     });
 
@@ -683,13 +793,24 @@
       if (!confirm('Restaurar valores por defecto?')) return;
       state = JSON.parse(JSON.stringify(DEFAULT));
       renderAll();
+      if (connectedToFirebase) saveRemoteState();
     });
 
-    elems.voiceVolume.addEventListener('input', (e) => {
-      elems.volumeValue.textContent = Number(e.target.value).toFixed(1);
+    elems.voiceVolume.addEventListener('input', (e) => { elems.volumeValue.textContent = Number(e.target.value).toFixed(1); });
+    elems.voiceSelect.addEventListener('change', () => { state.settings.voiceIndex = Number(elems.voiceSelect.value) || 0; saveLocalState(); if (connectedToFirebase) saveRemoteState(); });
+    elems.voiceVolume.addEventListener('change', () => { state.settings.volume = Number(elems.voiceVolume.value) || 1; saveLocalState(); if (connectedToFirebase) saveRemoteState(); });
+
+    // disconnect/connect firebase buttons
+    elems.connectFirebaseBtn.addEventListener('click', () => {
+      const txt = elems.firebaseConfigArea.value.trim();
+      if (!txt) return alert('Pega aquí el objeto JSON de configuración de Firebase (incluye databaseURL).');
+      let cfg = null;
+      try { cfg = JSON.parse(txt); } catch (e) { alert('JSON inválido. Corrige la configuración.'); return; }
+      connectFirebase(cfg);
     });
-    elems.voiceSelect.addEventListener('change', () => { state.settings.voiceIndex = Number(elems.voiceSelect.value) || 0; saveState(); });
-    elems.voiceVolume.addEventListener('change', () => { state.settings.volume = Number(elems.voiceVolume.value) || 1; saveState(); });
+    elems.disconnectFirebaseBtn.addEventListener('click', () => {
+      disconnectFirebase();
+    });
 
     // keyboard shortcuts
     document.addEventListener('keydown', (e) => {
@@ -701,22 +822,57 @@
       if (key === 'p' && e.shiftKey) { retreat('preferencial'); }
     });
 
-    // initial render and auto-repeat restore
-    renderAll();
-    if (Number(state.settings.autoRepeatInterval) > 0) {
-      scheduleAutoRepeat('general');
-      scheduleAutoRepeat('preferencial');
+    // TTS voice population
+    function populateVoices() {
+      voices = speechSynthesis.getVoices() || [];
+      elems.voiceSelect.innerHTML = '';
+      if (voices.length === 0) {
+        const opt = document.createElement('option');
+        opt.textContent = 'TTS no disponible';
+        elems.voiceSelect.appendChild(opt);
+        elems.voiceSelect.disabled = true;
+        return;
+      }
+      voices.forEach((v, i) => {
+        const opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = `${v.name} — ${v.lang}${v.default ? ' (pred.)' : ''}`;
+        elems.voiceSelect.appendChild(opt);
+      });
+      elems.voiceSelect.value = state.settings.voiceIndex ?? 0;
+    }
+    if ('speechSynthesis' in window) {
+      populateVoices();
+      speechSynthesis.onvoiceschanged = populateVoices;
     }
 
-    // expose for debugging
+    // sync status UI
+    function updateSyncStatus(connected, text) {
+      if (connected) {
+        syncStatus.textContent = text || 'Conectado (sincronizado)';
+        syncStatus.style.background = 'rgba(0,0,0,0.06)';
+        syncStatus.style.color = '#dff6ff';
+      } else {
+        syncStatus.textContent = text || 'Offline (local)';
+        syncStatus.style.background = 'rgba(0,0,0,0.02)';
+        syncStatus.style.color = '#fed7a2';
+      }
+    }
+
+    // initial render
+    renderAll();
+    updateSyncStatus(false, 'Offline (local)');
+
+    // Expose simple API for debug
     window.turnero = {
       state,
+      connectFirebase: (cfg) => connectFirebase(cfg),
+      disconnectFirebase: () => disconnectFirebase(),
       advance: (q='general') => advance(q),
-      retreat: (q='general') => retreat(q),
-      reset: (q='general') => resetCounter(q),
-      clear: (q='general') => clearHistory(q),
-      speak: (t) => speak(t)
+      retreat: (q='general') => retreat(q)
     };
+
+    // End IIFE
   })();
   </script>
 </body>
