@@ -9,16 +9,17 @@
   <style>
   :root{
     --bg-1: #071826;
-    --bg-2: #0e2a46;
     --accent-1: #06b6d4;
     --accent-2: #2563eb;
     --card-bg: rgba(255,255,255,0.03);
     --muted: #a9d9ef;
     --glass-border: rgba(6,182,212,0.06);
-    --success: #28a745;
     --danger: #ef4444;
     --radius: 12px;
     --shadow: 0 10px 30px rgba(2,10,18,0.6);
+    --display-font-size: 3.2rem;
+    --display-min-height: 100px;
+    --control-height: 44px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
@@ -30,7 +31,7 @@
     -webkit-font-smoothing:antialiased;
     padding:28px;
   }
-  .wrap{ max-width:1200px; margin:18px auto; padding:12px; }
+  .wrap{ max-width:1100px; margin:18px auto; padding:12px; }
   .card { background: var(--card-bg); border-radius:var(--radius); padding:16px; box-shadow: var(--shadow); border: 1px solid var(--glass-border); }
   .header { display:flex;justify-content:space-between;align-items:center; gap:12px; margin-bottom:16px; }
   .brand { display:flex; gap:14px; align-items:center; }
@@ -41,14 +42,21 @@
   .main{ display:flex; gap:18px; align-items:flex-start; margin-top:6px; }
   .controls-inline { display:flex; gap:12px; align-items:center; flex-wrap:wrap; background: transparent; }
   .controls-inline label{ font-size:0.92rem; color:#eaf8ff; display:flex; flex-direction:column; }
-  .controls-inline input[type="text"], .controls-inline select, .controls-inline input[type="range"], .controls-inline input[type="number"]{ padding:10px 12px;border-radius:10px;border:none;background:#04243a;color:#eaf8ff;min-width:110px;margin-top:8px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
-  .boards{ display:grid; grid-template-columns: 1fr 380px; gap:18px; width:100%; margin-top:8px; }
+  .controls-inline input[type="text"], .controls-inline select, .controls-inline input[type="range"], .controls-inline input[type="number"]{
+    padding:10px 12px;border-radius:10px;border:none;background:#04243a;color:#eaf8ff;min-width:110px;margin-top:8px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); height:var(--control-height);
+  }
+  .controls-inline input[type="text"]{ text-transform:uppercase; letter-spacing:0.6px; font-weight:700; }
+  .boards{ display:grid; grid-template-columns: 1fr 360px; gap:18px; width:100%; margin-top:8px; }
   .board{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:16px; box-shadow: 0 12px 40px rgba(2,10,20,0.6); border: 1px solid rgba(6,182,212,0.04); display:flex; flex-direction:column; gap:12px; }
   .board-header{ display:flex; justify-content:space-between; align-items:center; }
   .board-header h2{ color:#eaffff; margin:0; font-size:1.18rem; }
   .board-sub{ color:var(--muted); font-size:0.9rem; }
-  .display{ display:flex; align-items:center; justify-content:center; font-weight:800; font-size:3.6rem; padding:20px; border-radius:12px; color:#052233; background: linear-gradient(90deg,var(--accent-1),var(--accent-2)); min-height:110px; box-shadow: 0 6px 20px rgba(2,10,20,0.35); transition:transform .18s ease, box-shadow .18s ease; }
-  .display.small{ font-size:2.2rem; padding:14px; min-height:78px }
+  .display{
+    display:flex; align-items:center; justify-content:center; font-weight:900; font-size:var(--display-font-size);
+    padding:18px; border-radius:12px; color:#052233;
+    background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    min-height:var(--display-min-height); box-shadow: 0 6px 20px rgba(2,10,20,0.35); transition:transform .18s ease, box-shadow .18s ease, font-size .15s ease;
+  }
   .display.pulse{ animation:pulseAnnounce .9s ease; }
   @keyframes pulseAnnounce {
     0%{ transform:scale(1); box-shadow:0 6px 20px rgba(2,10,20,0.35); }
@@ -57,7 +65,7 @@
   }
   .board-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:6px; }
   .board-small{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
-  .btn{ padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer;border:none; display:inline-flex; align-items:center; gap:8px; }
+  .btn{ padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer;border:none; display:inline-flex; align-items:center; gap:8px; min-height:42px;}
   .btn svg{ height:16px; width:16px; opacity:0.95 }
   .btn.primary{ background: linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#052233; box-shadow: 0 8px 28px rgba(37,99,235,0.18); }
   .btn.secondary{ background: rgba(255,255,255,0.05); color:var(--muted); border:1px solid rgba(255,255,255,0.03); }
@@ -68,16 +76,14 @@
   .history h3{ margin:4px 0; color:var(--muted); font-size:0.95rem; }
   .history-list{ margin:8px 0 0; padding:8px; max-height:260px; overflow:auto; color:#e7fbff; display:flex; flex-direction:column; gap:8px; }
   .history-item{ background: rgba(255,255,255,0.02); padding:8px 12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-weight:600; color:#eaf8ff; transition:transform .14s ease, opacity .18s ease; }
-  .history-item.small{ font-size:0.92rem }
-  .history-item span.meta{ color:var(--muted); font-weight:500; font-size:0.85rem }
   .module-select{ display:flex; gap:8px; align-items:center; justify-content:flex-start; }
-  .module-select select{ padding:8px 12px;border-radius:10px;border:none;background:#04243a;color:#eaf8ff; }
+  .module-select select{ padding:8px 12px;border-radius:10px;border:none;background:#04243a;color:#eaf8ff; height:var(--control-height); }
   .drawer{ position:fixed; right:18px; top:18px; width:420px; max-width:96vw; height:calc(100vh - 36px); background: rgba(2,30,50,0.98); border-radius:12px; padding:14px; box-shadow: 0 30px 120px rgba(0,0,0,0.7); transform:translateY(-20px) scale(.98); opacity:0; pointer-events:none; transition:all .22s ease; color:#dff6ff; overflow:auto; }
   .drawer[aria-hidden="false"]{ transform:none; opacity:1; pointer-events:auto; }
   .modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); opacity:0; pointer-events:none; transition:opacity .18s; }
   .modal[aria-hidden="false"]{ opacity:1; pointer-events:auto; }
   .modal-card{ background: rgba(2,30,50,0.98); padding:18px; border-radius:12px; min-width:320px; max-width:92vw; box-shadow: 0 30px 80px rgba(0,0,0,0.6); color:#dff6ff; }
-  @media (max-width:980px){ .boards{ grid-template-columns:1fr; } .wrap { padding: 12px; } .drawer{ width:92vw } .logo{height:48px} .display{ font-size:2.8rem; min-height:86px } }
+  @media (max-width:980px){ .boards{ grid-template-columns:1fr; } .wrap { padding: 12px; } .drawer{ width:92vw } .logo{height:48px} .display{ font-size:2.6rem; min-height:86px } }
   .status { display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);color:var(--muted);font-size:0.85rem; }
   .note { font-size:0.85rem;color:#fed7a2;margin-top:8px }
   textarea#firebase-config{ width:100%; min-height:108px; padding:10px; border-radius:8px; border:none; background:#07243a; color:#cfeefd; resize:vertical }
@@ -90,7 +96,7 @@
     <div class="card">
       <div class="header">
         <div class="brand">
-          <img id="app-logo" class="logo" src="Logo-Interconsultas-01b-500px.png.png" alt="IPS Interconsultas" aria-hidden="false">
+          <img id="app-logo" class="logo" src="Logo-Interconsultas-01b-500px.png.png" alt="IPS Interconsultas">
           <div>
             <h1>IPS Interconsultas</h1>
             <p>Turnero — General y Preferencial</p>
@@ -187,7 +193,7 @@
                 </div>
               </div>
 
-              <div class="display small" id="display-preferencial" aria-live="polite">P-000</div>
+              <div class="display" id="display-preferencial" aria-live="polite">P-000</div>
 
               <div class="module-select" style="margin-bottom:6px">
                 <div class="module-label" style="color:var(--muted)">Módulo:</div>
@@ -217,7 +223,7 @@
           </section>
         </div>
 
-        <div style="width:380px;display:flex;flex-direction:column;gap:12px">
+        <div style="width:360px;display:flex;flex-direction:column;gap:12px">
           <div class="card" style="padding:14px;">
             <div style="display:flex;justify-content:space-between;align-items:center">
               <div style="color:#eaf8ff">
@@ -306,7 +312,7 @@
     </div>
   </div>
 
-  <!-- Logo fallback loader (intenta rutas comunes: relative, ./, /, /<possible-repo>/, raw opcional) -->
+  <!-- Logo fallback loader -->
   <script>
   (function(){
     const img = document.getElementById('app-logo');
@@ -318,7 +324,6 @@
       './' + filename,
       '/' + filename
     ];
-
     try {
       const parts = location.pathname.split('/').filter(Boolean);
       if (parts.length > 0) {
@@ -326,10 +331,6 @@
         candidates.push('/' + possibleRepo + '/' + filename);
       }
     } catch(e){}
-
-    // If you want to enable a raw.githubusercontent fallback, uncomment and set owner/repo/branch:
-    // candidates.push('https://raw.githubusercontent.com/OWNER/REPO/BRANCH/' + filename);
-
     function tryNext() {
       if (!candidates.length) {
         img.style.display = 'none';
@@ -341,7 +342,6 @@
       tried.add(c);
       img.src = c;
     }
-
     img.addEventListener('error', function onErr() {
       img.removeEventListener('error', onErr);
       tryNext();
@@ -350,8 +350,6 @@
       img.style.display = '';
       img.removeEventListener('load', onLoad);
     });
-
-    // Start attempts if initial src fails or is empty
     if (!img.complete || img.naturalWidth === 0) tryNext();
   })();
   </script>
@@ -362,14 +360,10 @@
 
   <script>
   (function () {
-    // Unique client id for avoiding re-applying our own remote writes
     const CLIENT_ID = 'client-' + Math.random().toString(36).slice(2,9);
     const LOCAL_KEY = 'turnero_ips_uniform_v1';
-
-    // DOM helper
     const $ = id => document.getElementById(id);
 
-    // Elements
     const elems = {
       displayGeneral: $('display-general'),
       displayPrefer: $('display-preferencial'),
@@ -406,14 +400,12 @@
       moduleTagPref: $('module-tag-pref')
     };
 
-    // Runtime
     let firebaseApp = null;
     let dbRef = null;
     let connectedToFirebase = false;
     let voices = [];
     let autoRepeatTimers = {};
 
-    // Default state
     const DEFAULT = {
       general: { counter: 0, history: [], lastModule: '1' },
       preferencial: { counter: 0, history: [], lastModule: '1' },
@@ -430,7 +422,6 @@
       meta: { lastUpdate: 0, lastClient: null }
     };
 
-    // Load local state or default
     function loadLocalState() {
       try {
         const raw = localStorage.getItem(LOCAL_KEY);
@@ -452,26 +443,22 @@
 
     let state = loadLocalState();
 
-    // Try to auto-load firebase-config.json from same origin (so you can commit it to GitHub root)
     (function tryAutoLoadFirebaseConfig(){
       fetch('/firebase-config.json').then(r => {
         if (!r.ok) throw new Error('no config file');
         return r.json();
       }).then(cfg => {
-        // apply to textarea and auto-connect
         elems.firebaseConfigArea.value = JSON.stringify(cfg, null, 2);
         connectFirebase(cfg);
       }).catch(()=>{/* no config found — user can paste config in UI */});
     })();
 
-    // --- Firebase connection and sync ---
     function connectFirebase(cfg) {
       try {
         if (!cfg || !cfg.databaseURL) {
           alert('La configuración de Firebase debe contener al menos databaseURL.');
           return;
         }
-        // init app (re-init if already existed)
         if (firebase.apps && firebase.apps.length) {
           try { firebase.app().delete(); } catch(e){ /* ignore */ }
         }
@@ -512,7 +499,6 @@
 
     function disconnectFirebase() {
       if (dbRef) { dbRef.off(); dbRef = null; }
-      try { if (firebase && firebase.app) { /* keep app instance */ } } catch (e) {}
       connectedToFirebase = false;
       updateSyncStatus(false, 'Desconectado (local)');
     }
@@ -558,7 +544,6 @@
 
     function saveLocalState() { try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state)); } catch(e){ console.warn(e); } }
 
-    // --- UI render & helpers ---
     function formatNumber(prefix, num) {
       const pad = Number(state.settings.pad) || 3;
       return `${prefix}-${String(num).padStart(pad, '0')}`;
@@ -600,8 +585,7 @@
         div.style.opacity = '0';
         div.innerHTML = `<div>${item}</div><div class="meta">${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</div>`;
         container.appendChild(div);
-        // simple appear animation
-        setTimeout(() => { div.style.opacity = '1'; div.style.transform = 'translateY(0)'; }, 40 + idx*30);
+        setTimeout(() => { div.style.opacity = '1'; div.style.transform = 'translateY(0)'; }, 40 + idx*20);
       });
     }
 
@@ -612,7 +596,6 @@
       if (state[queue].history.length > 200) state[queue].history.shift();
     }
 
-    // audio & TTS
     function speak(text) {
       if (!('speechSynthesis' in window)) return;
       try {
@@ -660,7 +643,6 @@
       } catch (e) {}
     }
 
-    // actions (synchronized)
     function getSelectedModule(queue) {
       try {
         if (queue === 'general') return elems.moduleSelectGeneral.value;
@@ -733,7 +715,6 @@
       if (autoRepeatTimers[queue]) { clearInterval(autoRepeatTimers[queue]); delete autoRepeatTimers[queue]; }
     }
 
-    // modal confirm
     function confirmModal(message) {
       return new Promise(resolve => {
         elems.modalMessage.textContent = message;
@@ -751,7 +732,6 @@
       });
     }
 
-    // board events
     document.querySelectorAll('.board').forEach(board => {
       board.addEventListener('click', async (ev) => {
         const btn = ev.target.closest('button');
@@ -784,21 +764,18 @@
       });
     });
 
-    // quick buttons
     elems.quickNextGen.addEventListener('click', () => advance('general', true));
     elems.quickNextPref.addEventListener('click', () => advance('preferencial', true));
 
-    // settings drawer toggle
     elems.settingsToggle.addEventListener('click', () => {
       const open = elems.settingsDrawer.getAttribute('aria-hidden') === 'false';
       elems.settingsDrawer.setAttribute('aria-hidden', (!open).toString());
     });
     elems.drawerClose.addEventListener('click', () => elems.settingsDrawer.setAttribute('aria-hidden', 'true'));
 
-    // save settings
     elems.saveSettings.addEventListener('click', () => {
-      state.settings.prefix_general = elems.prefixGeneral.value.trim() || 'G';
-      state.settings.prefix_prefer = elems.prefixPrefer.value.trim() || 'P';
+      state.settings.prefix_general = elems.prefixGeneral.value.trim().toUpperCase() || 'G';
+      state.settings.prefix_prefer = elems.prefixPrefer.value.trim().toUpperCase() || 'P';
       state.settings.pad = Number(elems.padDigits.value) || 3;
       state.settings.voiceIndex = Number(elems.voiceSelect.value) || 0;
       state.settings.volume = Number(elems.voiceVolume.value) || 1;
@@ -822,14 +799,34 @@
     });
 
     elems.voiceVolume.addEventListener('input', (e) => { elems.volumeValue.textContent = Number(e.target.value).toFixed(1); });
+
     elems.voiceSelect.addEventListener('change', () => { state.settings.voiceIndex = Number(elems.voiceSelect.value) || 0; saveLocalState(); if (connectedToFirebase) saveRemoteState(); });
     elems.voiceVolume.addEventListener('change', () => { state.settings.volume = Number(elems.voiceVolume.value) || 1; saveLocalState(); if (connectedToFirebase) saveRemoteState(); });
 
-    // update module tags when changed
-    elems.moduleSelectGeneral.addEventListener('change', () => { elems.moduleTagGen.textContent = elems.moduleSelectGeneral.value; });
-    elems.moduleSelectPrefer.addEventListener('change', () => { elems.moduleTagPref.textContent = elems.moduleSelectPrefer.value; });
+    // Live updates: prefijos y pad actualizan inmediatamente
+    elems.prefixGeneral.addEventListener('input', (e) => {
+      const v = (e.target.value || '').toUpperCase().slice(0,4);
+      state.settings.prefix_general = v || 'G';
+      elems.prefixGeneral.value = state.settings.prefix_general;
+      state.meta.lastUpdate = Date.now(); state.meta.lastClient = CLIENT_ID;
+      updateDisplay('general'); saveLocalState(); if (connectedToFirebase) saveRemoteState();
+    });
+    elems.prefixPrefer.addEventListener('input', (e) => {
+      const v = (e.target.value || '').toUpperCase().slice(0,4);
+      state.settings.prefix_prefer = v || 'P';
+      elems.prefixPrefer.value = state.settings.prefix_prefer;
+      state.meta.lastUpdate = Date.now(); state.meta.lastClient = CLIENT_ID;
+      updateDisplay('preferencial'); saveLocalState(); if (connectedToFirebase) saveRemoteState();
+    });
+    elems.padDigits.addEventListener('change', (e) => {
+      state.settings.pad = Number(e.target.value) || 3;
+      state.meta.lastUpdate = Date.now(); state.meta.lastClient = CLIENT_ID;
+      updateDisplay('general'); updateDisplay('preferencial'); saveLocalState(); if (connectedToFirebase) saveRemoteState();
+    });
+    elems.announceOnAdvance.addEventListener('change', (e) => {
+      state.settings.announceOnAdvance = !!e.target.checked; saveLocalState(); if (connectedToFirebase) saveRemoteState();
+    });
 
-    // firebase connect/disconnect
     elems.connectFirebaseBtn.addEventListener('click', () => {
       const txt = elems.firebaseConfigArea.value.trim();
       if (!txt) return alert('Pega aquí el objeto JSON de configuración de Firebase (incluye databaseURL).');
@@ -839,7 +836,6 @@
     });
     elems.disconnectFirebaseBtn.addEventListener('click', () => disconnectFirebase());
 
-    // keyboard shortcuts
     document.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.isContentEditable) return;
       const key = e.key.toLowerCase();
@@ -849,7 +845,6 @@
       if (key === 'p' && e.shiftKey) { retreat('preferencial'); }
     });
 
-    // populate voices
     function populateVoices() {
       voices = speechSynthesis.getVoices() || [];
       elems.voiceSelect.innerHTML = '';
@@ -873,7 +868,10 @@
       speechSynthesis.onvoiceschanged = populateVoices;
     }
 
-    // initial render & UI
+    // update module tags when changed
+    elems.moduleSelectGeneral.addEventListener('change', () => { elems.moduleTagGen.textContent = elems.moduleSelectGeneral.value; });
+    elems.moduleSelectPrefer.addEventListener('change', () => { elems.moduleTagPref.textContent = elems.moduleSelectPrefer.value; });
+
     renderAll();
     updateSyncStatus(false, 'Offline (local)');
 
@@ -882,7 +880,6 @@
       elems.syncStatus.style.color = connected ? '#dff6ff' : '#fed7a2';
     }
 
-    // Expose API for debug
     window.turnero = { state, connectFirebase, disconnectFirebase, advance: (q='general') => advance(q), retreat: (q='general') => retreat(q) };
   })();
   </script>
