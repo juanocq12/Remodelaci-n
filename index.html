@@ -5,57 +5,85 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Turnero — IPS Interconsultas (Sincronizado)</title>
   <meta name="robots" content="noindex">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-  /* Interfaz adoptada (colores/logo) */
+  :root{
+    --bg-1: #071826;
+    --bg-2: #0e2a46;
+    --accent-1: #06b6d4;
+    --accent-2: #2563eb;
+    --card-bg: rgba(255,255,255,0.03);
+    --muted: #a9d9ef;
+    --glass-border: rgba(6,182,212,0.06);
+    --success: #28a745;
+    --danger: #ef4444;
+    --radius: 12px;
+    --shadow: 0 10px 30px rgba(2,10,18,0.6);
+  }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
     min-height:100vh;
-    background: linear-gradient(125deg, #0e223a 0%, #1681c1 70%, #24c4e4 100%);
-    color:#fff;
+    background: linear-gradient(135deg,var(--bg-1) 0%, #08314e 35%, var(--accent-1) 100%);
+    color:#eaf8ff;
     -webkit-font-smoothing:antialiased;
-    padding:20px;
+    padding:28px;
+    -webkit-font-smoothing:antialiased;
   }
-  .wrap{ max-width:1100px; margin:18px auto; }
-  .card { background: rgba(255,255,255,0.06); border-radius:12px; padding:16px; box-shadow: 0 8px 30px rgba(0,0,0,0.45); border: 1px solid rgba(6,182,212,0.06); }
-  .header { display:flex;justify-content:space-between;align-items:center; gap:12px; margin-bottom:12px; }
-  .brand { display:flex; gap:12px; align-items:center; }
-  .brand h1 { color:#cfeefd; font-size:1.05rem; margin-bottom:4px; }
-  .brand p { color:#a9d9ef; font-size:0.85rem; margin:0; }
-  .logo{height:44px;margin-right:8px;border-radius:6px;object-fit:contain;background:transparent;padding:4px}
-  .small { font-size:0.85rem; color:#9fc7e2; }
-  .main{ display:flex; gap:18px; align-items:flex-start; }
+  .wrap{ max-width:1200px; margin:18px auto; padding:12px; }
+  .card { background: var(--card-bg); border-radius:var(--radius); padding:16px; box-shadow: var(--shadow); border: 1px solid var(--glass-border); }
+  .header { display:flex;justify-content:space-between;align-items:center; gap:12px; margin-bottom:16px; }
+  .brand { display:flex; gap:14px; align-items:center; }
+  .brand h1 { color:#e6fbff; font-size:1.05rem; margin-bottom:2px; font-weight:800; letter-spacing:0.2px }
+  .brand p { color:var(--muted); font-size:0.88rem; margin:0; }
+  .logo{height:56px;margin-right:8px;border-radius:8px;object-fit:contain;background:transparent;padding:6px; border:1px solid rgba(255,255,255,0.03)}
+  .small { font-size:0.85rem; color:#cfeefd; }
+  .main{ display:flex; gap:18px; align-items:flex-start; margin-top:6px; }
   .controls-inline { display:flex; gap:12px; align-items:center; flex-wrap:wrap; background: transparent; }
-  .controls-inline label{ font-size:0.9rem; color:#e6f7ff; display:flex; flex-direction:column; }
-  .controls-inline input[type="text"], .controls-inline select, .controls-inline input[type="range"]{ padding:8px 10px;border-radius:8px;border:none;background:#0d274d;color:#fff;min-width:90px;margin-top:6px; }
-  .boards{ display:grid; grid-template-columns: 1fr 360px; gap:18px; width:100%; }
-  .board{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:14px; box-shadow: 0 8px 30px rgba(0,0,0,0.45); border: 1px solid rgba(6,182,212,0.04); display:flex; flex-direction:column; gap:12px; }
-  .board-header h2{ color:#cfeefd; margin:0; font-size:1.15rem; }
-  .board-sub{ color:#a9d9ef; font-size:0.88rem; }
-  .display{ display:flex; align-items:center; justify-content:center; font-weight:700; font-size:2.8rem; padding:18px; border-radius:10px; color:#052233; background: linear-gradient(90deg,#06b6d4,#2563eb); min-height:84px; }
-  .display.small{ font-size:2rem; padding:12px; }
-  .board-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+  .controls-inline label{ font-size:0.92rem; color:#eaf8ff; display:flex; flex-direction:column; }
+  .controls-inline input[type="text"], .controls-inline select, .controls-inline input[type="range"], .controls-inline input[type="number"]{ padding:10px 12px;border-radius:10px;border:none;background:#04243a;color:#eaf8ff;min-width:110px;margin-top:8px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
+  .boards{ display:grid; grid-template-columns: 1fr 380px; gap:18px; width:100%; margin-top:8px; }
+  .board{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:12px; padding:16px; box-shadow: 0 12px 40px rgba(2,10,20,0.6); border: 1px solid rgba(6,182,212,0.04); display:flex; flex-direction:column; gap:12px; }
+  .board-header{ display:flex; justify-content:space-between; align-items:center; }
+  .board-header h2{ color:#eaffff; margin:0; font-size:1.18rem; }
+  .board-sub{ color:var(--muted); font-size:0.9rem; }
+  .display{ display:flex; align-items:center; justify-content:center; font-weight:800; font-size:3.6rem; padding:20px; border-radius:12px; color:#052233; background: linear-gradient(90deg,var(--accent-1),var(--accent-2)); min-height:110px; box-shadow: 0 6px 20px rgba(2,10,20,0.35); transition:transform .18s ease, box-shadow .18s ease; }
+  .display.small{ font-size:2.2rem; padding:14px; min-height:78px }
+  .display.pulse{ animation:pulseAnnounce .9s ease; }
+  @keyframes pulseAnnounce {
+    0%{ transform:scale(1); box-shadow:0 6px 20px rgba(2,10,20,0.35); }
+    50%{ transform:scale(1.03); box-shadow:0 12px 40px rgba(2,10,20,0.45); }
+    100%{ transform:scale(1); box-shadow:0 6px 20px rgba(2,10,20,0.35); }
+  }
+  .board-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:6px; }
   .board-small{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; }
-  .btn{ padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer;border:none; }
-  .btn.primary{ background: linear-gradient(90deg,#06b6d4,#2563eb); color:#052233; }
-  .btn.secondary{ background: rgba(255,255,255,0.06); color:#a9d9ef; border:1px solid rgba(255,255,255,0.04); }
-  .btn.call{ background:#0c7c59; color:#fff; }
-  .btn.ghost{ background:transparent; color:#a8d9ef; border:1px solid rgba(255,255,255,0.06); }
-  .btn.danger{ background:#ef4444; color:#fff; }
-  .history h3{ margin:4px 0; color:#a9d9ef; font-size:0.95rem; }
-  .history-list{ margin:8px 0 0; padding-left:18px; max-height:220px; overflow:auto; color:#e7fbff; }
-  .module-select{ display:flex; gap:8px; align-items:center; justify-content:center; }
-  .module-select select{ padding:8px 10px;border-radius:8px;border:none;background:#0d274d;color:#fff; }
-  .drawer{ position:fixed; right:18px; top:18px; width:360px; max-width:92vw; height:calc(100vh - 36px); background: rgba(2,30,50,0.98); border-radius:12px; padding:12px; box-shadow: 0 30px 80px rgba(0,0,0,0.6); transform:translateY(-20px) scale(.98); opacity:0; pointer-events:none; transition:all .22s ease; color:#dff6ff; }
+  .btn{ padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer;border:none; display:inline-flex; align-items:center; gap:8px; }
+  .btn svg{ height:16px; width:16px; opacity:0.95 }
+  .btn.primary{ background: linear-gradient(90deg,var(--accent-1),var(--accent-2)); color:#052233; box-shadow: 0 8px 28px rgba(37,99,235,0.18); }
+  .btn.secondary{ background: rgba(255,255,255,0.05); color:var(--muted); border:1px solid rgba(255,255,255,0.03); }
+  .btn.call{ background:#0ea376; color:#052233; box-shadow: 0 8px 18px rgba(14,163,118,0.12); }
+  .btn.ghost{ background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.04); }
+  .btn.danger{ background:var(--danger); color:#fff; box-shadow: 0 6px 18px rgba(239,68,68,0.18); }
+  .btn.small{ padding:8px 10px; font-size:0.9rem }
+  .history h3{ margin:4px 0; color:var(--muted); font-size:0.95rem; }
+  .history-list{ margin:8px 0 0; padding:8px; max-height:260px; overflow:auto; color:#e7fbff; display:flex; flex-direction:column; gap:8px; }
+  .history-item{ background: rgba(255,255,255,0.02); padding:8px 12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-weight:600; color:#eaf8ff; transition:transform .14s ease, opacity .18s ease; }
+  .history-item.small{ font-size:0.92rem }
+  .history-item span.meta{ color:var(--muted); font-weight:500; font-size:0.85rem }
+  .module-select{ display:flex; gap:8px; align-items:center; justify-content:flex-start; }
+  .module-select select{ padding:8px 12px;border-radius:10px;border:none;background:#04243a;color:#eaf8ff; }
+  .drawer{ position:fixed; right:18px; top:18px; width:420px; max-width:96vw; height:calc(100vh - 36px); background: rgba(2,30,50,0.98); border-radius:12px; padding:14px; box-shadow: 0 30px 120px rgba(0,0,0,0.7); transform:translateY(-20px) scale(.98); opacity:0; pointer-events:none; transition:all .22s ease; color:#dff6ff; overflow:auto; }
   .drawer[aria-hidden="false"]{ transform:none; opacity:1; pointer-events:auto; }
   .modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.6); opacity:0; pointer-events:none; transition:opacity .18s; }
   .modal[aria-hidden="false"]{ opacity:1; pointer-events:auto; }
-  .modal-card{ background: rgba(2,30,50,0.98); padding:18px; border-radius:12px; min-width:280px; max-width:92vw; box-shadow: 0 30px 80px rgba(0,0,0,0.6); color:#dff6ff; }
-  @media (max-width:980px){ .boards{ grid-template-columns:1fr; } .wrap { padding: 12px; } }
-  .status { display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.04);color:#a9d9ef;font-size:0.85rem; }
+  .modal-card{ background: rgba(2,30,50,0.98); padding:18px; border-radius:12px; min-width:320px; max-width:92vw; box-shadow: 0 30px 80px rgba(0,0,0,0.6); color:#dff6ff; }
+  @media (max-width:980px){ .boards{ grid-template-columns:1fr; } .wrap { padding: 12px; } .drawer{ width:92vw } .logo{height:48px} .display{ font-size:2.8rem; min-height:86px } }
+  .status { display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);color:var(--muted);font-size:0.85rem; }
   .note { font-size:0.85rem;color:#fed7a2;margin-top:8px }
-  textarea#firebase-config{ width:100%; min-height:96px; padding:8px; border-radius:8px; border:none; background:#07243a; color:#cfeefd; resize:vertical }
+  textarea#firebase-config{ width:100%; min-height:108px; padding:10px; border-radius:8px; border:none; background:#07243a; color:#cfeefd; resize:vertical }
+  /* focus */
+  button:focus, select:focus, input:focus, textarea:focus { outline:3px solid rgba(6,182,212,0.12); outline-offset:2px }
   </style>
 </head>
 <body>
@@ -82,21 +110,21 @@
         <div style="flex:1">
           <div class="controls-inline" style="margin-bottom:12px">
             <label>Prefijo General
-              <input id="prefix-general" type="text" maxlength="4" value="G">
+              <input id="prefix-general" type="text" maxlength="4" value="G" aria-label="Prefijo General">
             </label>
             <label>Prefijo Preferencial
-              <input id="prefix-prefer" type="text" maxlength="4" value="P">
+              <input id="prefix-prefer" type="text" maxlength="4" value="P" aria-label="Prefijo Preferencial">
             </label>
             <label>Relleno dígitos
-              <select id="pad-digits">
+              <select id="pad-digits" aria-label="Relleno dígitos">
                 <option value="2">2 (01)</option>
                 <option value="3" selected>3 (001)</option>
                 <option value="4">4 (0001)</option>
               </select>
             </label>
-            <label style="display:flex;align-items:center;gap:8px;color:#cfeefd">
+            <label style="display:flex;align-items:center;gap:8px;color:#eaf8ff">
               <input id="announce-on-advance" type="checkbox" checked>
-              <span style="font-size:0.9rem">Anunciar al avanzar</span>
+              <span style="font-size:0.92rem">Anunciar al avanzar</span>
             </label>
           </div>
 
@@ -107,12 +135,15 @@
                   <h2 id="title-general">General</h2>
                   <div class="board-sub">Uso general</div>
                 </div>
+                <div style="display:flex;gap:8px;align-items:center">
+                  <div class="status" title="Módulo actual">Módulo <strong id="module-tag-gen" style="margin-left:6px">1</strong></div>
+                </div>
               </div>
 
               <div class="display" id="display-general" aria-live="polite">G-000</div>
 
               <div class="module-select" style="margin-bottom:6px">
-                <div class="module-label">Módulo:</div>
+                <div class="module-label" style="color:var(--muted)">Módulo:</div>
                 <select id="module-select-general" aria-label="Seleccionar módulo General">
                   <option value="1">Módulo 1</option>
                   <option value="2">Módulo 2</option>
@@ -121,19 +152,28 @@
               </div>
 
               <div class="board-actions">
-                <button class="btn secondary prev" data-action="prev" title="Retroceder">◀ Retroceder</button>
-                <button class="btn primary next" data-action="next" title="Siguiente">▶ Siguiente</button>
-                <button class="btn call" data-action="call" title="Llamar sin avanzar">🔊 Llamar</button>
+                <button class="btn secondary prev" data-action="prev" title="Retroceder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Retroceder
+                </button>
+                <button class="btn primary next" data-action="next" title="Siguiente">
+                  ▶ Siguiente
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="btn call" data-action="call" title="Llamar sin avanzar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M15 10l4.553-2.276A2 2 0 0 1 22 9.618l-2 4A2 2 0 0 1 17.553 16L15 14" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  🔊 Llamar
+                </button>
               </div>
 
               <div class="board-small">
-                <button class="btn ghost" data-action="reset">Reiniciar</button>
-                <button class="btn danger" data-action="clear">Borrar historial</button>
+                <button class="btn ghost small" data-action="reset">Reiniciar</button>
+                <button class="btn danger small" data-action="clear">Borrar historial</button>
               </div>
 
               <div class="history">
                 <h3>Últimos llamados</h3>
-                <ol id="history-general" class="history-list" aria-live="polite"></ol>
+                <div id="history-general" class="history-list" aria-live="polite"></div>
               </div>
             </article>
 
@@ -143,12 +183,15 @@
                   <h2 id="title-preferencial">Preferencial</h2>
                   <div class="board-sub">Atención prioritaria</div>
                 </div>
+                <div style="display:flex;gap:8px;align-items:center">
+                  <div class="status" title="Módulo actual">Módulo <strong id="module-tag-pref" style="margin-left:6px">1</strong></div>
+                </div>
               </div>
 
               <div class="display small" id="display-preferencial" aria-live="polite">P-000</div>
 
               <div class="module-select" style="margin-bottom:6px">
-                <div class="module-label">Módulo:</div>
+                <div class="module-label" style="color:var(--muted)">Módulo:</div>
                 <select id="module-select-preferencial" aria-label="Seleccionar módulo Preferencial">
                   <option value="1">Módulo 1</option>
                   <option value="2">Módulo 2</option>
@@ -163,45 +206,48 @@
               </div>
 
               <div class="board-small">
-                <button class="btn ghost" data-action="reset">Reiniciar</button>
-                <button class="btn danger" data-action="clear">Borrar historial</button>
+                <button class="btn ghost small" data-action="reset">Reiniciar</button>
+                <button class="btn danger small" data-action="clear">Borrar historial</button>
               </div>
 
               <div class="history">
                 <h3>Últimos llamados</h3>
-                <ol id="history-preferencial" class="history-list" aria-live="polite"></ol>
+                <div id="history-preferencial" class="history-list" aria-live="polite"></div>
               </div>
             </article>
           </section>
         </div>
 
-        <div style="width:360px;display:flex;flex-direction:column;gap:12px">
-          <div class="card" style="padding:12px;">
+        <div style="width:380px;display:flex;flex-direction:column;gap:12px">
+          <div class="card" style="padding:14px;">
             <div style="display:flex;justify-content:space-between;align-items:center">
-              <div style="color:#cfeefd">
+              <div style="color:#eaf8ff">
                 <div style="font-weight:700">Ajustes</div>
-                <div style="font-size:0.9rem;color:#a9d9ef">Voz, volumen y opciones</div>
+                <div style="font-size:0.92rem;color:var(--muted)">Voz, volumen y opciones</div>
               </div>
               <div>
                 <button id="settings-toggle" class="btn ghost" aria-label="Ajustes">Abrir</button>
               </div>
             </div>
-            <div style="margin-top:10px;color:#a9d9ef;font-size:0.9rem">
+            <div style="margin-top:10px;color:var(--muted);font-size:0.9rem">
               <div>Atajos: G / Shift+G = General · P / Shift+P = Preferencial</div>
             </div>
           </div>
 
-          <div class="card" style="padding:12px; text-align:center; color:#a9d9ef">
-            <div style="font-weight:700;color:#cfeefd">Controles rápidos</div>
-            <div style="margin-top:8px">
-              <button class="btn primary" id="quick-next-gen" style="width:100%; margin-bottom:8px">Siguiente General</button>
+          <div class="card" style="padding:14px; text-align:center; color:var(--muted)">
+            <div style="font-weight:800;color:#eaffff">Controles rápidos</div>
+            <div style="margin-top:10px">
+              <button class="btn primary" id="quick-next-gen" style="width:100%; margin-bottom:10px">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18l6-6-6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Siguiente General
+              </button>
               <button class="btn primary" id="quick-next-pref" style="width:100%;">Siguiente Preferencial</button>
             </div>
           </div>
         </div>
       </div>
 
-      <footer style="margin-top:12px; display:flex;justify-content:space-between;align-items:center">
+      <footer style="margin-top:14px; display:flex;justify-content:space-between;align-items:center">
         <div class="small">CorreQ · IPS Interconsultas</div>
         <div class="small">Versión local — Turnero</div>
       </footer>
@@ -210,36 +256,36 @@
 
   <!-- Settings drawer -->
   <aside id="settings-drawer" class="drawer" aria-hidden="true">
-    <header class="drawer-header">
-      <h3 style="color:#06b6d4;margin:0">Ajustes avanzados</h3>
+    <header class="drawer-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <h3 style="color:var(--accent-1);margin:0">Ajustes avanzados</h3>
       <button id="drawer-close" class="btn ghost" aria-label="Cerrar">Cerrar</button>
     </header>
 
     <div class="drawer-body">
-      <label style="color:#cfeefd">Voz (selecciona una)</label>
-      <select id="voice-select" style="padding:8px;border-radius:8px;border:none;background:#0d274d;color:#fff"></select>
+      <label style="color:#eaf8ff;display:block;margin-bottom:6px">Voz (selecciona una)</label>
+      <select id="voice-select" style="padding:10px;border-radius:8px;border:none;background:#04243a;color:#eaf8ff;width:100%"></select>
 
-      <label style="color:#cfeefd">Volumen: <span id="volume-value">1.0</span></label>
+      <label style="color:#eaf8ff;display:block;margin-top:10px">Volumen: <span id="volume-value">1.0</span></label>
       <input id="voice-volume" type="range" min="0" max="1" step="0.1" value="1">
 
-      <label style="color:#cfeefd">Beep antes de anunciar
-        <input id="play-beep" type="checkbox" checked>
+      <label style="color:#eaf8ff;display:block;margin-top:10px">Beep antes de anunciar
+        <input id="play-beep" type="checkbox" checked style="margin-left:8px">
       </label>
 
-      <label style="color:#cfeefd">Intervalo repetición automática (seg) — 0 para desactivar
-        <input id="auto-repeat-interval" type="number" min="0" step="1" value="0" style="padding:8px;border-radius:8px;border:none;background:#0d274d;color:#fff">
+      <label style="color:#eaf8ff;display:block;margin-top:10px">Intervalo repetición automática (seg) — 0 para desactivar
+        <input id="auto-repeat-interval" type="number" min="0" step="1" value="0" style="padding:8px;border-radius:8px;border:none;background:#04243a;color:#eaf8ff;width:100%;margin-top:6px">
       </label>
 
-      <div class="drawer-actions" style="margin-top:6px">
+      <div class="drawer-actions" style="margin-top:12px;display:flex;gap:8px">
         <button id="save-settings" class="btn primary">Guardar</button>
         <button id="reset-settings" class="btn ghost">Restaurar</button>
       </div>
 
-      <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.04);margin:10px 0" />
+      <hr style="border:none;border-top:1px dashed rgba(255,255,255,0.04);margin:12px 0" />
 
-      <div style="font-size:0.9rem;color:#a9d9ef">
-        <div style="margin-bottom:6px">Sincronización en tiempo real</div>
-        <label style="display:block;color:#cfeefd">Pega aquí la config de Firebase (objeto JSON)</label>
+      <div style="font-size:0.92rem;color:var(--muted)">
+        <div style="margin-bottom:8px">Sincronización en tiempo real</div>
+        <label style="display:block;color:#eaf8ff">Pega aquí la config de Firebase (objeto JSON)</label>
         <textarea id="firebase-config" placeholder='Ej: { "apiKey": "...", "authDomain": "...", "databaseURL": "https://<tu-db>.firebaseio.com", "projectId": "...", "storageBucket": "...", "messagingSenderId": "...", "appId": "..." }'></textarea>
         <div style="display:flex;gap:8px;margin-top:8px">
           <button id="connect-firebase" class="btn primary">Conectar</button>
@@ -306,7 +352,9 @@
       connectFirebaseBtn: $('connect-firebase'),
       disconnectFirebaseBtn: $('disconnect-firebase'),
       syncStatus: $('sync-status'),
-      appLogo: $('app-logo')
+      appLogo: $('app-logo'),
+      moduleTagGen: $('module-tag-gen'),
+      moduleTagPref: $('module-tag-pref')
     };
 
     // Runtime
@@ -479,6 +527,8 @@
       elems.voiceSelect.value = state.settings.voiceIndex ?? 0;
       elems.moduleSelectGeneral.value = state.general.lastModule || '1';
       elems.moduleSelectPrefer.value = state.preferencial.lastModule || '1';
+      elems.moduleTagGen.textContent = elems.moduleSelectGeneral.value || '1';
+      elems.moduleTagPref.textContent = elems.moduleSelectPrefer.value || '1';
       updateDisplay('general');
       updateDisplay('preferencial');
       renderHistory('general');
@@ -493,12 +543,16 @@
     }
 
     function renderHistory(queue) {
-      const ul = queue === 'general' ? elems.historyGeneral : elems.historyPrefer;
-      ul.innerHTML = '';
-      (state[queue].history || []).slice().reverse().forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item;
-        ul.appendChild(li);
+      const container = queue === 'general' ? elems.historyGeneral : elems.historyPrefer;
+      container.innerHTML = '';
+      (state[queue].history || []).slice().reverse().forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'history-item small';
+        div.style.opacity = '0';
+        div.innerHTML = `<div>${item}</div><div class="meta">${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</div>`;
+        container.appendChild(div);
+        // simple appear animation
+        setTimeout(() => { div.style.opacity = '1'; div.style.transform = 'translateY(0)'; }, 40 + idx*30);
       });
     }
 
@@ -551,7 +605,10 @@
       beepThenSpeak(phrase);
       const el = queue === 'general' ? elems.displayGeneral : elems.displayPrefer;
       try {
-        el.animate([{ boxShadow: '0 0 0 0 rgba(2,182,212,0.0)' }, { boxShadow: '0 0 0 14px rgba(6,182,212,0.06)' }], { duration: 700 });
+        // add pulse class
+        el.classList.remove('pulse');
+        void el.offsetWidth;
+        el.classList.add('pulse');
       } catch (e) {}
     }
 
@@ -719,6 +776,10 @@
     elems.voiceVolume.addEventListener('input', (e) => { elems.volumeValue.textContent = Number(e.target.value).toFixed(1); });
     elems.voiceSelect.addEventListener('change', () => { state.settings.voiceIndex = Number(elems.voiceSelect.value) || 0; saveLocalState(); if (connectedToFirebase) saveRemoteState(); });
     elems.voiceVolume.addEventListener('change', () => { state.settings.volume = Number(elems.voiceVolume.value) || 1; saveLocalState(); if (connectedToFirebase) saveRemoteState(); });
+
+    // update module tags when changed
+    elems.moduleSelectGeneral.addEventListener('change', () => { elems.moduleTagGen.textContent = elems.moduleSelectGeneral.value; });
+    elems.moduleSelectPrefer.addEventListener('change', () => { elems.moduleTagPref.textContent = elems.moduleSelectPrefer.value; });
 
     // firebase connect/disconnect
     elems.connectFirebaseBtn.addEventListener('click', () => {
