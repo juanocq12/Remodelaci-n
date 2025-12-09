@@ -149,7 +149,7 @@
                   <div class="board-sub">Uso general</div>
                 </div>
                 <div style="display:flex;gap:8px;align-items:center">
-                  <div class="status" title="Módulo actual">Módulo <strong id="module-tag-gen" style="margin-left:6px">1</strong></div>
+                  <div class="status" title="Módulo actual">Módulo <strong id="module-tag-gen" style="margin-left:6px">4</strong></div>
                 </div>
               </div>
 
@@ -158,9 +158,9 @@
               <div class="module-select" style="margin-bottom:6px">
                 <div class="module-label" style="color:var(--muted)">Módulo:</div>
                 <select id="module-select-general" aria-label="Seleccionar módulo General">
-                  <option value="1">Módulo 1</option>
-                  <option value="2">Módulo 2</option>
-                  <option value="3">Módulo 3</option>
+                  <option value="4">Módulo 4</option>
+                  <option value="5">Módulo 5</option>
+                  <option value="6">Módulo 6</option>
                 </select>
               </div>
 
@@ -197,7 +197,7 @@
                   <div class="board-sub">Atención prioritaria</div>
                 </div>
                 <div style="display:flex;gap:8px;align-items:center">
-                  <div class="status" title="Módulo actual">Módulo <strong id="module-tag-pref" style="margin-left:6px">1</strong></div>
+                  <div class="status" title="Módulo actual">Módulo <strong id="module-tag-pref" style="margin-left:6px">4</strong></div>
                 </div>
               </div>
 
@@ -206,9 +206,9 @@
               <div class="module-select" style="margin-bottom:6px">
                 <div class="module-label" style="color:var(--muted)">Módulo:</div>
                 <select id="module-select-preferencial" aria-label="Seleccionar módulo Preferencial">
-                  <option value="1">Módulo 1</option>
-                  <option value="2">Módulo 2</option>
-                  <option value="3">Módulo 3</option>
+                  <option value="4">Módulo 4</option>
+                  <option value="5">Módulo 5</option>
+                  <option value="6">Módulo 6</option>
                 </select>
               </div>
 
@@ -415,8 +415,8 @@
     let autoRepeatTimers = {};
 
     const DEFAULT = {
-      general: { counter: 0, history: [], lastModule: '1' },
-      preferencial: { counter: 0, history: [], lastModule: '1' },
+      general: { counter: 0, history: [], lastModule: '4' },
+      preferencial: { counter: 0, history: [], lastModule: '4' },
       settings: {
         prefix_general: 'G',
         prefix_prefer: 'P',
@@ -567,10 +567,10 @@
       elems.playBeep.checked = !!state.settings.playBeep;
       elems.autoRepeatInterval.value = state.settings.autoRepeatInterval || 0;
       elems.voiceSelect.value = state.settings.voiceIndex ?? 0;
-      elems.moduleSelectGeneral.value = state.general.lastModule || '1';
-      elems.moduleSelectPrefer.value = state.preferencial.lastModule || '1';
-      elems.moduleTagGen.textContent = elems.moduleSelectGeneral.value || '1';
-      elems.moduleTagPref.textContent = elems.moduleSelectPrefer.value || '1';
+      elems.moduleSelectGeneral.value = state.general.lastModule || '4';
+      elems.moduleSelectPrefer.value = state.preferencial.lastModule || '4';
+      elems.moduleTagGen.textContent = elems.moduleSelectGeneral.value || '4';
+      elems.moduleTagPref.textContent = elems.moduleSelectPrefer.value || '4';
       updateDisplay('general');
       updateDisplay('preferencial');
       renderHistory('general');
@@ -656,7 +656,7 @@
         if (queue === 'general') return elems.moduleSelectGeneral.value;
         if (queue === 'preferencial') return elems.moduleSelectPrefer.value;
       } catch (e) {}
-      return '1';
+      return '4';
     }
 
     function advance(queue, announce = true) {
@@ -708,7 +708,7 @@
       autoRepeatTimers[queue] = setInterval(() => {
         const prefix = queue === 'general' ? state.settings.prefix_general : state.settings.prefix_prefer;
         const label = formatNumber(prefix, state[queue].counter || 0);
-        const module = state[queue].lastModule || getSelectedModule(queue) || '1';
+        const module = state[queue].lastModule || getSelectedModule(queue) || '4';
         if (label) {
           pushHistory(queue, label, module);
           state.meta.lastUpdate = Date.now();
